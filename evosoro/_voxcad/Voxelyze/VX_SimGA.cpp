@@ -43,11 +43,12 @@ void CVX_SimGA::WriteResultFile(CXML_Rip* pXML)
 	double FallAdjPostY = SS.EndOfLifetimePosteriorY;
 
     double PushDist = 0;
+    double PushRot = 0; //zelf ingevoegd deze pushrot
 	int FoundNeedleInHaystack = 0;
 	if (pEnv->GetUsingNeedleInHaystack())
 	{
 	    PushDist = pow(pow(SS.CurNeedlePos.x-InitialNeedlePosition.x,2)+pow(SS.CurNeedlePos.y-InitialNeedlePosition.y,2),0.5)/LocalVXC.GetLatticeDim();
-
+        PushRot = SS.CurNeedleRot.z-InitialNeedleRotation.z + SS.CurNeedleRot.x-InitialNeedleRotation.x + SS.CurNeedleRot.y-InitialNeedleRotation.y;// + SS.CurNeedleRot.y + SS.CurNeedleRot.z;
 	    if(SS.CurNeedlePos.x != InitialNeedlePosition.x or SS.CurNeedlePos.y != InitialNeedlePosition.y)
 	    {
 	    FoundNeedleInHaystack = 1;
@@ -166,6 +167,7 @@ void CVX_SimGA::WriteResultFile(CXML_Rip* pXML)
 
 			pXML->Element("FoundNeedleInHaystack", FoundNeedleInHaystack);
 			pXML->Element("PushDist", PushDist);
+			pXML->Element("PushRot",PushRot);
 
 		pXML->UpLevel();
 

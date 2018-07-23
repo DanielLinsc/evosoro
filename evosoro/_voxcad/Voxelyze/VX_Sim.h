@@ -44,10 +44,11 @@ See <http://www.opensource.org/licenses/lgpl-3.0.html> for license details.
 //#define INPUT_VOX_INDEX -1
 
 struct SimState { //Information about current simulation state:
-	void Clear() {CurCM = CurNeedlePos = TotalObjDisp = Vec3D<>(0,0,0); CurNumTouchingFloor = CurNumNonFeetTouchingFloor = CurFeetAnteriorY = CurFeetPosteriorY = CurAnteriorDist = CurPosteriorDist = CurAnteriorY = CurPosteriorY = EndOfLifetimePosteriorY = NormObjDisp = MaxVoxDisp = MaxVoxVel = MaxVoxKinE = MaxBondStrain = MaxBondStress = MaxBondStrainE = TotalObjKineticE = TotalObjStrainE = MaxPressure = MinPressure = 0.0;}
+	void Clear() {CurCM = CurNeedlePos = CurNeedleRot = TotalObjDisp = Vec3D<>(0,0,0); CurNumTouchingFloor = CurNumNonFeetTouchingFloor = CurFeetAnteriorY = CurFeetPosteriorY = CurAnteriorDist = CurPosteriorDist = CurAnteriorY = CurPosteriorY = EndOfLifetimePosteriorY = NormObjDisp = MaxVoxDisp = MaxVoxVel = MaxVoxKinE = MaxBondStrain = MaxBondStress = MaxBondStrainE = TotalObjKineticE = TotalObjStrainE = MaxPressure = MinPressure = 0.0;}
 	Vec3D<> CurCM;
 
 	Vec3D<> CurNeedlePos;
+	Vec3D<> CurNeedleRot; //zelf ingevoegd
 
 	vfloat CurAnteriorDist;
 	vfloat CurPosteriorDist;
@@ -232,6 +233,10 @@ public:
 	Vec3D<> InitialNeedlePosition;
 	Vec3D<> GetNeedlePosition();
 
+	//hieronder ingevoegd
+	Vec3D<> InitialNeedleRotation;
+	Vec3D<> GetNeedleRotation();
+//tothier
 	double GetWindowDist();
 
 	int GetNumTouchingFloor();

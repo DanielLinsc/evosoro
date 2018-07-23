@@ -41,8 +41,8 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)
 
 NUM_RANDOM_INDS = 1
 MAX_GENS = 1000
-POPSIZE = 15
-IND_SIZE = (5, 5, 4)
+POPSIZE = 16
+IND_SIZE = (5, 5, 5)
 SIM_TIME = 10
 INIT_TIME = 0.5
 DT_FRAC = 0.5
@@ -102,6 +102,8 @@ my_env.add_param("growth_amplitude", GROWTH_AMPLITUDE, "<GrowthAmplitude>")
 my_objective_dict = ObjectiveDict()
 my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
 my_objective_dict.add_objective(name="age", maximize=False, tag=None)
+my_objective_dict.add_objective(name="num_voxels", maximize=False, tag=None,
+                                node_func=np.count_nonzero, output_node_name="material")
 
 # initialize a pop of SoftBots
 my_pop = Population(my_objective_dict, MyGenotype, Phenotype, pop_size=POPSIZE)

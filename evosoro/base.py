@@ -1,4 +1,5 @@
 from evosoro.tools.utils import xml_format
+import numpy as np
 
 
 # TODO: classes should hold dictionaries of variables, vxa tags and values
@@ -21,8 +22,8 @@ class VoxCadParams(object):
 class Sim(VoxCadParams):
     """Container for VoxCad simulation parameters."""
 
-    def __init__(self, self_collisions_enabled=True, simulation_time=10, dt_frac=0.7, stop_condition=2,
-                 fitness_eval_init_time=2, equilibrium_mode=0, min_temp_fact=0.1, max_temp_fact_change=0.00001,
+    def __init__(self, self_collisions_enabled=True, simulation_time=10.5, dt_frac=0.9, stop_condition=2,
+                 fitness_eval_init_time=0.5, equilibrium_mode=0, min_temp_fact=0.1, max_temp_fact_change=0.00001,
                  max_stiffness_change=10000, min_elastic_mod=5e006, max_elastic_mod=5e008, afterlife_time=0,
                  mid_life_freeze_time=0):
 
@@ -50,9 +51,15 @@ class Sim(VoxCadParams):
 class Env(VoxCadParams):
     """Container for VoxCad environment parameters."""
 
-    def __init__(self, frequency=4.0, gravity_enabled=1, temp_enabled=1, floor_enabled=1, floor_slope=0.0,
-                 lattice_dimension=0.01, fat_stiffness=5e+006, bone_stiffness=5e+008, muscle_stiffness=5e+006,
-                 sticky_floor=0, time_between_traces=0, actuation_variance=0, temp_amp=39):
+    def __init__(self, frequency=4.0, gravity_enabled=1, grav_acc=-9.81, density=1e+006, temp_enabled=1,
+                 floor_enabled=1, floor_slope=0.0, lattice_dimension=0.01, fat_stiffness=5e+006, bone_stiffness=5e+008,
+                 muscle_stiffness=5e+006, sticky_floor=0, time_between_traces=0, actuation_variance=0, temp_amp=39,
+                 squeeze_rate=0, constant_squeeze=True, squeeze_start=0, squeeze_end=10, num_hurdles=0,
+                 space_between_hurdles=0, hurdle_height=0, hurdle_stop=0, circular_hurdles=False, tunnel_width=0,
+                 forward_hurdles_only=False, wall_height=0, back_stop=False, fence=False, debris=False, debris_size=0,
+                 debris_start=0, biped=False, biped_leg_proportion=0.6, needle_position=2,
+                 ballistic_slowdown_fact=0.01, ballistic_max_slowdown=0.1, falling_prohibited=False,
+                 kramer_fabric=False):
 
         VoxCadParams.__init__(self)
 
@@ -60,6 +67,8 @@ class Env(VoxCadParams):
 
         self.frequency = frequency
         self.gravity_enabled = gravity_enabled
+        self.grav_acc = grav_acc
+        self.density = density
         self.floor_enabled = floor_enabled
         self.temp_enabled = temp_enabled
         self.floor_slope = floor_slope
@@ -71,6 +80,37 @@ class Env(VoxCadParams):
         self.time_between_traces = time_between_traces
         self.actuation_variance = actuation_variance
         self.temp_amp = temp_amp
+
+        self.num_hurdles = num_hurdles
+        self.space_between_hurdles = space_between_hurdles
+        self.hurdle_height = -1
+        if num_hurdles > 0:
+            self.hurdle_height = hurdle_height
+        self.circular_hurdles = circular_hurdles
+        self.forward_hurdles_only = forward_hurdles_only
+        self.hurdle_stop = hurdle_stop
+        self.wall_height = wall_height
+        self.back_stop = back_stop
+        self.fence = fence
+        self.debris = debris
+        self.debris_size = debris_size
+        self.debris_start = debris_start
+        self.tunnel_width = tunnel_width
+        self.squeeze_rate = squeeze_rate
+        self.constant_squeeze = constant_squeeze
+        self.squeeze_start = squeeze_start
+        self.squeeze_end = squeeze_end
+
+        self.needle_position = needle_position
+
+        self.biped = biped
+        self.biped_leg_proportion = biped_leg_proportion
+        self.falling_prohibited = falling_prohibited
+
+        self.kramer_fabric = kramer_fabric
+
+        self.ballistic_slowdown_fact = ballistic_slowdown_fact
+        self.ballistic_max_slowdown = ballistic_max_slowdown
 
 
 class Material(VoxCadParams):

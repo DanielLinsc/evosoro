@@ -52,14 +52,14 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 
 NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation (increases diversity, works with AFPO when minimizing "age")
 MAX_GENS = 1000  # Number of generations
-POPSIZE = 10  # Population size (number of individuals in the population)
-IND_SIZE = (6, 6, 6)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE=(6, 6, 6) -> workspace is a cube of 6x6x6 voxels
+POPSIZE = 20  # Population size (number of individuals in the population)
+IND_SIZE = (8, 8, 8)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE=(6, 6, 6) -> workspace is a cube of 6x6x6 voxels
 SIM_TIME = 5.0  # evaluation time (seconds), including INIT_TIME!
 INIT_TIME = 0.5 # initial transient time (robot settles down before actuation and fitness computation start)
-DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
+DT_FRAC = 0.7  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
 TIME_TO_TRY_AGAIN = 30  # (seconds) wait this long before assuming simulation crashed and resending
-MAX_EVAL_TIME = 60  # (seconds) wait this long before giving up on evaluating this individual
+MAX_EVAL_TIME = 30  # (seconds) wait this long before giving up on evaluating this individual
 SAVE_LINEAGES = False
 MAX_TIME = 8  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 0  # extra gens to run when continuing from checkpoint
@@ -112,7 +112,7 @@ class MyGenotype(Genotype):
 
 # Define a custom phenotype, inheriting from the Phenotype class
 class MyPhenotype(Phenotype):
-    def is_valid(self, min_percent_full=0.3, min_percent_muscle=0.1):
+    def is_valid(self, min_percent_full=0., min_percent_muscle=0.1):
         # override super class function to redefine what constitutes a valid individuals
         for name, details in self.genotype.to_phenotype_mapping.items():
             if np.isnan(details["state"]).any():

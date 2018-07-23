@@ -10,7 +10,7 @@ from evosoro.tools.utils import sigmoid, xml_format, dominates
 class Genotype(object):
     """A container for multiple networks, 'genetic code' copied with modification to produce offspring."""
 
-    def __init__(self, orig_size_xyz=(6, 6, 6)):
+    def __init__(self, orig_size_xyz=(4, 4, 4)):#aangepast , was 6,6,6,
 
         """
         Parameters
@@ -44,7 +44,7 @@ class Genotype(object):
         new.__dict__.update(deepcopy(self.__dict__, memo))
         return new
 
-    def add_network(self, network, freeze=False, num_consecutive_mutations=1):
+    def add_network(self, network, freeze=False, switch=False, num_consecutive_mutations=1):
         """Append a new network to this list of networks.
 
         Parameters
@@ -52,12 +52,16 @@ class Genotype(object):
         freeze : bool
             This indicator is used to prevent mutations to a network while freeze == True
 
+        switch : bool
+            For learning trials
+
         num_consecutive_mutations : int
             Uses this many (random) steps per mutation.
 
         """
         assert isinstance(network, Network)
         network.freeze = freeze
+        network.switch = switch
         network.num_consecutive_mutations = num_consecutive_mutations
         self.networks += [network]
         self.all_networks_outputs.extend(network.output_node_names)
@@ -85,11 +89,25 @@ class Genotype(object):
                         self.to_phenotype_mapping[name]["state"] = network.values
 
         for name, details in self.to_phenotype_mapping.items():
+            # details["old_state"] = copy.deepcopy(details["state"])
+            # SAM: moved this to mutation.py prior to mutation attempts loop
             if name not in self.all_networks_outputs:
                 details["state"] = np.ones(self.orig_size_xyz, dtype=details["output_type"]) * -999
                 if details["dependency_order"] is not None:
                     for dependency_name in details["dependency_order"]:
                         self.to_phenotype_mapping.dependencies[dependency_name]["state"] = None
+
+        # create material matrix
+        # for name, details in self.to_phenotype_mapping.items():
+        #     details["old_state"] = copy.deepcopy(details["state"])
+        #     for network in self:
+        #         if name in network.output_node_names:
+        #             details["state"] = network.graph.node[name]["state"]
+        #         else:
+        #             details["state"] = np.ones(self.orig_size_xyz, dtype=details["output_type"]) * -999
+        #             if details["dependency_order"] is not None:
+        #                 for dependency_name in details["dependency_order"]:
+        #                     self.to_phenotype_mapping.dependencies[dependency_name]["state"] = None
 
         for name, details in self.to_phenotype_mapping.items():
             if details["dependency_order"] is not None:
@@ -153,7 +171,7 @@ class GenotypeToPhenotypeMap(object):
         return new
 
     def add_map(self, name, tag, func=sigmoid, output_type=float, dependency_order=None, params=None, param_tags=None,
-                env_kws=None, logging_stats=np.mean):
+                env_kws=None, logging_stats=np.mean, age_zero_overwrite=None, switch_proportion=0, switch_name=None):
         """Add an association between a genotype output and a VoxCad parameter.
 
         Parameters
@@ -185,6 +203,15 @@ class GenotypeToPhenotypeMap(object):
 
         logging_stats : func or list
             One or more functions (statistics) of the output to be logged as additional column(s) in logging
+
+        age_zero_overwrite : str
+            Evaluate this network with this placeholder at birth (age=0) instead of actual values.
+
+        switch_proportion : float
+            Switches are non-inheritable portions of genotype (Hinton & Nowlan, 1987).
+
+        switch_name : str
+            Network name containing switch values
 
         """
         if (dependency_order is not None) and not isinstance(dependency_order, list):
@@ -219,7 +246,10 @@ class GenotypeToPhenotypeMap(object):
                               "params": params,
                               "param_tags": param_tags,
                               "env_kws": env_kws,
-                              "logging_stats": logging_stats}
+                              "logging_stats": logging_stats,
+                              "age_zero_overwrite": age_zero_overwrite,
+                              "switch_proportion": switch_proportion,
+                              "switch_name": switch_name}
 
     def add_output_dependency(self, name, dependency_name, requirement, material_if_true=None, material_if_false=None):
         """Add a dependency between two genotype outputs.
@@ -333,6 +363,8 @@ class SoftBot(object):
         self.parent_genotype = self.genotype  # default for randomly generated ind
         self.parent_id = -1
         self.age = 0
+        self.learning_id = max_id  # this is the same for each trial
+        self.num_successful_trials = 0
 
         # set the objectives as attributes of self (and parent)
         self.objective_dict = objective_dict
@@ -352,7 +384,7 @@ class SoftBot(object):
 class Population(object):
     """A population of SoftBots."""
 
-    def __init__(self, objective_dict, genotype, phenotype, pop_size=30):
+    def __init__(self, objective_dict, genotype, phenotype, pop_size=30, learning_trials=0):
 
         """Initialize a population of individual SoftBots.
 
@@ -370,6 +402,9 @@ class Population(object):
         pop_size : int
             The target number of individuals to maintain in the population.
 
+        learning_trials : int
+            Duplicate evaluations of the same individual
+
         """
         self.genotype = genotype
         self.phenotype = phenotype
@@ -384,6 +419,7 @@ class Population(object):
         self.lineage_dict = {}
         self.max_id = 0
         self.non_dominated_size = 0
+        self.learning_trials = learning_trials
 
         while len(self) < pop_size:
             self.add_random_individual()
@@ -453,6 +489,15 @@ class Population(object):
                 self.max_id += 1
                 valid = True
 
+    def replace_ind_networks(self, network_names, networks):
+        assert(len(network_names) == len(networks))
+        for ind in range(len(self)):
+            for m, key in enumerate(self[ind].genotype.all_networks_outputs):
+                for n, name in enumerate(network_names):
+                    if name == key:
+                        self[ind].genotype[m].values = networks[n][ind]
+            self[ind].genotype.express()
+
     def update_ages(self):
         """Increment the age of each individual."""
         for ind in self:
@@ -474,6 +519,26 @@ class Population(object):
         keys_to_remove = [key for key in self.lineage_dict if key not in current_ids]
         for key in keys_to_remove:
             del self.lineage_dict[key]
+
+    def keep_only_one_learning_trial(self):
+        """Keep only the best learning trial evaluated."""
+        success_dict = {}
+        for ind in self:
+            if ind.learning_id not in success_dict:
+                success_dict[ind.learning_id] = ind.fitness
+            else:
+                success_dict[ind.learning_id] += ind.fitness
+
+        learning_trial_dict = dict()
+        for ind in self:
+            ind.num_successful_trials = success_dict[ind.learning_id]
+
+            if ind.learning_id not in learning_trial_dict:
+                learning_trial_dict[ind.learning_id] = ind
+            elif ind.fitness > learning_trial_dict[ind.learning_id].fitness:
+                learning_trial_dict[ind.learning_id] = ind
+
+        self.individuals = [ind for key, ind in learning_trial_dict.items()]
 
     def sort_by_objectives(self):
         """Sorts the population multiple times by each objective, from least important to most important."""

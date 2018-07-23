@@ -56,22 +56,22 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 
 NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation
 MAX_GENS = 1000  # Number of generations
-POPSIZE = 15  # Population size (number of individuals in the population)
-IND_SIZE = (6, 6, 6)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
-SIM_TIME = 5  # (seconds), including INIT_TIME!
+POPSIZE = 20  # Population size (number of individuals in the population)
+IND_SIZE = (6,6,6)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
+SIM_TIME = 120  # (seconds), including INIT_TIME!
 INIT_TIME = 1
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
 TIME_TO_TRY_AGAIN = 30  # (seconds) wait this long before assuming simulation crashed and resending
 MAX_EVAL_TIME = 60  # (seconds) wait this long before giving up on evaluating this individual
-SAVE_LINEAGES = False
-MAX_TIME = 8  # (hours) how long to wait before autosuspending
+SAVE_LINEAGES = True
+MAX_TIME = 100  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 0  # extra gens to run when continuing from checkpoint
 
 RUN_DIR = "basic_data"  # Subdirectory where results are going to be generated
 RUN_NAME = "Basic"
-CHECKPOINT_EVERY = 1  # How often to save an snapshot of the execution state to later resume the algorithm
-SAVE_POPULATION_EVERY = 1  # How often (every x generations) we save a snapshot of the evolving population
+CHECKPOINT_EVERY = 10  # How often to save an snapshot of the execution state to later resume the algorithm
+SAVE_POPULATION_EVERY = 20  # How often (every x generations) we save a snapshot of the evolving population
 
 SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
@@ -111,7 +111,7 @@ class MyGenotype(Genotype):
 
 # Define a custom phenotype, inheriting from the Phenotype class
 class MyPhenotype(Phenotype):
-    def is_valid(self, min_percent_full=0.3, min_percent_muscle=0.1):
+    def is_valid(self, min_percent_full=0.01, min_percent_muscle=0.05):
         # override super class function to redefine what constitutes a valid individuals
         for name, details in self.genotype.to_phenotype_mapping.items():
             if np.isnan(details["state"]).any():
@@ -139,8 +139,9 @@ my_objective_dict = ObjectiveDict()
 
 # Adding an objective named "fitness", which we want to maximize. This information is returned by Voxelyze
 # in a fitness .xml file, with a tag named "NormFinalDist"
-my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
-
+#my_objective_dict.add_objective(name="fitness", maximize=True, tag="<PushDist>")
+my_objective_dict.add_objective(name="fitness", maximize=True, tag="<PushRot>")
+#my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
 # Add an objective to minimize the age of solutions: promotes diversity
 my_objective_dict.add_objective(name="age", maximize=False, tag=None)
 
@@ -156,9 +157,9 @@ my_objective_dict.add_objective(name="num_voxels", maximize=False, tag=None,
 # This information is not returned by Voxelyze (tag=None): it is instead computed in Python.
 # We also specify how energy should be computed, which is done by counting the occurrences of
 # active materials (materials number 3 and 4)
-my_objective_dict.add_objective(name="energy", maximize=False, tag=None,
-                                node_func=partial(count_occurrences, keys=[3, 4]),
-                                output_node_name="material")
+#my_objective_dict.add_objective(name="energy", maximize=False, tag=None,
+                                #node_func=partial(count_occurrences, keys=[3, 4]),
+                                #output_node_name="material")
 
 
 # Initializing a population of SoftBots

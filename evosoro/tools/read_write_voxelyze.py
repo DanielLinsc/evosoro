@@ -29,9 +29,33 @@ def read_voxlyze_results(population, print_log, filename="softbotsOutput.xml"):
         this_file = open(filename)  # TODO: is there a way to just go back to the first line without reopening the file?
         tag = details["tag"]
         if tag is not None:
-            for line in this_file:
-                if tag in line:
-                    results[rank] = float(line[line.find(tag) + len(tag):line.find("</" + tag[1:])])
+            if tag == "<CMTrace>":
+                trace = []
+                n = 0
+                for line in this_file:
+                    if tag in line or n in [1, 2, 6]:
+                        n += 1
+                    elif n == 3:
+                        this_tag = "<TraceX>"
+                        x = float(line[line.find(this_tag) + len(this_tag):line.find("</" + this_tag[1:])])
+                        n += 1
+                    elif n == 4:
+                        this_tag = "<TraceY>"
+                        y = float(line[line.find(this_tag) + len(this_tag):line.find("</" + this_tag[1:])])
+                        n += 1
+                    elif n == 5:
+                        this_tag = "<TraceZ>"
+                        z = float(line[line.find(this_tag) + len(this_tag):line.find("</" + this_tag[1:])])
+                        trace += [(x, y, z)]
+                        n += 1
+                    elif n == 7 and "</CMTrace>" not in line:
+                        n = 2
+                results[rank] = trace
+
+            else:
+                for line in this_file:
+                    if tag in line:
+                        results[rank] = float(line[line.find(tag) + len(tag):line.find("</" + tag[1:])])
         this_file.close()
 
     return results
@@ -40,6 +64,48 @@ def read_voxlyze_results(population, print_log, filename="softbotsOutput.xml"):
 def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
     # TODO: work in base.py to remove redundant static text in this function
+
+    # obstacles: the following is used to freeze any elements not apart of the individual
+    body_xlim = (0, individual.genotype.orig_size_xyz[0])
+    body_ylim = (0, individual.genotype.orig_size_xyz[1])  # todo: if starting ind somewhere besides (0, 0)
+    body_zlim = ((env.hurdle_height+1), individual.genotype.orig_size_xyz[2]+(env.hurdle_height+1))
+
+    padding = env.num_hurdles * (env.space_between_hurdles + 1)
+    x_pad = [padding, padding]
+    y_pad = [padding, padding]
+
+    if not env.circular_hurdles and env.num_hurdles > 0:
+        if env.num_hurdles == 1:  # single hurdle
+            y_pad = x_pad = [env.space_between_hurdles/2+1, env.space_between_hurdles/2+1]
+        else:  # tunnel
+            x_pad = [env.tunnel_width/2, env.tunnel_width/2]
+            y_pad[0] = max(env.space_between_hurdles, body_ylim[1]-1) + 1 - body_ylim[1] + body_ylim[0]
+
+    if env.forward_hurdles_only and env.num_hurdles > 0:  # ring
+        y_pad[0] = body_ylim[1]
+
+    if env.needle_position > 0:
+        y_pad = x_pad = [0, env.needle_position]
+
+    workspace_xlim = (-x_pad[0], body_xlim[1] + x_pad[1])
+    workspace_ylim = (-y_pad[0], body_ylim[1] + y_pad[1])
+    workspace_zlim = (0, max(env.wall_height, body_zlim[1]))
+
+    length_workspace_xyz = (float(workspace_xlim[1]-workspace_xlim[0]),
+                            float(workspace_ylim[1]-workspace_ylim[0]),
+                            float(workspace_zlim[1]-workspace_zlim[0]))
+
+    fixed_regions_dict = {key: {"X": {}, "Y": {}, "dX": {}, "dY": {}} for key in range(4)}
+
+    fixed_regions_dict[0] = {"X": 0, "dX": (x_pad[0]-1)/length_workspace_xyz[0]}
+
+    fixed_regions_dict[1] = {"X": (body_xlim[1]-body_xlim[0]+x_pad[0]+1)/length_workspace_xyz[0],
+                             "dX": 1 - (body_xlim[1]-body_xlim[0]+x_pad[0]+1)/length_workspace_xyz[0]}
+
+    fixed_regions_dict[2] = {"Y": 0, "dY": (y_pad[0]-1)/length_workspace_xyz[1]}
+
+    fixed_regions_dict[3] = {"Y": (body_ylim[1]-body_ylim[0]+y_pad[0]+1)/length_workspace_xyz[1],
+                             "dY": 1 - (body_ylim[1]-body_ylim[0]+y_pad[0]+1)/length_workspace_xyz[1]}
 
     # update any env variables based on outputs instead of writing outputs in
     for name, details in individual.genotype.to_phenotype_mapping.items():
@@ -101,8 +167,8 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
         <WriteFitnessFile>1</WriteFitnessFile>\n\
         <FitnessFileName>" + run_directory + "/fitnessFiles/softbotsOutput--id_%05i.xml" % individual.id +
         "</FitnessFileName>\n\
-        <QhullTmpFile>" + run_directory + "/tempFiles/qhullInput--id_%05i.txt" % individual.id + "</QhullTmpFile>\n\
-        <CurvaturesTmpFile>" + run_directory + "/tempFiles/curvatures--id_%05i.txt" % individual.id +
+        <QhullTmpFile>" + run_directory + "/../_qhull/tempFiles/qhullInput--id_%05i.txt" % individual.id + "</QhullTmpFile>\n\
+        <CurvaturesTmpFile>" + run_directory + "/../_qhull/tempFiles/curvatures--id_%05i.txt" % individual.id +
         "</CurvaturesTmpFile>\n\
         </GA>\n\
         <MinTempFact>" + str(sim.min_temp_fact) + "</MinTempFact>\n\
@@ -130,16 +196,162 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     for name, tag in env.new_param_tag_dict.items():
         voxelyze_file.write(tag + str(getattr(env, name)) + "</" + tag[1:] + "\n")
 
+    if env.num_hurdles > 0:
+        voxelyze_file.write(
+            "<Boundary_Conditions>\n\
+            <NumBCs>5</NumBCs>\n\
+            <FRegion>\n\
+            <PrimType>0</PrimType>\n\
+            <X>" + str(fixed_regions_dict[0]["X"]) + "</X>\n\
+            <Y>0</Y>\n\
+            <Z>0</Z>\n\
+            <dX>" + str(fixed_regions_dict[0]["dX"]) + "</dX>\n\
+            <dY>1</dY>\n\
+            <dZ>1</dZ>\n\
+            <Radius>0</Radius>\n\
+            <R>0.4</R>\n\
+            <G>0.6</G>\n\
+            <B>0.4</B>\n\
+            <alpha>1</alpha>\n\
+            <DofFixed>63</DofFixed>\n\
+            <ForceX>0</ForceX>\n\
+            <ForceY>0</ForceY>\n\
+            <ForceZ>0</ForceZ>\n\
+            <TorqueX>0</TorqueX>\n\
+            <TorqueY>0</TorqueY>\n\
+            <TorqueZ>0</TorqueZ>\n\
+            <DisplaceX>0</DisplaceX>\n\
+            <DisplaceY>0</DisplaceY>\n\
+            <DisplaceZ>0</DisplaceZ>\n\
+            <AngDisplaceX>0</AngDisplaceX>\n\
+            <AngDisplaceY>0</AngDisplaceY>\n\
+            <AngDisplaceZ>0</AngDisplaceZ>\n\
+            </FRegion>\n\
+            <FRegion>\n\
+            <PrimType>0</PrimType>\n\
+            <X>" + str(fixed_regions_dict[1]["X"]) + "</X>\n\
+            <Y>0</Y>\n\
+            <Z>0</Z>\n\
+            <dX>" + str(fixed_regions_dict[1]["dX"]) + "</dX>\n\
+            <dY>1</dY>\n\
+            <dZ>1</dZ>\n\
+            <Radius>0</Radius>\n\
+            <R>0.4</R>\n\
+            <G>0.6</G>\n\
+            <B>0.4</B>\n\
+            <alpha>1</alpha>\n\
+            <DofFixed>63</DofFixed>\n\
+            <ForceX>0</ForceX>\n\
+            <ForceY>0</ForceY>\n\
+            <ForceZ>0</ForceZ>\n\
+            <TorqueX>0</TorqueX>\n\
+            <TorqueY>0</TorqueY>\n\
+            <TorqueZ>0</TorqueZ>\n\
+            <DisplaceX>0</DisplaceX>\n\
+            <DisplaceY>0</DisplaceY>\n\
+            <DisplaceZ>0</DisplaceZ>\n\
+            <AngDisplaceX>0</AngDisplaceX>\n\
+            <AngDisplaceY>0</AngDisplaceY>\n\
+            <AngDisplaceZ>0</AngDisplaceZ>\n\
+            </FRegion>\n\
+            <FRegion>\n\
+            <PrimType>0</PrimType>\n\
+            <X>0</X>\n\
+            <Y>" + str(fixed_regions_dict[2]["Y"]) + "</Y>\n\
+            <Z>0</Z>\n\
+            <dX>1</dX>\n\
+            <dY>" + str(fixed_regions_dict[2]["dY"]) + "</dY>\n\
+            <dZ>1</dZ>\n\
+            <Radius>0</Radius>\n\
+            <R>0.4</R>\n\
+            <G>0.6</G>\n\
+            <B>0.4</B>\n\
+            <alpha>1</alpha>\n\
+            <DofFixed>63</DofFixed>\n\
+            <ForceX>0</ForceX>\n\
+            <ForceY>0</ForceY>\n\
+            <ForceZ>0</ForceZ>\n\
+            <TorqueX>0</TorqueX>\n\
+            <TorqueY>0</TorqueY>\n\
+            <TorqueZ>0</TorqueZ>\n\
+            <DisplaceX>0</DisplaceX>\n\
+            <DisplaceY>0</DisplaceY>\n\
+            <DisplaceZ>0</DisplaceZ>\n\
+            <AngDisplaceX>0</AngDisplaceX>\n\
+            <AngDisplaceY>0</AngDisplaceY>\n\
+            <AngDisplaceZ>0</AngDisplaceZ>\n\
+            </FRegion>\n\
+            <FRegion>\n\
+            <PrimType>0</PrimType>\n\
+            <X>0</X>\n\
+            <Y>" + str(fixed_regions_dict[3]["Y"]) + "</Y>\n\
+            <Z>0</Z>\n\
+            <dX>1</dX>\n\
+            <dY>" + str(fixed_regions_dict[3]["dY"]) + "</dY>\n\
+            <dZ>1</dZ>\n\
+            <Radius>0</Radius>\n\
+            <R>0.4</R>\n\
+            <G>0.6</G>\n\
+            <B>0.4</B>\n\
+            <alpha>1</alpha>\n\
+            <DofFixed>63</DofFixed>\n\
+            <ForceX>0</ForceX>\n\
+            <ForceY>0</ForceY>\n\
+            <ForceZ>0</ForceZ>\n\
+            <TorqueX>0</TorqueX>\n\
+            <TorqueY>0</TorqueY>\n\
+            <TorqueZ>0</TorqueZ>\n\
+            <DisplaceX>0</DisplaceX>\n\
+            <DisplaceY>0</DisplaceY>\n\
+            <DisplaceZ>0</DisplaceZ>\n\
+            <AngDisplaceX>0</AngDisplaceX>\n\
+            <AngDisplaceY>0</AngDisplaceY>\n\
+            <AngDisplaceZ>0</AngDisplaceZ>\n\
+            </FRegion>\n\
+            <FRegion>\n\
+                <PrimType>0</PrimType>\n\
+                <X>0</X>\n\
+                <Y>0</Y>\n\
+                <Z>0</Z>\n\
+                <dX>1</dX>\n\
+                <dY>1</dY>\n\
+                <dZ>" + str(env.hurdle_height/length_workspace_xyz[2]) + "</dZ>\n\
+                <Radius>0</Radius>\n\
+                <R>0.4</R>\n\
+                <G>0.6</G>\n\
+                <B>0.4</B>\n\
+                <alpha>1</alpha>\n\
+                <DofFixed>63</DofFixed>\n\
+                <ForceX>0</ForceX>\n\
+                <ForceY>0</ForceY>\n\
+                <ForceZ>0</ForceZ>\n\
+                <TorqueX>0</TorqueX>\n\
+                <TorqueY>0</TorqueY>\n\
+                <TorqueZ>0</TorqueZ>\n\
+                <DisplaceX>0</DisplaceX>\n\
+                <DisplaceY>0</DisplaceY>\n\
+                <DisplaceZ>0</DisplaceZ>\n\
+                <AngDisplaceX>0</AngDisplaceX>\n\
+                <AngDisplaceY>0</AngDisplaceY>\n\
+                <AngDisplaceZ>0</AngDisplaceZ>\n\
+            </FRegion>\n\
+            </Boundary_Conditions>\n"
+        )
+
+    else:
+        voxelyze_file.write(
+            "<Fixed_Regions>\n\
+            <NumFixed>0</NumFixed>\n\
+            </Fixed_Regions>\n\
+            <Forced_Regions>\n\
+            <NumForced>0</NumForced>\n\
+            </Forced_Regions>\n"
+            )
+
     voxelyze_file.write(
-        "<Fixed_Regions>\n\
-        <NumFixed>0</NumFixed>\n\
-        </Fixed_Regions>\n\
-        <Forced_Regions>\n\
-        <NumForced>0</NumForced>\n\
-        </Forced_Regions>\n\
-        <Gravity>\n\
+        "<Gravity>\n\
         <GravEnabled>" + str(env.gravity_enabled) + "</GravEnabled>\n\
-        <GravAcc>-9.81</GravAcc>\n\
+        <GravAcc>" + str(env.grav_acc) + "</GravAcc>\n\
         <FloorEnabled>" + str(env.floor_enabled) + "</FloorEnabled>\n\
         <FloorSlope>" + str(env.floor_slope) + "</FloorSlope>\n\
         </Gravity>\n\
@@ -152,6 +364,11 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
         </Thermal>\n\
         <TimeBetweenTraces>" + str(env.time_between_traces) + "</TimeBetweenTraces>\n\
         <StickyFloor>" + str(env.sticky_floor) + "</StickyFloor>\n\
+        <NeedleInHaystack>" + str(int(env.needle_position > 0)) + "</NeedleInHaystack>\n\
+        <KramerFabric>" + str(int(env.kramer_fabric)) + "</KramerFabric>\n\
+        <FallingProhibited>" + str(int(env.falling_prohibited)) + "</FallingProhibited>\n\
+        <BallisticSlowdownFact>" + str(env.ballistic_slowdown_fact) + "</BallisticSlowdownFact>\n\
+        <MaxSlowdownPermitted>" + str(env.ballistic_max_slowdown) + "</MaxSlowdownPermitted>\n\
         </Environment>\n")
 
     voxelyze_file.write(
@@ -190,7 +407,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -214,7 +431,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -238,7 +455,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>" + str(0.01*(1+random.uniform(0, env.actuation_variance))) + "</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -262,7 +479,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>" + str(-0.01*(1+random.uniform(0, env.actuation_variance))) + "</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -286,7 +503,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -310,7 +527,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>" + str(0.01 * (1 + random.uniform(0, env.actuation_variance))) + "</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -334,7 +551,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+006</Density>\n\
+            <Density>" + str(env.density) + "</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -343,18 +560,100 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
         </Material>\n\
         </Palette>\n\
         <Structure Compression=\"ASCII_READABLE\">\n\
-        <X_Voxels>" + str(individual.genotype.orig_size_xyz[0]) + "</X_Voxels>\n\
-        <Y_Voxels>" + str(individual.genotype.orig_size_xyz[1]) + "</Y_Voxels>\n\
-        <Z_Voxels>" + str(individual.genotype.orig_size_xyz[2]) + "</Z_Voxels>\n")
+        <X_Voxels>" + str(length_workspace_xyz[0]) + "</X_Voxels>\n\
+        <Y_Voxels>" + str(length_workspace_xyz[1]) + "</Y_Voxels>\n\
+        <Z_Voxels>" + str(length_workspace_xyz[2]) + "</Z_Voxels>\n")
 
     all_tags = [details["tag"] for name, details in individual.genotype.to_phenotype_mapping.items()]
-    if "<Data>" not in all_tags:  # not evolving topology -- fixed presence/absence of voxels
+    if "<Data>" not in all_tags:  # not evolving topology -- fixed presence/absence of voxels -stond eerst not in ipv in
         voxelyze_file.write("<Data>\n")
-        for z in range(individual.genotype.orig_size_xyz[2]):
+        for z in range(*workspace_zlim):
             voxelyze_file.write("<Layer><![CDATA[")
-            for y in range(individual.genotype.orig_size_xyz[1]):
-                for x in range(individual.genotype.orig_size_xyz[0]):
-                    voxelyze_file.write("3")
+            for y in range(*workspace_ylim):
+                for x in range(*workspace_xlim):
+
+                    if (body_xlim[0] <= x < body_xlim[1]) and (body_ylim[0] <= y < body_ylim[1]) and (body_zlim[0] <= z < body_zlim[1]):
+
+                        if env.biped and (z < body_zlim[1]*env.biped_leg_proportion) and (x == body_xlim[1]/2):
+                            voxelyze_file.write("0")
+
+                        elif env.falling_prohibited and z == body_zlim[1]-1:
+                            voxelyze_file.write("6")  # head id
+
+                        # elif env.kramer_fabric and (x > body_xlim[1]*.6 or x < body_xlim[1]*.3):
+                        #     voxelyze_file.write("1")
+
+                        else:
+                            voxelyze_file.write("3") #was drie
+
+                    elif env.needle_position > 0:
+                        if (x == workspace_xlim[1]-1) and (y == workspace_ylim[1]/2-1) and (z == 0):
+                            voxelyze_file.write("7")  # food
+                        else:
+                            voxelyze_file.write("0")
+
+                    elif env.num_hurdles > 0:
+                        # within the fixed regions
+                        xy_centered = [x-body_xlim[1]/2, y-body_ylim[1]/2]
+                        is_obstacle = False
+
+                        if env.circular_hurdles:  # rings of circles
+                            for hurdle in range(-1, env.num_hurdles + 1):
+                                hurdle_radius = hurdle * env.space_between_hurdles
+                                if abs(xy_centered[0]**2+xy_centered[1]**2-hurdle_radius**2) <= hurdle_radius:
+                                    if z < env.hurdle_height:
+                                        is_obstacle = True
+                                        if env.debris and x % 2 == 0:
+                                            is_obstacle = False
+
+                                elif y == workspace_ylim[0] and env.back_stop and abs(xy_centered[0]) >= hurdle_radius/hurdle and abs(xy_centered[0]) <= hurdle_radius:
+                                    if z < env.wall_height:
+                                        if (env.fence and (x+z) % 2 == 0) or not env.fence:
+                                            is_obstacle = True  # back wall
+
+                        else:  # tunnel
+
+                            start = body_ylim[1]*env.squeeze_start
+                            end = body_ylim[1]*env.squeeze_end
+                            p = (y-start) / float(end-start)
+
+                            adj = 0
+                            if y > body_ylim[1]*env.squeeze_start:
+                                adj = int(p * env.squeeze_rate)
+
+                            if env.constant_squeeze and y > body_ylim[1]*env.squeeze_end:
+                                adj = min(int(env.squeeze_rate), workspace_xlim[1]-body_xlim[1])
+
+                            wall = [workspace_xlim[0] + adj,
+                                    workspace_xlim[1] - 1 - adj]
+
+                            if x in wall and z < env.wall_height:
+                                if (env.fence and (y+z) % 2 == 0) or not env.fence:
+                                    is_obstacle = True  # wall
+
+                            elif y % env.space_between_hurdles == 0 and z < env.hurdle_height:
+                                is_obstacle = True  # hurdle
+                                if env.debris and y > env.debris_start*body_ylim[1]:
+                                    if (y % 2 == 0 and (x+z) % 2 == 0) or (y % 2 == 1 and (x+z) % 2 == 1) or x <= wall[0] + 1 or x >= wall[1] - 1:
+                                        is_obstacle = False  # nothing
+                                elif x <= wall[0] or x >= wall[1]:
+                                    is_obstacle = False  # nothing
+
+                                if y > env.hurdle_stop*body_ylim[1]:
+                                    is_obstacle = False
+
+                            if y == workspace_ylim[0] and env.back_stop and z < env.wall_height:
+                                if (env.fence and (x+z) % 2 == 0) or not env.fence:
+                                    is_obstacle = True  # back wall
+
+                        if is_obstacle:
+                            voxelyze_file.write("5")
+                        else:
+                            voxelyze_file.write("0")  # flat ground
+
+                    else:
+                        voxelyze_file.write("0")  # flat ground
+
             voxelyze_file.write("]]></Layer>\n")
         voxelyze_file.write("</Data>\n")
 
@@ -374,15 +673,48 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
         if details["env_kws"] is None:
             # write the output state matrix to file
-            for z in range(individual.genotype.orig_size_xyz[2]):
+            for z in range(*workspace_zlim):
                 voxelyze_file.write("<Layer><![CDATA[")
-                for y in range(individual.genotype.orig_size_xyz[1]):
-                    for x in range(individual.genotype.orig_size_xyz[0]):
+                for y in range(*workspace_ylim):
+                    for x in range(*workspace_xlim):
 
-                        state = details["output_type"](details["state"][x, y, z])
-                        # for n, network in enumerate(individual.genotype):
-                        #     if name in network.output_node_names:
-                        #         state = individual.genotype[n].graph.node[name]["state"][x, y, z]
+                        if (body_xlim[0] <= x < body_xlim[1]) and (body_ylim[0] <= y < body_ylim[1]) and (body_zlim[0] <= z < body_zlim[1]):
+                            if individual.age == 0 and details["age_zero_overwrite"] is not None:
+                                state = details["age_zero_overwrite"]
+
+                            elif details["switch_proportion"] > 0 and (x < body_xlim[1]-details["switch_proportion"]):
+                                # this is like the 'inverse' switch- if true then not switch and equal to other net
+                                switch_net_key = details["switch_name"]
+                                switch_net = individual.genotype.to_phenotype_mapping[switch_net_key]
+                                state = details["output_type"](switch_net["state"][x-body_xlim[0], y-body_ylim[0], z-(env.hurdle_height+1)])
+
+                            #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
+                             #       state = 1  # tiny food
+                            else:#was else
+                                state = details["output_type"](details["state"][x-body_xlim[0], y-body_ylim[0], z-(env.hurdle_height+1)])
+
+                        elif env.circular_hurdles and z < env.hurdle_height and env.debris and x % 2 != 0:
+                            state = 0
+                            xy_centered = [x-body_xlim[1]/2, y-body_ylim[1]/2]
+                            for hurdle in range(1, env.num_hurdles + 1):
+                                hurdle_radius = hurdle * env.space_between_hurdles
+                                if abs(xy_centered[0]**2 + xy_centered[1]**2 - hurdle_radius**2) <= hurdle_radius:
+                                    state = -1  # tiny debris
+
+                        elif env.num_hurdles > 0 and z < env.hurdle_height and workspace_xlim[0] < x < workspace_xlim[1]-1:
+                            if env.debris_size < -1:
+                                state = 0.5*random.random()-1
+                            else:
+                                state = env.debris_size  # tiny debris
+                        # dit ingevoegd
+                        elif env.needle_position > 0:
+                            if (x == workspace_xlim[1] - 1) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2) and (z == 0):
+                                state = 7  # voxelyze_file.write("7")  # food
+                            else:
+                                state = 0
+                        # tot hier
+                        else:
+                            state = 0
 
                         voxelyze_file.write(str(state))
                         if details["tag"] != "<Data>":  # TODO more dynamic
