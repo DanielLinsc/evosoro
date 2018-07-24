@@ -16,7 +16,7 @@ INCLUDEPATH += ../../../../Libs/qwt/src \
     ./GeneratedFiles \
     ./../Utils \
     /usr/include/qwt
-LIBS += -lqwt \
+LIBS += -lqwt6-qt5 \
 #    -lOpenGL32 \
     -lGL \
  #   -lglu32 \

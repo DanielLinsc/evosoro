@@ -18,7 +18,7 @@
 
 
 //for multithreading
-#include <QtConcurrentMap>
+#include <QtConcurrent/QtConcurrentMap>
 
 class QVX_Object : public QWidget, public CVX_Object
 {
