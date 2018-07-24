@@ -1,0 +1,21 @@
+gen		id		dom		parent_id		variation_type		fitness		parent_fitness		age		parent_age		num_voxels		parent_num_voxels		material_different_from_parent		mean_material		mean_parent_material		mean_parent_diff_material
+0		15		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		35		10000000.0		
+0		13		1		-1		newly_generated		0.0		-10000000.0		0		10000000.0		51		10000000.0		
+0		19		2		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		1		2		-1		newly_generated		-0.00185137		-10000000.0		0		10000000.0		58		10000000.0		
+0		18		3		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		17		4		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		16		5		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		14		6		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		12		7		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		11		8		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		10		9		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		9		10		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		8		11		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		7		12		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		6		13		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		5		14		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		4		15		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		3		16		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		2		17		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		
+0		0		18		-1		newly_generated		0.0		-10000000.0		0		10000000.0		64		10000000.0		

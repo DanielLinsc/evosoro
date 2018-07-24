@@ -85,7 +85,8 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
         y_pad[0] = body_ylim[1]
 
     if env.needle_position > 0:
-        y_pad = x_pad = [0, env.needle_position]
+        x_pad = [0, env.needle_position]
+        #y_pad = x_pad = [0, env.needle_position] oud, gewijzigd naar bovenstaand
 
     workspace_xlim = (-x_pad[0], body_xlim[1] + x_pad[1])
     workspace_ylim = (-y_pad[0], body_ylim[1] + y_pad[1])
