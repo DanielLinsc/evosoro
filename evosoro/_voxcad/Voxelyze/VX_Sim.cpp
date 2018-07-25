@@ -1523,6 +1523,7 @@ bool CVX_Sim::UpdateStats(std::string* pRetMessage) //updates simulation state (
 
 	    SS.CurNeedlePos = GetNeedlePosition();
 	    SS.CurNeedleRot = GetNeedleRotation();
+	    SS.CurNeedleRotVel = GetNeedleRotationalVelocity();
 
 	    SS.CurAnteriorDist = getAnteriorDist();
 	    SS.CurPosteriorDist = getPosteriorDist();
@@ -2739,6 +2740,19 @@ Vec3D<> CVX_Sim::GetNeedleRotation(void)
         }
 	}
 	return ThisRot;
+}
+Vec3D<> CVX_Sim::GetNeedleRotationalVelocity(void)
+{
+	Vec3D<> ThisRotVel;
+	for (int i=0; i<NumVox(); i++){
+        int ThisMat = VoxArray[i].GetMaterialIndex();
+        if (ThisMat == 7){
+            //ThisRot = VoxArray[i].GetCurAngle(); //GetCurPos was het, GetCurRot zelf gedef.
+            //Vec3D<> Axis1(LocalVXC.GetLatticeDim()/4,0,0);
+            ThisRotVel = VoxArray[i].GetCurAngVel();//(VoxArray[i].GetCurAngVel()*CQuat<>(Axis1)*VoxArray[i].GetCurAngle().Conjugate()).ToVec(); //is maar een as maar van hierboven gehaald, zoek op getcurang
+        }
+	}
+	return ThisRotVel;
 }
 //tot hier
 

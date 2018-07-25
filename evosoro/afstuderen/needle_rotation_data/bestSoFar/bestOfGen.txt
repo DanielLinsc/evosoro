@@ -1,23 +1,5 @@
 gen		id		dom		parent_id		variation_type		fitness		parent_fitness		age		parent_age		num_voxels		parent_num_voxels		material_different_from_parent		mean_material		mean_parent_material		mean_parent_diff_material
-0		15		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		35		10000000.0		
-1		38		0		8		mutate_function(square-to-sin)		0.00248758		0.0		1		1		64		64		
-2		38		0		8		survived		0.00248758		0.0		2		1		64		64		
-3		38		0		8		survived		0.00248758		0.0		3		1		64		64		
-4		38		0		8		survived		0.00248758		0.0		4		1		64		64		
-5		38		0		8		survived		0.00248758		0.0		5		1		64		64		
-6		38		0		8		survived		0.00248758		0.0		6		1		64		64		
-7		38		0		8		survived		0.00248758		0.0		7		1		64		64		
-8		174		0		150		mutate_function(sin-to-sqrt_abs)		0.00249866		0.00236247		8		8		64		41		
-9		174		0		150		survived		0.00249866		0.00236247		9		8		64		41		
-10		174		0		150		survived		0.00249866		0.00236247		10		8		64		41		
-11		174		0		150		survived		0.00249866		0.00236247		11		8		64		41		
-12		174		0		150		survived		0.00249866		0.00236247		12		8		64		41		
-13		174		0		150		survived		0.00249866		0.00236247		13		8		64		41		
-14		174		0		150		survived		0.00249866		0.00236247		14		8		64		41		
-15		174		0		150		survived		0.00249866		0.00236247		15		8		64		41		
-16		174		0		150		survived		0.00249866		0.00236247		16		8		64		41		
-17		174		0		150		survived		0.00249866		0.00236247		17		8		64		41		
-18		174		0		150		survived		0.00249866		0.00236247		18		8		64		41		
-19		174		0		150		survived		0.00249866		0.00236247		19		8		64		41		
-20		174		0		150		survived		0.00249866		0.00236247		20		8		64		41		
-21		174		0		150		survived		0.00249866		0.00236247		21		8		64		41		
+0		13		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		51		10000000.0		
+1		30		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		10000000.0		10000000.0		
+2		46		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		10000000.0		10000000.0		
+3		62		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		10000000.0		10000000.0		
