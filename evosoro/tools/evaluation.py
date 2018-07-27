@@ -15,7 +15,9 @@ from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
 # sub.call("cp ../_voxcad/voxelyzeMain/voxelyze .", shell=True)
 # sub.call("cp ../_voxcad/qhull .", shell=True)
 
-
+#zelf ingevoegd hieronder
+node = ['node11','node12','node13','node14','node15']
+number_nodes = len(node)
 def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_name, max_eval_time=60,
                  time_to_try_again=10, save_lineages=False):
     """Evaluate all individuals of the population in VoxCad.
@@ -75,9 +77,13 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             num_evaluated_this_gen += 1
             pop.total_evaluations += 1
             ids_to_analyze += [ind.id]
-
-            sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
+            #invoegen try nodexxx om te kijken of het werkt, of implementeren dat het in het main script al gevraagd wordt of je met nodes werkt
+            sub.Popen("ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
                       shell=True)
+           # sub.Popen("ssh " + node + "cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
+                    #  shell=True)	
+            #sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
+                      #shell=True)
 
     print_log.message("Launched {0} voxelyze calls, out of {1} individuals".format(num_evaluated_this_gen, len(pop)))
 
