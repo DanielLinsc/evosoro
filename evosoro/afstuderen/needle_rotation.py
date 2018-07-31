@@ -78,10 +78,10 @@ SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
 np.random.seed(SEED)
 
-if socket.gethostname() == "tsu5":
-    SSHCON = True
-else:
-    SSHCON = False
+#if socket.gethostname() == "tsu5":
+ #   SSHCON = True
+#else:
+ #   SSHCON = False
 
 # Defining a custom genotype, inheriting from base class Genotype
 class MyGenotype(Genotype):
@@ -172,7 +172,7 @@ my_objective_dict.add_objective(name="num_voxels", maximize=False, tag=None,
 my_pop = Population(my_objective_dict, MyGenotype, MyPhenotype, pop_size=POPSIZE)
 
 # Setting up our optimization
-my_optimization = ParetoOptimization(my_sim, my_env, my_pop, SSHCON)
+my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
 
 # And, finally, our main
 if __name__ == "__main__":
