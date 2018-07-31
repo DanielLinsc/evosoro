@@ -16,7 +16,7 @@ from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
 # sub.call("cp ../_voxcad/qhull .", shell=True)
 
 #zelf ingevoegd hieronder
-node = ['node11','node12','node13','node14','node15']
+node = ['node12','node13','node14','node15','node16','node17','node18']
 number_nodes = len(node)
 def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_name, sshcon, max_eval_time=60,
                  time_to_try_again=10, save_lineages=False):
@@ -79,7 +79,7 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             ids_to_analyze += [ind.id]
             #invoegen try nodexxx om te kijken of het werkt, of implementeren dat het in het main script al gevraagd wordt of je met nodes werkt
             if sshcon == True:
-                sub.Popen("ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
+                sub.Popen("exit && ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
                       shell=True)
             else:
            #sub.Popen("ssh " + node + "cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,

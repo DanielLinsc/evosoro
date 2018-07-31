@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<Voxelyze_Sim_Result Version="1.0">
+    <Fitness>
+        <NormFinalDist>1.86211</NormFinalDist>
+        <NormRegimeDist>0.354714</NormRegimeDist>
+        <NormFrozenDist>0</NormFrozenDist>
+        <FinalDist>1.86211</FinalDist>
+        <finalDistY>1.2241</finalDistY>
+        <AnteriorDist>4.13109</AnteriorDist>
+        <PosteriorDist>0.354714</PosteriorDist>
+        <AnteriorY>5.13696</AnteriorY>
+        <PosteriorY>1.2979</PosteriorY>
+        <EndOfLifePosteriorY>0</EndOfLifePosteriorY>
+        <FallAdjPostY>0</FallAdjPostY>
+        <NumNonFeetTouchingFloor>0</NumNonFeetTouchingFloor>
+        <NumTouchingFloor>18</NumTouchingFloor>
+        <Lifetime>60.0005</Lifetime>
+        <FoundNeedleInHaystack>1</FoundNeedleInHaystack>
+        <PushDist>0.714363</PushDist>
+        <PushRot>-0.000892889</PushRot>
+        <RotVel>-1.65713e-07</RotVel>
+    </Fitness>
+</Voxelyze_Sim_Result>
