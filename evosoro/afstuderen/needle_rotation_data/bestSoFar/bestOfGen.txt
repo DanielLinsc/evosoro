@@ -1,0 +1,24 @@
+gen		id		dom		parent_id		variation_type		fitness		parent_fitness		age		parent_age		num_voxels		parent_num_voxels		material_different_from_parent		mean_material		mean_parent_material		mean_parent_diff_material
+0		69		0		-1		newly_generated		0.0		-10000000.0		0		10000000.0		5		10000000.0		
+1		204		0		88		mutate_function(absolute-to-sin)		0.000711996		-0.000742515		1		1		36		32		
+2		204		0		88		survived		0.000711996		-0.000742515		2		1		36		32		
+3		204		0		88		survived		0.000711996		-0.000742515		3		1		36		32		
+4		204		0		88		survived		0.000711996		-0.000742515		4		1		36		32		
+5		204		0		88		survived		0.000711996		-0.000742515		5		1		36		32		
+6		204		0		88		survived		0.000711996		-0.000742515		6		1		36		32		
+7		929		0		590		remove_link		0.000711996		0.00061111		7		7		34		34		
+8		1129		0		1002		remove_node		0.000854889		0.0		4		4		35		46		
+9		1129		0		1002		survived		0.000854889		0.0		5		4		35		46		
+10		1334		0		1129		mutate_function(absolute-to-neg_abs)		0.000855893		0.000854889		6		6		35		35		
+11		1334		0		1129		survived		0.000855893		0.000854889		7		6		35		35		
+12		1603		0		1527		mutate_function(sin-to-absolute)		0.000879938		9.48714e-09		8		8		36		5		
+13		1695		0		1527		mutate_function(sin-to-sqrt_abs)		0.000879938		9.48714e-09		9		9		5		5		
+14		1903		0		1650		remove_link		0.00118214		0.000797727		10		10		35		35		
+15		1903		0		1650		survived		0.00118214		0.000797727		11		10		35		35		
+16		1903		0		1650		survived		0.00118214		0.000797727		12		10		35		35		
+17		1903		0		1650		survived		0.00118214		0.000797727		13		10		35		35		
+18		1903		0		1650		survived		0.00118214		0.000797727		14		10		35		35		
+19		1903		0		1650		survived		0.00118214		0.000797727		15		10		35		35		
+20		2638		0		2286		add_node		0.0015565		0.000930607		16		16		35		34		
+21		2638		0		2286		survived		0.0015565		0.000930607		17		16		35		34		
+22		2638		0		2286		survived		0.0015565		0.000930607		18		16		35		34		

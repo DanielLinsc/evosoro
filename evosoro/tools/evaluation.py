@@ -208,9 +208,9 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
 
             # wait a second and try again
             else:
-                time.sleep(0.5)
+                time.sleep(0.05)
         else:
-            time.sleep(0.5)
+            time.sleep(0.05)
 
     if not all_done:
         print_log.message("WARNING: Couldn't get a fitness value in time for some individuals. "
