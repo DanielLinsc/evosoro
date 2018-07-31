@@ -78,17 +78,14 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             pop.total_evaluations += 1
             ids_to_analyze += [ind.id]
             #invoegen try nodexxx om te kijken of het werkt, of implementeren dat het in het main script al gevraagd wordt of je met nodes werkt
-<<<<<<< HEAD
             #if sshcon == True:
             sub.Popen("ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
                     shell=True)
             #else:
-=======
-            if sshcon == True:
-                sub.Popen("exit && ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
-                      shell=True)
-            else:
->>>>>>> 2fe09af72378e98a157eb1d8173cdd5635525f66
+            #if sshcon == True:
+             #   sub.Popen("exit && ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
+                     # shell=True)
+            #else:
            #sub.Popen("ssh " + node + "cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
                     #  shell=True)	
                 #sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
