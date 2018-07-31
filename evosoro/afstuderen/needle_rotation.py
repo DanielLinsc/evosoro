@@ -78,10 +78,10 @@ SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
 np.random.seed(SEED)
 
-if socket.gethostname() == "daniel-VirtualBox":
-    SSHCON = False
-else:
+if socket.gethostname() == "tsu5":
     SSHCON = True
+else:
+    SSHCON = False
 
 # Defining a custom genotype, inheriting from base class Genotype
 class MyGenotype(Genotype):
