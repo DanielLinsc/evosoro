@@ -42,4 +42,4 @@ def continue_from_checkpoint(directory="tests_data", additional_gens=0, max_hour
             optimizer.run(continued_from_checkpoint=True, max_hours_runtime=max_hours_runtime, max_gens=max_gens,
                           max_eval_time=max_eval_time, time_to_try_again=time_to_try_again,
                           checkpoint_every=checkpoint_every, save_vxa_every=save_vxa_every,
-                          save_lineages=save_lineages, save_nets=save_nets, save_pareto=save_pareto)
+                          save_lineages=save_lineages, save_nets=save_nets, save_pareto=save_pareto, sshcon=sshcon)

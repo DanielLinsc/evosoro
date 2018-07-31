@@ -33,6 +33,7 @@ import numpy as np
 import subprocess as sub
 from functools import partial
 import os
+import socket
 import sys
 
 # Appending repo's root dir in the python path to enable subsequent imports
@@ -77,6 +78,10 @@ SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
 np.random.seed(SEED)
 
+if socket.gethostname() == "daniel-VirtualBox":
+    SSHCON = False
+else:
+    SSHCON = True
 
 # Defining a custom genotype, inheriting from base class Genotype
 class MyGenotype(Genotype):
@@ -167,7 +172,7 @@ my_objective_dict.add_objective(name="num_voxels", maximize=False, tag=None,
 my_pop = Population(my_objective_dict, MyGenotype, MyPhenotype, pop_size=POPSIZE)
 
 # Setting up our optimization
-my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
+my_optimization = ParetoOptimization(my_sim, my_env, my_pop, SSHCON)
 
 # And, finally, our main
 if __name__ == "__main__":

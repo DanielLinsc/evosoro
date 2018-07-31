@@ -44,11 +44,12 @@ class Optimizer(object):
 
 
 class PopulationBasedOptimizer(Optimizer):
-    def __init__(self, sim, env, pop, selection_func, mutation_func):
+    def __init__(self, sim, env, pop, selection_func, mutation_func,sshcon):
         Optimizer.__init__(self, sim, env)
         self.pop = pop
         self.select = selection_func
         self.mutate = mutation_func
+        self.sshcon = sshcon
         self.num_env_cycles = 0
         self.autosuspended = False
         self.max_gens = None
@@ -154,8 +155,8 @@ class PopulationBasedOptimizer(Optimizer):
 
 
 class ParetoOptimization(PopulationBasedOptimizer):
-    def __init__(self, sim, env, pop):
-        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection, create_new_children_through_mutation)
+    def __init__(self, sim, env, pop, sshcon):
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection, create_new_children_through_mutation, sshcon)
 
 
 class ParetoTournamentOptimization(PopulationBasedOptimizer):
