@@ -1,0 +1,4 @@
+/opt/clion-2018.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/daniel/evosoro/evosoro/_voxcad
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug

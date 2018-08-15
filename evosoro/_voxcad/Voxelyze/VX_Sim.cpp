@@ -379,7 +379,7 @@ void CVX_Sim::ClearAll(void) //Reset all initialized variables
 	SS.Clear();
 	IniCM = Vec3D<>(0,0,0);
 	InitialNeedlePosition = Vec3D<>(0,0,0);
-    InitialNeedleRotation = Vec3D<>(0,0,0);
+    InitialNeedleRotation = double(0.0);
 
 	delete ImportSurfMesh;
 	ImportSurfMesh=NULL;
@@ -2728,15 +2728,15 @@ Vec3D<> CVX_Sim::GetNeedlePosition(void)
 	return ThisPos;
 }
 //vanaf hier zelf ingevoegd
-Vec3D<> CVX_Sim::GetNeedleRotation(void)
+double CVX_Sim::GetNeedleRotation(void)
 {
-	Vec3D<> ThisRot;
+	double ThisRot (0.0);
 	for (int i=0; i<NumVox(); i++){
         int ThisMat = VoxArray[i].GetMaterialIndex();
         if (ThisMat == 7){
             //ThisRot = VoxArray[i].GetCurAngle(); //GetCurPos was het, GetCurRot zelf gedef.
-            Vec3D<> Axis1(LocalVXC.GetLatticeDim()/4,0,0);
-            ThisRot = (VoxArray[i].GetCurAngle()*CQuat<>(Axis1)*VoxArray[i].GetCurAngle().Conjugate()).ToVec(); //is maar een as maar van hierboven gehaald, zoek op getcurang
+            //Vec3D<> Axis1(LocalVXC.GetLatticeDim()/4,0,0ThisRot = VoxArray[i].GetCurAngle().ToRotationVector().z;
+            //ThisRot = (VoxArray[i].GetCurAngle()*CQuat<>(Axis1)*VoxArray[i].GetCurAngle().Conjugate()).ToVec(); //is maar een as maar van hierboven gehaald, zoek op getcurang
         }
 	}
 	return ThisRot;

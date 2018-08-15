@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="_voxcad"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="_voxcad">
+				<Option output="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/_voxcad" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/."/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/QTUtils"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/VoxCad"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 _voxcad"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="_voxcad/fast">
+				<Option output="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/_voxcad" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/."/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/QTUtils"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/VoxCad"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils"/>
+					<Add directory="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 _voxcad/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/evosoro/evosoro/_voxcad/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/qrc_VoxCad.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_3DBrush.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_BCs.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_EditPrim.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_FEAInfo.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_Palette.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_Physics.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_StructureEditor.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_Tensile.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_VideoCapture.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_VoxInfo.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_Dlg_Workspace.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QOpenGL.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QSimplePlot.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QThreadWrap.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QVX_Edit.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QVX_Interfaces.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_QVX_TensileTest.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/release/moc_VoxCad.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_VoxCad.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vBCs.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vFEAInfo.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vPalette.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vPhysics.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vPrimEdit.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vStructureEditor.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vTensile.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vVideoGen.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vVoxInfo.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/ui_vWorkSpace.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Makefile">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QOpenGL.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QOpenGL.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QSimplePlot.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QSimplePlot.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QThreadWrap.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/QTUtils/QThreadWrap.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_3DBrush.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_3DBrush.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_BCs.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_BCs.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_EditPrim.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_EditPrim.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_FEAInfo.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_FEAInfo.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Palette.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Palette.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Physics.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Physics.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_StructureEditor.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_StructureEditor.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Tensile.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Tensile.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_VideoCapture.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_VideoCapture.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_VoxInfo.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_VoxInfo.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Workspace.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/Dlg_Workspace.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_Edit.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_Edit.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_Interface.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_Interfaces.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_TensileTest.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/QVX_TensileTest.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/VoxCad.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/VoxCad.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/VoxCad/main.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/CMakeLists.txt">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Makefile">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/ReadMe.txt">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Vec3D.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlerror.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlerror.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlerror.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlparser.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlparser.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlparser.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zconf.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zlib.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zlib.lib">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondInternal.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondInternal.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondInternal.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondInternal.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_SimGLView.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_SimGLView.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Voxel.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Voxel.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Voxel.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Voxel.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Benchmark.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Benchmark.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Benchmark.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Benchmark.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Bond.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Bond.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Bond.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Bond.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Enums.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_MeshUtil (copy).cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_MeshUtil.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_MeshUtil.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_MeshUtil.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_MeshUtil.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Sim.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Sim.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Sim.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Sim.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_SimGA.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_SimGA.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_SimGA.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_SimGA.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Source.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Source.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Voxel.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Voxel.d">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Voxel.h">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Voxel.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Voxelyze.sln">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Voxelyze.vcxproj">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Voxelyze.vcxproj.filters">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/cmake-build-debug/CMakeCache.txt">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/cmake-build-debug/Makefile">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/cmake-build-debug/Voxelyze.cbp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/cmake-build-debug/cmake_install.cmake">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/libvoxelyze.0.9.a">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/icons/V32.ico">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/icons/banner.jpg">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/rebuild_everything.sh">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain/Makefile">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain/main.cpp">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain/main.o">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain/needle.vxa">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/voxelyzeMain/voxelyze">
+			<Option target="_voxcad"/>
+		</Unit>
+		<Unit filename="/home/daniel/evosoro/evosoro/_voxcad/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

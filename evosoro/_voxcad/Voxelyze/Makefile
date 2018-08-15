@@ -19,15 +19,15 @@ VOXELYZE_LIB_VERSION = lib$(VOXELYZE_VERSION).a
 
 # CXX=icpc
 # CC=icpc
-CXX=g++
-CC=g++
+CXX=g++ -g
+CC=g++ -g
 #INCLUDE=-I./zlib-1.2.5 -I./Voxelyze -I./TinyXML
 # INCLUDE= -I./Voxelyze -I./Voxelyze/Utils -l./Voxelyze/Utils/zlib
 INCLUDE= -I./Voxelyze -I./Voxelyze/Utils
 
 
 # CFLAGS= -xhost -O3 -Wall $(INCLUDE)
-CFLAGS= -O3 -Wall -std=c++11 $(INCLUDE)
+CFLAGS= -g -O3 -Wall -std=c++11 $(INCLUDE)
 #CFLAGS= -g -Wall $(INCLUDE)
 
 CPPFLAGS= $(CFLAGS)

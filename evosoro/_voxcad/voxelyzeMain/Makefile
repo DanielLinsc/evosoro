@@ -21,8 +21,8 @@ LIBRARY_INCLUDES = \
 
 # CXX=icpc
 # CC=icpc
-CXX=g++
-CC=g++
+CXX=g++ -g
+CC=g++ -g
 
 
 #OPTFLAGS = -Wall -O3 -march=i686 -fforce-addr -fomit-frame-pointer -funroll-loops -frerun-cse-after-loop -frerun-loop-opt -falign-functions=4

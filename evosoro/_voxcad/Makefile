@@ -36,7 +36,7 @@ DISTNAME      = VoxCad1.0.0
 DISTDIR = /home/daniel/evosoro/evosoro/_voxcad/release/VoxCad1.0.0
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64  -lglut -lGLU -lz -lm -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Xml -lQt5Core -lGL -lpthread #-lqwt6-qt5
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lglut -lGLU -lz -lm -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Xml -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -179,9 +179,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -195,6 +197,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
@@ -346,9 +350,11 @@ Makefile: VoxCad.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.co
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -362,6 +368,8 @@ Makefile: VoxCad.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.co
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
@@ -412,9 +420,11 @@ Makefile: VoxCad.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.co
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri:
@@ -428,6 +438,8 @@ Makefile: VoxCad.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.co
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri:
@@ -542,7 +554,7 @@ GeneratedFiles/qrc_VoxCad.cpp: VoxCad/VoxCad.qrc \
 compiler_moc_header_make_all: GeneratedFiles/release/moc_VoxCad.cpp GeneratedFiles/release/moc_QVX_Edit.cpp GeneratedFiles/release/moc_QVX_Interfaces.cpp GeneratedFiles/release/moc_QVX_TensileTest.cpp GeneratedFiles/release/moc_Dlg_VideoCapture.cpp GeneratedFiles/release/moc_Dlg_3DBrush.cpp GeneratedFiles/release/moc_Dlg_BCs.cpp GeneratedFiles/release/moc_Dlg_EditPrim.cpp GeneratedFiles/release/moc_Dlg_FEAInfo.cpp GeneratedFiles/release/moc_Dlg_Palette.cpp GeneratedFiles/release/moc_Dlg_Physics.cpp GeneratedFiles/release/moc_Dlg_StructureEditor.cpp GeneratedFiles/release/moc_Dlg_Tensile.cpp GeneratedFiles/release/moc_Dlg_VoxInfo.cpp GeneratedFiles/release/moc_Dlg_Workspace.cpp GeneratedFiles/release/moc_QOpenGL.cpp GeneratedFiles/release/moc_QThreadWrap.cpp GeneratedFiles/release/moc_QSimplePlot.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) GeneratedFiles/release/moc_VoxCad.cpp GeneratedFiles/release/moc_QVX_Edit.cpp GeneratedFiles/release/moc_QVX_Interfaces.cpp GeneratedFiles/release/moc_QVX_TensileTest.cpp GeneratedFiles/release/moc_Dlg_VideoCapture.cpp GeneratedFiles/release/moc_Dlg_3DBrush.cpp GeneratedFiles/release/moc_Dlg_BCs.cpp GeneratedFiles/release/moc_Dlg_EditPrim.cpp GeneratedFiles/release/moc_Dlg_FEAInfo.cpp GeneratedFiles/release/moc_Dlg_Palette.cpp GeneratedFiles/release/moc_Dlg_Physics.cpp GeneratedFiles/release/moc_Dlg_StructureEditor.cpp GeneratedFiles/release/moc_Dlg_Tensile.cpp GeneratedFiles/release/moc_Dlg_VoxInfo.cpp GeneratedFiles/release/moc_Dlg_Workspace.cpp GeneratedFiles/release/moc_QOpenGL.cpp GeneratedFiles/release/moc_QThreadWrap.cpp GeneratedFiles/release/moc_QSimplePlot.cpp
-GeneratedFiles/release/moc_VoxCad.cpp: GeneratedFiles/$(Configuration)/ui_VoxCad.h \
+GeneratedFiles/release/moc_VoxCad.cpp: GeneratedFiles/ui_VoxCad.h \
 		VoxCad/QVX_Edit.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
@@ -568,23 +580,23 @@ GeneratedFiles/release/moc_VoxCad.cpp: GeneratedFiles/$(Configuration)/ui_VoxCad
 		QTUtils/QThreadWrap.h \
 		QTUtils/QOpenGL.h \
 		VoxCad/Dlg_Palette.h \
-		GeneratedFiles/$(Configuration)/ui_vPalette.h \
+		GeneratedFiles/ui_vPalette.h \
 		VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/Dlg_Workspace.h \
-		GeneratedFiles/$(Configuration)/ui_vWorkSpace.h \
+		GeneratedFiles/ui_vWorkSpace.h \
 		VoxCad/Dlg_VoxInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vVoxInfo.h \
+		GeneratedFiles/ui_vVoxInfo.h \
 		VoxCad/Dlg_BCs.h \
-		GeneratedFiles/$(Configuration)/ui_vBCs.h \
+		GeneratedFiles/ui_vBCs.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		VoxCad/Dlg_FEAInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vFEAInfo.h \
+		GeneratedFiles/ui_vFEAInfo.h \
 		VoxCad/Dlg_Physics.h \
-		GeneratedFiles/$(Configuration)/ui_vPhysics.h \
+		GeneratedFiles/ui_vPhysics.h \
 		VoxCad/Dlg_Tensile.h \
-		GeneratedFiles/$(Configuration)/ui_vTensile.h \
+		GeneratedFiles/ui_vTensile.h \
 		VoxCad/QVX_TensileTest.h \
 		VoxCad/Dlg_3DBrush.h \
 		VoxCad/VoxCad.h
@@ -662,12 +674,12 @@ GeneratedFiles/release/moc_QVX_TensileTest.cpp: Voxelyze/VX_Sim.h \
 		VoxCad/QVX_TensileTest.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/QVX_TensileTest.h -o GeneratedFiles/release/moc_QVX_TensileTest.cpp
 
-GeneratedFiles/release/moc_Dlg_VideoCapture.cpp: GeneratedFiles/$(Configuration)/ui_vVideoGen.h \
+GeneratedFiles/release/moc_Dlg_VideoCapture.cpp: GeneratedFiles/ui_vVideoGen.h \
 		VoxCad/Dlg_VideoCapture.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_VideoCapture.h -o GeneratedFiles/release/moc_Dlg_VideoCapture.cpp
 
 GeneratedFiles/release/moc_Dlg_3DBrush.cpp: VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		Voxelyze/VX_FRegion.h \
 		Voxelyze/Utils/Vec3D.h \
 		Voxelyze/Utils/XML_Rip.h \
@@ -677,7 +689,7 @@ GeneratedFiles/release/moc_Dlg_3DBrush.cpp: VoxCad/Dlg_EditPrim.h \
 		VoxCad/Dlg_3DBrush.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_3DBrush.h -o GeneratedFiles/release/moc_Dlg_3DBrush.cpp
 
-GeneratedFiles/release/moc_Dlg_BCs.cpp: GeneratedFiles/$(Configuration)/ui_vBCs.h \
+GeneratedFiles/release/moc_Dlg_BCs.cpp: GeneratedFiles/ui_vBCs.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -701,15 +713,15 @@ GeneratedFiles/release/moc_Dlg_BCs.cpp: GeneratedFiles/$(Configuration)/ui_vBCs.
 		Voxelyze/OpenGLInclude.h \
 		QTUtils/QThreadWrap.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		VoxCad/Dlg_BCs.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_BCs.h -o GeneratedFiles/release/moc_Dlg_BCs.cpp
 
-GeneratedFiles/release/moc_Dlg_EditPrim.cpp: GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+GeneratedFiles/release/moc_Dlg_EditPrim.cpp: GeneratedFiles/ui_vPrimEdit.h \
 		VoxCad/Dlg_EditPrim.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_EditPrim.h -o GeneratedFiles/release/moc_Dlg_EditPrim.cpp
 
-GeneratedFiles/release/moc_Dlg_FEAInfo.cpp: GeneratedFiles/$(Configuration)/ui_vFEAInfo.h \
+GeneratedFiles/release/moc_Dlg_FEAInfo.cpp: GeneratedFiles/ui_vFEAInfo.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -735,7 +747,7 @@ GeneratedFiles/release/moc_Dlg_FEAInfo.cpp: GeneratedFiles/$(Configuration)/ui_v
 		VoxCad/Dlg_FEAInfo.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_FEAInfo.h -o GeneratedFiles/release/moc_Dlg_FEAInfo.cpp
 
-GeneratedFiles/release/moc_Dlg_Palette.cpp: GeneratedFiles/$(Configuration)/ui_vPalette.h \
+GeneratedFiles/release/moc_Dlg_Palette.cpp: GeneratedFiles/ui_vPalette.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -759,13 +771,13 @@ GeneratedFiles/release/moc_Dlg_Palette.cpp: GeneratedFiles/$(Configuration)/ui_v
 		Voxelyze/OpenGLInclude.h \
 		QTUtils/QThreadWrap.h \
 		VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/QVX_Edit.h \
 		QTUtils/QOpenGL.h \
 		VoxCad/Dlg_Palette.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_Palette.h -o GeneratedFiles/release/moc_Dlg_Palette.cpp
 
-GeneratedFiles/release/moc_Dlg_Physics.cpp: GeneratedFiles/$(Configuration)/ui_vPhysics.h \
+GeneratedFiles/release/moc_Dlg_Physics.cpp: GeneratedFiles/ui_vPhysics.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -791,7 +803,7 @@ GeneratedFiles/release/moc_Dlg_Physics.cpp: GeneratedFiles/$(Configuration)/ui_v
 		VoxCad/Dlg_Physics.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_Physics.h -o GeneratedFiles/release/moc_Dlg_Physics.cpp
 
-GeneratedFiles/release/moc_Dlg_StructureEditor.cpp: GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+GeneratedFiles/release/moc_Dlg_StructureEditor.cpp: GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/QVX_Edit.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
@@ -819,7 +831,7 @@ GeneratedFiles/release/moc_Dlg_StructureEditor.cpp: GeneratedFiles/$(Configurati
 		VoxCad/Dlg_StructureEditor.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_StructureEditor.h -o GeneratedFiles/release/moc_Dlg_StructureEditor.cpp
 
-GeneratedFiles/release/moc_Dlg_Tensile.cpp: GeneratedFiles/$(Configuration)/ui_vTensile.h \
+GeneratedFiles/release/moc_Dlg_Tensile.cpp: GeneratedFiles/ui_vTensile.h \
 		VoxCad/QVX_TensileTest.h \
 		Voxelyze/VX_Sim.h \
 		Voxelyze/VXS_Voxel.h \
@@ -844,11 +856,11 @@ GeneratedFiles/release/moc_Dlg_Tensile.cpp: GeneratedFiles/$(Configuration)/ui_v
 		VoxCad/Dlg_Tensile.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_Tensile.h -o GeneratedFiles/release/moc_Dlg_Tensile.cpp
 
-GeneratedFiles/release/moc_Dlg_VoxInfo.cpp: GeneratedFiles/$(Configuration)/ui_vVoxInfo.h \
+GeneratedFiles/release/moc_Dlg_VoxInfo.cpp: GeneratedFiles/ui_vVoxInfo.h \
 		VoxCad/Dlg_VoxInfo.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/daniel/evosoro/evosoro/_voxcad -I/home/Libs/qwt/src -I/home/daniel/evosoro/evosoro/_voxcad -I/home/daniel/evosoro/evosoro/Voxelyze -I/home/daniel/evosoro/evosoro/Voxelyze -I'/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles/$(Configuration)' -I/home/daniel/evosoro/evosoro/_voxcad/GeneratedFiles -I/home/daniel/evosoro/evosoro/Utils -I/usr/include/qwt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include VoxCad/Dlg_VoxInfo.h -o GeneratedFiles/release/moc_Dlg_VoxInfo.cpp
 
-GeneratedFiles/release/moc_Dlg_Workspace.cpp: GeneratedFiles/$(Configuration)/ui_vWorkSpace.h \
+GeneratedFiles/release/moc_Dlg_Workspace.cpp: GeneratedFiles/ui_vWorkSpace.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
 		Voxelyze/Utils/XML_Rip.h \
@@ -915,7 +927,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 ####### Compile
 
 release/main.o: VoxCad/main.cpp VoxCad/VoxCad.h \
-		GeneratedFiles/$(Configuration)/ui_VoxCad.h \
+		GeneratedFiles/ui_VoxCad.h \
 		VoxCad/QVX_Edit.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
@@ -941,29 +953,29 @@ release/main.o: VoxCad/main.cpp VoxCad/VoxCad.h \
 		QTUtils/QThreadWrap.h \
 		QTUtils/QOpenGL.h \
 		VoxCad/Dlg_Palette.h \
-		GeneratedFiles/$(Configuration)/ui_vPalette.h \
+		GeneratedFiles/ui_vPalette.h \
 		VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/Dlg_Workspace.h \
-		GeneratedFiles/$(Configuration)/ui_vWorkSpace.h \
+		GeneratedFiles/ui_vWorkSpace.h \
 		VoxCad/Dlg_VoxInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vVoxInfo.h \
+		GeneratedFiles/ui_vVoxInfo.h \
 		VoxCad/Dlg_BCs.h \
-		GeneratedFiles/$(Configuration)/ui_vBCs.h \
+		GeneratedFiles/ui_vBCs.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		VoxCad/Dlg_FEAInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vFEAInfo.h \
+		GeneratedFiles/ui_vFEAInfo.h \
 		VoxCad/Dlg_Physics.h \
-		GeneratedFiles/$(Configuration)/ui_vPhysics.h \
+		GeneratedFiles/ui_vPhysics.h \
 		VoxCad/Dlg_Tensile.h \
-		GeneratedFiles/$(Configuration)/ui_vTensile.h \
+		GeneratedFiles/ui_vTensile.h \
 		VoxCad/QVX_TensileTest.h \
 		VoxCad/Dlg_3DBrush.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o VoxCad/main.cpp
 
 release/VoxCad.o: VoxCad/VoxCad.cpp VoxCad/VoxCad.h \
-		GeneratedFiles/$(Configuration)/ui_VoxCad.h \
+		GeneratedFiles/ui_VoxCad.h \
 		VoxCad/QVX_Edit.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
@@ -989,23 +1001,23 @@ release/VoxCad.o: VoxCad/VoxCad.cpp VoxCad/VoxCad.h \
 		QTUtils/QThreadWrap.h \
 		QTUtils/QOpenGL.h \
 		VoxCad/Dlg_Palette.h \
-		GeneratedFiles/$(Configuration)/ui_vPalette.h \
+		GeneratedFiles/ui_vPalette.h \
 		VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/Dlg_Workspace.h \
-		GeneratedFiles/$(Configuration)/ui_vWorkSpace.h \
+		GeneratedFiles/ui_vWorkSpace.h \
 		VoxCad/Dlg_VoxInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vVoxInfo.h \
+		GeneratedFiles/ui_vVoxInfo.h \
 		VoxCad/Dlg_BCs.h \
-		GeneratedFiles/$(Configuration)/ui_vBCs.h \
+		GeneratedFiles/ui_vBCs.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		VoxCad/Dlg_FEAInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vFEAInfo.h \
+		GeneratedFiles/ui_vFEAInfo.h \
 		VoxCad/Dlg_Physics.h \
-		GeneratedFiles/$(Configuration)/ui_vPhysics.h \
+		GeneratedFiles/ui_vPhysics.h \
 		VoxCad/Dlg_Tensile.h \
-		GeneratedFiles/$(Configuration)/ui_vTensile.h \
+		GeneratedFiles/ui_vTensile.h \
 		VoxCad/QVX_TensileTest.h \
 		VoxCad/Dlg_3DBrush.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/VoxCad.o VoxCad/VoxCad.cpp
@@ -1069,7 +1081,7 @@ release/QVX_Interface.o: VoxCad/QVX_Interface.cpp VoxCad/QVX_Interfaces.h \
 		Voxelyze/OpenGLInclude.h \
 		QTUtils/QThreadWrap.h \
 		VoxCad/Dlg_VideoCapture.h \
-		GeneratedFiles/$(Configuration)/ui_vVideoGen.h
+		GeneratedFiles/ui_vVideoGen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/QVX_Interface.o VoxCad/QVX_Interface.cpp
 
 release/QVX_TensileTest.o: VoxCad/QVX_TensileTest.cpp VoxCad/QVX_TensileTest.h \
@@ -1098,12 +1110,12 @@ release/QVX_TensileTest.o: VoxCad/QVX_TensileTest.cpp VoxCad/QVX_TensileTest.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/QVX_TensileTest.o VoxCad/QVX_TensileTest.cpp
 
 release/Dlg_VideoCapture.o: VoxCad/Dlg_VideoCapture.cpp VoxCad/Dlg_VideoCapture.h \
-		GeneratedFiles/$(Configuration)/ui_vVideoGen.h
+		GeneratedFiles/ui_vVideoGen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_VideoCapture.o VoxCad/Dlg_VideoCapture.cpp
 
 release/Dlg_3DBrush.o: VoxCad/Dlg_3DBrush.cpp VoxCad/Dlg_3DBrush.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		Voxelyze/VX_FRegion.h \
 		Voxelyze/Utils/Vec3D.h \
 		Voxelyze/Utils/XML_Rip.h \
@@ -1115,7 +1127,7 @@ release/Dlg_3DBrush.o: VoxCad/Dlg_3DBrush.cpp VoxCad/Dlg_3DBrush.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_3DBrush.o VoxCad/Dlg_3DBrush.cpp
 
 release/Dlg_BCs.o: VoxCad/Dlg_BCs.cpp VoxCad/Dlg_BCs.h \
-		GeneratedFiles/$(Configuration)/ui_vBCs.h \
+		GeneratedFiles/ui_vBCs.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -1139,11 +1151,11 @@ release/Dlg_BCs.o: VoxCad/Dlg_BCs.cpp VoxCad/Dlg_BCs.h \
 		Voxelyze/OpenGLInclude.h \
 		QTUtils/QThreadWrap.h \
 		VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h
+		GeneratedFiles/ui_vPrimEdit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_BCs.o VoxCad/Dlg_BCs.cpp
 
 release/Dlg_EditPrim.o: VoxCad/Dlg_EditPrim.cpp VoxCad/Dlg_EditPrim.h \
-		GeneratedFiles/$(Configuration)/ui_vPrimEdit.h \
+		GeneratedFiles/ui_vPrimEdit.h \
 		Voxelyze/VX_FRegion.h \
 		Voxelyze/Utils/Vec3D.h \
 		Voxelyze/Utils/XML_Rip.h \
@@ -1154,7 +1166,7 @@ release/Dlg_EditPrim.o: VoxCad/Dlg_EditPrim.cpp VoxCad/Dlg_EditPrim.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_EditPrim.o VoxCad/Dlg_EditPrim.cpp
 
 release/Dlg_FEAInfo.o: VoxCad/Dlg_FEAInfo.cpp VoxCad/Dlg_FEAInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vFEAInfo.h \
+		GeneratedFiles/ui_vFEAInfo.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -1180,7 +1192,7 @@ release/Dlg_FEAInfo.o: VoxCad/Dlg_FEAInfo.cpp VoxCad/Dlg_FEAInfo.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_FEAInfo.o VoxCad/Dlg_FEAInfo.cpp
 
 release/Dlg_Palette.o: VoxCad/Dlg_Palette.cpp VoxCad/Dlg_Palette.h \
-		GeneratedFiles/$(Configuration)/ui_vPalette.h \
+		GeneratedFiles/ui_vPalette.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -1204,13 +1216,13 @@ release/Dlg_Palette.o: VoxCad/Dlg_Palette.cpp VoxCad/Dlg_Palette.h \
 		Voxelyze/OpenGLInclude.h \
 		QTUtils/QThreadWrap.h \
 		VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/QVX_Edit.h \
 		QTUtils/QOpenGL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_Palette.o VoxCad/Dlg_Palette.cpp
 
 release/Dlg_Physics.o: VoxCad/Dlg_Physics.cpp VoxCad/Dlg_Physics.h \
-		GeneratedFiles/$(Configuration)/ui_vPhysics.h \
+		GeneratedFiles/ui_vPhysics.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
@@ -1237,7 +1249,7 @@ release/Dlg_Physics.o: VoxCad/Dlg_Physics.cpp VoxCad/Dlg_Physics.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_Physics.o VoxCad/Dlg_Physics.cpp
 
 release/Dlg_StructureEditor.o: VoxCad/Dlg_StructureEditor.cpp VoxCad/Dlg_StructureEditor.h \
-		GeneratedFiles/$(Configuration)/ui_vStructureEditor.h \
+		GeneratedFiles/ui_vStructureEditor.h \
 		VoxCad/QVX_Edit.h \
 		VoxCad/QVX_Interfaces.h \
 		Voxelyze/VX_Object.h \
@@ -1265,7 +1277,7 @@ release/Dlg_StructureEditor.o: VoxCad/Dlg_StructureEditor.cpp VoxCad/Dlg_Structu
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_StructureEditor.o VoxCad/Dlg_StructureEditor.cpp
 
 release/Dlg_Tensile.o: VoxCad/Dlg_Tensile.cpp VoxCad/Dlg_Tensile.h \
-		GeneratedFiles/$(Configuration)/ui_vTensile.h \
+		GeneratedFiles/ui_vTensile.h \
 		VoxCad/QVX_TensileTest.h \
 		Voxelyze/VX_Sim.h \
 		Voxelyze/VXS_Voxel.h \
@@ -1292,11 +1304,11 @@ release/Dlg_Tensile.o: VoxCad/Dlg_Tensile.cpp VoxCad/Dlg_Tensile.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_Tensile.o VoxCad/Dlg_Tensile.cpp
 
 release/Dlg_VoxInfo.o: VoxCad/Dlg_VoxInfo.cpp VoxCad/Dlg_VoxInfo.h \
-		GeneratedFiles/$(Configuration)/ui_vVoxInfo.h
+		GeneratedFiles/ui_vVoxInfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Dlg_VoxInfo.o VoxCad/Dlg_VoxInfo.cpp
 
 release/Dlg_Workspace.o: VoxCad/Dlg_Workspace.cpp VoxCad/Dlg_Workspace.h \
-		GeneratedFiles/$(Configuration)/ui_vWorkSpace.h \
+		GeneratedFiles/ui_vWorkSpace.h \
 		Voxelyze/VX_Object.h \
 		Voxelyze/Utils/Vec3D.h \
 		Voxelyze/Utils/XML_Rip.h \

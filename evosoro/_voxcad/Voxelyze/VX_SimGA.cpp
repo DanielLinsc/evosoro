@@ -49,7 +49,7 @@ void CVX_SimGA::WriteResultFile(CXML_Rip* pXML)
 	if (pEnv->GetUsingNeedleInHaystack())
 	{
 	    PushDist = pow(pow(SS.CurNeedlePos.x-InitialNeedlePosition.x,2)+pow(SS.CurNeedlePos.y-InitialNeedlePosition.y,2),0.5)/LocalVXC.GetLatticeDim();
-        PushRot = SS.CurNeedleRot.z-InitialNeedleRotation.z + SS.CurNeedleRot.x-InitialNeedleRotation.x + SS.CurNeedleRot.y-InitialNeedleRotation.y;// + SS.CurNeedleRot.y + SS.CurNeedleRot.z;
+        PushRot = SS.CurNeedleRot-InitialNeedleRotation;// + SS.CurNeedleRot.y + SS.CurNeedleRot.z;
 	    RotVel = SS.CurNeedleRotVel.z + SS.CurNeedleRotVel.y + SS.CurNeedleRotVel.x;
 	    if(SS.CurNeedlePos.x != InitialNeedlePosition.x or SS.CurNeedlePos.y != InitialNeedlePosition.y)
 	    {
