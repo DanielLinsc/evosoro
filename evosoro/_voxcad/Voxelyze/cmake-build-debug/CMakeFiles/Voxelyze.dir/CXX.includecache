@@ -6,57 +6,21 @@
 
 #IncludeRegexTransform: 
 
-.././OpenGLInclude.h
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.cpp
-Array3D.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.h
 XML_Rip.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.h
 
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.cpp
-GL_Utils.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
-math.h
--
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/OpenGLInclude.h
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
 Vec3D.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Vec3D.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.cpp
-MarchCube.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.h
-vector
--
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/MarchCube.h
 Mesh.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.h
 Array3D.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Array3D.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.cpp
-Mesh.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.h
-Math.h
--
-math.h
--
-algorithm
--
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/OpenGLInclude.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/Mesh.h
 vector
@@ -74,12 +38,6 @@ math.h
 float.h
 -
 
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.cpp
-XML_Rip.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.h
-QTextStream
--
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/XML_Rip.h
 QDomDocument
 -
@@ -91,16 +49,6 @@ vector
 -
 sstream
 -
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.cpp
-ctype.h
--
-sstream
--
-iostream
--
-tinyxml.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.h
 ctype.h
@@ -122,36 +70,6 @@ sstream
 tinystr.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinystr.h
 
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlerror.cpp
-tinyxml.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxmlparser.cpp
-ctype.h
--
-stddef.h
--
-tinyxml.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/tinyxml.h
-windows.h
--
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zconf.h
-windows.h
--
-windows.h
--
-sys/types.h
--
-unistd.h
--
-unixio.h
--
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zlib.h
-zconf.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zconf.h
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.cpp
 VXS_Bond.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.h
@@ -163,12 +81,6 @@ VX_Sim.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Bond.h
 VX_Bond.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Bond.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.cpp
-VXS_BondCollision.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.h
-VXS_Voxel.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_Voxel.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VXS_BondCollision.h
 VXS_Bond.h
@@ -242,16 +154,6 @@ VX_Enums.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Enums.h
 
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.cpp
-VX_Environment.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.h
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h
-Utils/GL_Utils.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.h
 VX_FRegion.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.h
@@ -270,39 +172,9 @@ Utils/Vec3D.h
 math.h
 -
 
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.cpp
-VX_FEA.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.h
-math.h
--
-iomanip
--
-iostream
--
-fstream
--
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h
-Utils/GL_Utils.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
-
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FEA.h
 VX_Environment.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Environment.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.cpp
-VX_FRegion.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.h
-math.h
--
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h
-Utils/GL_Utils.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_FRegion.h
 Utils/Vec3D.h
@@ -351,28 +223,6 @@ math.h
 -
 fstream
 -
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.cpp
-Utils/zlib.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/zlib.h
-VX_Object.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.h
-sstream
--
-iomanip
--
-cstdlib
--
-climits
--
-stdlib.h
--
-qgl.h
--
-OpenGLInclude.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/OpenGLInclude.h
-Utils/GL_Utils.h
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/Utils/GL_Utils.h
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Object.h
 vector
@@ -443,8 +293,6 @@ limits
 -
 VX_Sim.h
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Sim.h
-
-/home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Source.cpp
 
 /home/daniel/evosoro/evosoro/_voxcad/Voxelyze/VX_Voxel.cpp
 VX_Voxel.h

@@ -2719,12 +2719,15 @@ int CVX_Sim::GetNumNonFeetTouchingFloor()
 Vec3D<> CVX_Sim::GetNeedlePosition(void)
 {
 	Vec3D<> ThisPos;
+	int needlecount=0;
 	for (int i=0; i<NumVox(); i++){
         int ThisMat = VoxArray[i].GetMaterialIndex();
         if (ThisMat == 7){
-            ThisPos = VoxArray[i].GetCurPos();
+            ThisPos += VoxArray[i].GetCurPos();//+= to get the avarage of all the 7 voxels
+            needlecount++;
         }
 	}
+    ThisPos = ThisPos / needlecount;
 	return ThisPos;
 }
 //vanaf hier zelf ingevoegd
