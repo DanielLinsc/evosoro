@@ -2735,7 +2735,8 @@ double CVX_Sim::GetNeedleRotation(void)
         int ThisMat = VoxArray[i].GetMaterialIndex();
         if (ThisMat == 7){
             //ThisRot = VoxArray[i].GetCurAngle(); //GetCurPos was het, GetCurRot zelf gedef.
-            //Vec3D<> Axis1(LocalVXC.GetLatticeDim()/4,0,0ThisRot = VoxArray[i].GetCurAngle().ToRotationVector().z;
+            //Vec3D<> Axis1(LocalVXC.GetLatticeDim()/4,0,0
+		ThisRot = VoxArray[i].GetCurAngle().ToRotationVector().z;
             //ThisRot = (VoxArray[i].GetCurAngle()*CQuat<>(Axis1)*VoxArray[i].GetCurAngle().Conjugate()).ToVec(); //is maar een as maar van hierboven gehaald, zoek op getcurang
         }
 	}
