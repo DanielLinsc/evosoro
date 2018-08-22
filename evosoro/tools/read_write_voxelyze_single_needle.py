@@ -68,15 +68,11 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     # obstacles: the following is used to freeze any elements not apart of the individual
     body_xlim = (0, individual.genotype.orig_size_xyz[0])
     body_ylim = (0, individual.genotype.orig_size_xyz[1])  # todo: if starting ind somewhere besides (0, 0)
-    #body_zlim = ((env.hurdle_height+1), individual.genotype.orig_size_xyz[2]+(env.hurdle_height+1))
-    body_zlim = (2, individual.genotype.orig_size_xyz[2] + (env.hurdle_height + 1))
-    padding = 0;
+    body_zlim = ((env.hurdle_height+1), individual.genotype.orig_size_xyz[2]+(env.hurdle_height+1))
+
+    padding = env.num_hurdles * (env.space_between_hurdles + 1)
     x_pad = [padding, padding]
     y_pad = [padding, padding]
-
-    #padding = env.num_hurdles * (env.space_between_hurdles + 1)
-    #x_pad = [padding, padding]
-    #y_pad = [padding, padding]
 
     if not env.circular_hurdles and env.num_hurdles > 0:
         if env.num_hurdles == 1:  # single hurdle
@@ -89,13 +85,12 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
         y_pad[0] = body_ylim[1]
 
     if env.needle_position > 0:
-        x_pad = [0,0]
-        #x_pad = [env.needle_position-2, env.needle_position]
+        x_pad = [env.needle_position, env.needle_position]
         #y_pad = x_pad = [0, env.needle_position] oud, gewijzigd naar bovenstaand
 
     workspace_xlim = (-x_pad[0], body_xlim[1] + x_pad[1])
     workspace_ylim = (-y_pad[0], body_ylim[1] + y_pad[1])
-    workspace_zlim = (0, max(env.wall_height, body_zlim[1])) #was 0 before, veranderd zodat de needle niet weg is
+    workspace_zlim = (0, max(env.wall_height, body_zlim[1]))
 
     length_workspace_xyz = (float(workspace_xlim[1]-workspace_xlim[0]),
                             float(workspace_ylim[1]-workspace_ylim[0]),
@@ -738,10 +733,8 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                                 state = env.debris_size  # tiny debris
                         # dit ingevoegd
                         elif env.needle_position > 0:
-                            if (x == workspace_xlim[1]/ 2) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2) and (z == 0):
+                            if (x == workspace_xlim[1] - 1) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2) and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == workspace_xlim[0]+1) and (y >= workspace_ylim[1] / 2 - 1) and (y <= workspace_ylim[1] / 2) and (z == 0):
-                                state = 8  # voxelyze_file.write("8")  # food2
                             else:
                                 state = 0
                         # tot hier

@@ -130,12 +130,11 @@ def continuous_material(output_state, *args, **kwargs):
 
 def discretize_material(output_state, num_materials=4, *args, **kwargs):
     """Discretize outputs into bins, one for each material."""
-    bins = np.linspace(-1, 1, num=num_materials+1)
+    bins = np.linspace(-1, 1, num=num_materials + 1)
     return make_one_shape_only(output_state) * np.digitize(output_state, bins)
 
 
 def make_material_tree(this_softbot, *args, **kwargs):
-
     mapping = this_softbot.to_phenotype_mapping
     material = mapping["material"]
 
@@ -160,7 +159,6 @@ def make_material_tree(this_softbot, *args, **kwargs):
 
 
 def make_material_tree_single_muscle_patches(this_softbot, *args, **kwargs):
-
     mapping = this_softbot.to_phenotype_mapping
     material = mapping["material"]
 
@@ -222,7 +220,7 @@ def make_one_shape_only(output_state, mask=None):
     # sys.exit(0)
 
     one_shape = np.zeros(output_state.shape, dtype=np.int32)
-
+    output_state
     if np.sum(mask(output_state)) < 2:
         one_shape[np.where(mask(output_state))] = 1
         return one_shape
@@ -247,7 +245,8 @@ def make_one_shape_only(output_state, mask=None):
                 x = this_voxel[0]
                 y = this_voxel[1]
                 z = this_voxel[2]
-                for neighbor in [(x+1, y, z), (x-1, y, z), (x, y+1, z), (x, y-1, z), (x, y, z+1), (x, y, z-1)]:
+                for neighbor in [(x + 1, y, z), (x - 1, y, z), (x, y + 1, z), (x, y - 1, z), (x, y, z + 1),
+                                 (x, y, z - 1)]:
                     if neighbor in not_yet_checked:
                         not_yet_checked.remove(neighbor)
                         if mask(output_state[neighbor]):
@@ -260,7 +259,7 @@ def make_one_shape_only(output_state, mask=None):
         for loc in largest_shape:
             one_shape[loc] = 1
 
-        return one_shape
+        return one_shape  # output_state.shape #one_shape dit aangepast om meerdere shapes terug te krijgen?
 
 
 def count_neighbors(output_state, mask=None):
@@ -288,7 +287,7 @@ def count_neighbors(output_state, mask=None):
     num_neighbors = [0 for _ in voxels]
 
     for idx, (x, y, z) in enumerate(voxels):
-        for neighbor in [(x+1, y, z), (x-1, y, z), (x, y+1, z), (x, y-1, z), (x, y, z+1), (x, y, z-1)]:
+        for neighbor in [(x + 1, y, z), (x - 1, y, z), (x, y + 1, z), (x, y - 1, z), (x, y, z + 1), (x, y, z - 1)]:
             if neighbor in voxels:
                 num_neighbors[idx] += presence[neighbor]
 

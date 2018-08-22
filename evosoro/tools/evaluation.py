@@ -4,8 +4,8 @@ import random
 import numpy as np
 import subprocess as sub
 
+#from read_write_voxelyze_single_needle import read_voxlyze_results, write_voxelyze_file
 from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
-
 
 # TODO: make eval times relative to the number of simulated voxels
 # TODO: right now just saving files gen-id-fitness; but this should be more flexible (as option in objective dict?)
