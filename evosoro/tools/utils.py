@@ -221,7 +221,7 @@ def make_one_shape_only(output_state, mask=None):
 
     one_shape = np.zeros(output_state.shape, dtype=np.int32)
     output_state
-    if np.sum(mask(output_state)) < 2:
+    if np.sum(mask(output_state)) > 2: #was kleiner dan, draai om voor maar een shape
         one_shape[np.where(mask(output_state))] = 1
         return one_shape
 

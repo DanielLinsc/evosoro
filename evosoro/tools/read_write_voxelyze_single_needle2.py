@@ -95,8 +95,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
     workspace_xlim = (-x_pad[0], body_xlim[1] + x_pad[1])
     workspace_ylim = (-y_pad[0], body_ylim[1] + y_pad[1])
-    workspace_zlim = (0, body_zlim[1])
-    #workspace_zlim = (0, max(env.wall_height, body_zlim[1])) #was 0 before, veranderd zodat de needle niet weg is
+    workspace_zlim = (0, max(env.wall_height, body_zlim[1])) #was 0 before, veranderd zodat de needle niet weg is
 
     length_workspace_xyz = (float(workspace_xlim[1]-workspace_xlim[0]),
                             float(workspace_ylim[1]-workspace_ylim[0]),
@@ -345,65 +344,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Boundary_Conditions>\n"
         )
 
-    elif env.needle_position > 0:
-        voxelyze_file.write(
-            "    <Boundary_Conditions>\n\
-                      <NumBCs>2</NumBCs>\n\
-                      <FRegion>\n\
-                        <PrimType>0</PrimType>\n\
-                        <X>0.72</X>\n\
-                        <Y>0.45</Y>\n\
-                        <Z>0</Z>\n\
-                        <dX>0.05</dX>\n\
-                        <dY>0.1</dY>\n\
-                        <dZ>0.1</dZ>\n\
-                        <Radius>0</Radius>\n\
-                        <R>0.4</R>\n\
-                        <G>0.6</G>\n\
-                        <B>0.4</B>\n\
-                        <alpha>1</alpha>\n\
-                        <DofFixed>31</DofFixed>\n\
-                        <ForceX>0</ForceX>\n\
-                        <ForceY>0</ForceY>\n\
-                        <ForceZ>0</ForceZ>\n\
-                        <TorqueX>0</TorqueX>\n\
-                        <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>100</TorqueZ>\n\
-                        <DisplaceX>0</DisplaceX>\n\
-                        <DisplaceY>0</DisplaceY>\n\
-                        <DisplaceZ>0</DisplaceZ>\n\
-                        <AngDisplaceX>0</AngDisplaceX>\n\
-                        <AngDisplaceY>0</AngDisplaceY>\n\
-                        <AngDisplaceZ>0</AngDisplaceZ>\n\
-                      </FRegion>\n\
-                    <FRegion>\n\
-                      <PrimType>0</PrimType>\n\
-                      <X>0.23</X>\n\
-                      <Y>0.45</Y>\n\
-                      <Z>0</Z>\n\
-                      <dX>0.05</dX>\n\
-                      <dY>0.1</dY>\n\
-                      <dZ>0.1</dZ>\n\
-                      <Radius>0</Radius>\n\
-                      <R>0.4</R>\n\
-                      <G>0.6</G>\n\
-                      <B>0.4</B>\n\
-                      <alpha>1</alpha>\n\
-                      <DofFixed>31</DofFixed>\n\
-                      <ForceX>0</ForceX>\n\
-                      <ForceY>0</ForceY>\n\
-                      <ForceZ>0</ForceZ>\n\
-                      <TorqueX>0</TorqueX>\n\
-                      <TorqueY>0</TorqueY>\n\
-                      <TorqueZ>0</TorqueZ>\n\
-                      <DisplaceX>0</DisplaceX>\n\
-                      <DisplaceY>0</DisplaceY>\n\
-                      <DisplaceZ>0</DisplaceZ>\n\
-                      <AngDisplaceX>0</AngDisplaceX>\n\
-                      <AngDisplaceY>0</AngDisplaceY>\n\
-                      <AngDisplaceZ>0</AngDisplaceZ>\n\
-                    </FRegion>\n\
-            </Boundary_Conditions>\n")
+
 
     else:
         voxelyze_file.write(
@@ -636,7 +577,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.bone_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>5e+010</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
@@ -781,11 +722,6 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
                             #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
                              #       state = 1  # tiny food
-                            elif (x == 2) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2+1) and (z == 0):
-                                state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == 7) and (y >= workspace_ylim[1] / 2 - 1) and (y <= workspace_ylim[1] / 2+1) and (z == 0):
-                                state = 8  # voxelyze_file.write("8")  # food2
-
                             else:#was else
                                 state = details["output_type"](details["state"][x-body_xlim[0], y-body_ylim[0], z-(env.hurdle_height+1)])
                         elif env.circular_hurdles and z < env.hurdle_height and env.debris and x % 2 != 0:
