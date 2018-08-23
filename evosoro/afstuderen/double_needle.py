@@ -55,18 +55,18 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 # sub.call("chmod 755 ./qhull", shell=True)  # Execution right for qhull
 
 
-NUM_RANDOM_INDS = 2  # Number of random individuals to insert each generation
+NUM_RANDOM_INDS = 20  # Number of random individuals to insert each generation
 MAX_GENS = 3000  # Number of generations
-POPSIZE = 50  # Population size (number of individuals in the population)
+POPSIZE = 300  # Population size (number of individuals in the population)
 IND_SIZE = (10,5,1)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
-SIM_TIME = 0.2  # (seconds), including INIT_TIME!
+SIM_TIME = 1  # (seconds), including INIT_TIME!
 INIT_TIME = 0.01
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
 TIME_TO_TRY_AGAIN = 20  #30 (seconds) wait this long before assuming simulation crashed and resending
 MAX_EVAL_TIME = 25  #60 (seconds) wait this long before giving up on evaluating this individual
 SAVE_LINEAGES = True
-MAX_TIME = 100  # (hours) how long to wait before autosuspending
+MAX_TIME = 120  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 1  # extra gens to run when continuing from checkpoint
 
 RUN_DIR = "double_needle_momentum_data2"  # Subdirectory where results are going to be generated
