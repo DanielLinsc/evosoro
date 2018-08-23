@@ -21,28 +21,28 @@ See <http://www.opensource.org/licenses/lgpl-3.0.html> for license details.
 #define PI 3.14159265358979
 #define VEC3D_HYSTERESIS_FACTOR 1.1 /*how much a valuemust go past 1.0 to switch states*/
 
-#ifdef PREC_LOW //Max allowable error: 0.1%, 0.0548 Rad = 3.14° Small angle, 0.0001 Rad = 0.00573° round to zero
+#ifdef PREC_LOW //Max allowable error: 0.1%, 0.0548 Rad = 3.14ï¿½ Small angle, 0.0001 Rad = 0.00573ï¿½ round to zero
 	#define vfloat float
 	static const vfloat MAX_ERROR_PERCENT = 0.001;
 	static const vfloat DISCARD_ANGLE_RAD = 0.0001; //Anything less than this angle can be considered 0
 	static const vfloat SMALL_ANGLE_RAD = 0.0548; //Angles less than this get small angle approximations. To get: Root solve atan(t)/t-1+MAX_ERROR_PERCENT. From: MAX_ERROR_PERCENT = (t-atan(t))/t 
 	static const vfloat W_THRESH_ACOS2SQRT = 0.9880; //Threshhold of w above which we can approximate acos(w) with sqrt(2-2w). To get: Root solve 1-sqrt(2-2wt)/acos(wt) - MAX_ERROR_PERCENT. From MAX_ERROR_PERCENT = (acos(wt)-sqrt(2-2wt))/acos(wt)
 	//Set compiler to /fp:fast
-#elif defined PREC_HIGH //Max allowable error: 0.0001%, 0.00173205 Rad = 0.1° Small angle, 1e-7 Rad = 5.73e-6° round to zero
+#elif defined PREC_HIGH //Max allowable error: 0.0001%, 0.00173205 Rad = 0.1ï¿½ Small angle, 1e-7 Rad = 5.73e-6ï¿½ round to zero
 	#define vfloat double
 	static const vfloat MAX_ERROR_PERCENT = 1e-6;
 	static const vfloat DISCARD_ANGLE_RAD = 1e-7; //Anything less than this angle can be considered 0
 	static const vfloat SMALL_ANGLE_RAD = 1.732e-3; //Angles less than this get small angle approximations. To get: Root solve atan(t)/t-1+MAX_ERROR_PERCENT. From: MAX_ERROR_PERCENT = (t-atan(t))/t 
 	static const vfloat W_THRESH_ACOS2SQRT = 0.999987737; //Threshhold of w above which we can approximate acos(w) with sqrt(2-2w). To get: Root solve 1-sqrt(2-2wt)/acos(wt) - MAX_ERROR_PERCENT. From MAX_ERROR_PERCENT = (acos(wt)-sqrt(2-2wt))/acos(wt)
 	//Set compiler to /fp:precise
-//#elif defined PREC_MAX //Max allowable error: 0.00000001%, 1.732e-5 Rad = 0.001° Small angle, 1e-12 Rad = 5.73e-11° round to zero
+//#elif defined PREC_MAX //Max allowable error: 0.00000001%, 1.732e-5 Rad = 0.001ï¿½ Small angle, 1e-12 Rad = 5.73e-11ï¿½ round to zero
 //	#define vfloat double
 //	static const vfloat MAX_ERROR_PERCENT = 1e-10;
 //	static const vfloat DISCARD_ANGLE_RAD = 1e-12; //Anything less than this angle can be considered 0
 //	static const vfloat SMALL_ANGLE_RAD = 1.732e-5; //Angles less than this get small angle approximations. To get: Root solve atan(t)/t-1+MAX_ERROR_PERCENT. From: MAX_ERROR_PERCENT = (t-atan(t))/t 
 //	static const vfloat W_THRESH_ACOS2SQRT = 0.9999997996; //Threshhold of w above which we can approximate acos(w) with sqrt(2-2w). To get: Root solve 1-sqrt(2-2wt)/acos(wt) - MAX_ERROR_PERCENT. From MAX_ERROR_PERCENT = (acos(wt)-sqrt(2-2wt))/acos(wt)
 	//Set compiler to /fp:precise
-#else //defined PREC_MED //Max allowable error: 0.01%, 0.0173 Rad = 1° Small angle, 0.00001 Rad = 0.000573° round to zero
+#else //defined PREC_MED //Max allowable error: 0.01%, 0.0173 Rad = 1ï¿½ Small angle, 0.00001 Rad = 0.000573ï¿½ round to zero
 	#define vfloat double //temporary 6-10
 //	#define vfloat float
 	static const vfloat MAX_ERROR_PERCENT = 1e-4;
@@ -275,8 +275,8 @@ public:
 		//5-21
 //		if (squareLength < SLTHRESH_DISCARD_ANGLE) return Vec3D<T>(0,0,0); //solution
 		if (squareLength <= 0) return Vec3D<T>(0,0,0); //solution
-		else if (squareLength < SLTHRESH_ACOS2SQRT) return Vec3D<T>(x, y, z)*2.0*sqrt((2-2*(w>1?1:w))/squareLength); //acos(w) = sqrt(2*(1-x)) for w close to 1. for w=0.001, error is 1.317e-6
-		else return Vec3D<T>(x, y, z)*2.0*acos(w>1?1:w)/sqrt(squareLength);
+		else if (squareLength < SLTHRESH_ACOS2SQRT) return Vec3D<T>(x, y, z)*sqrt((2-2*(w>1?1:w))/squareLength); //acos(w) = sqrt(2*(1-x)) for w close to 1. for w=0.001, error is 1.317e-6
+		else return Vec3D<T>(x, y, z)*acos(w>1?1:w)/sqrt(squareLength);
 
 //		if (squareLength <=0) return Vec3D(0,0,0);
 //		else return Vec3D(x, y, z)*2.0*acos(w>1?1:w)/sqrt(squareLength);

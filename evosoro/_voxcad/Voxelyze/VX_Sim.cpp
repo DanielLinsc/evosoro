@@ -855,8 +855,11 @@ void CVX_Sim::ResetSimulation(void)
 	CurStepCount = 0;
 	CmInitialized = false;
 
+	RotationCount = 0.0;
+    PreviousNeedleRotation = 0;
 	NeedleInitialized = false;
-
+    RotationPosNeg = false;
+    RotationNegPos = false;
 	DevelopmentFrozen = false;
 
 	// timeOfLastNeuralUpdate = -999;
@@ -1088,6 +1091,29 @@ bool CVX_Sim::TimeStep(std::string* pRetMessage)
 		InitialNeedleRotation = GetNeedleRotation();
 		NeedleInitialized = true;
 	}
+
+    if(pEnv->GetUsingNeedleInHaystack())
+    {
+        CurrentNeedleRotation = GetNeedleRotation();
+        if(PreviousNeedleRotation-CurrentNeedleRotation >= 0.5 and !RotationNegPos and !RotationPosNeg){
+            RotationPosNeg = true;
+        }
+        else if (CurrentNeedleRotation-PreviousNeedleRotation >= 0.5 and !RotationNegPos and !RotationPosNeg){
+            RotationNegPos = true;
+        }
+        else if (RotationPosNeg ==true){
+            if (CurrentNeedleRotation <=-3){
+                RotationCount += 2*M_PI;
+                RotationPosNeg = false;}
+        }
+        else if (RotationNegPos ==true){
+            if (CurrentNeedleRotation >=3){
+                RotationCount -= 2*M_PI;
+                RotationNegPos = false;
+            }
+        }
+        PreviousNeedleRotation = CurrentNeedleRotation;
+    }
 
 	if (GetMidLifeFreezeTime() > 0)
 	{

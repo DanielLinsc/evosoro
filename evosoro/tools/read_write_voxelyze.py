@@ -368,7 +368,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>100</TorqueZ>\n\
+                        <TorqueZ>5</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -492,13 +492,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.bone_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>" + str(env.density) + "</Density>\n\
+            <Density>1e+05</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -612,13 +612,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.muscle_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>" + str(env.density) + "</Density>\n\
+            <Density>1e+05</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -636,13 +636,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.bone_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>" + str(env.density) + "</Density>\n\
+            <Density>1e+05</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -781,9 +781,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
                             #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
                              #       state = 1  # tiny food
-                            elif (x == 2) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2+1) and (z == 0):
+                            elif (x == 2) and (y == workspace_ylim[1]/2) and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == 7) and (y >= workspace_ylim[1] / 2 - 1) and (y <= workspace_ylim[1] / 2+1) and (z == 0):
+                            elif(x == 7) and (y == workspace_ylim[1] / 2) and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
 
                             else:#was else
@@ -803,9 +803,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                                 state = env.debris_size  # tiny debris
                         # dit ingevoegd
                         elif env.needle_position > 0:
-                            if (x == 2) and (y >= workspace_ylim[1]/2-1) and (y <= workspace_ylim[1]/2+1) and (z == 0):
+                            if (x == 2) and (y == workspace_ylim[1]/2) and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == 7) and (y >= workspace_ylim[1] / 2 - 1) and (y <= workspace_ylim[1] / 2+1) and (z == 0):
+                            elif(x == 7) and (y == workspace_ylim[1] / 2) and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
                             else:
                                 state = 0

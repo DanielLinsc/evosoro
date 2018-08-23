@@ -237,7 +237,13 @@ public:
 	//hieronder ingevoegd
 	double InitialNeedleRotation;
 	double GetNeedleRotation();
-	Vec3D<> GetNeedleRotationalVelocity();
+	double RotationCount;
+	bool RotationPosNeg;
+	bool RotationNegPos;
+
+	double CurrentNeedleRotation;
+    double PreviousNeedleRotation;
+    Vec3D<> GetNeedleRotationalVelocity();
 //tothier
 	double GetWindowDist();
 
