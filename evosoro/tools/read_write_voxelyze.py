@@ -368,7 +368,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>-5</TorqueZ>\n\
+                        <TorqueZ>-50</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -498,7 +498,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+05</Density>\n\
+            <Density>1e+03</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
