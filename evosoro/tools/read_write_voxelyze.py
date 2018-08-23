@@ -351,12 +351,12 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                       <NumBCs>2</NumBCs>\n\
                       <FRegion>\n\
                         <PrimType>0</PrimType>\n\
-                        <X>0.72</X>\n\
-                        <Y>0.45</Y>\n\
+                        <X>0.66</X>\n\
+                        <Y>0.47</Y>\n\
                         <Z>0</Z>\n\
-                        <dX>0.05</dX>\n\
-                        <dY>0.1</dY>\n\
-                        <dZ>0.1</dZ>\n\
+                        <dX>0.03</dX>\n\
+                        <dY>0.06</dY>\n\
+                        <dZ>0.01</dZ>\n\
                         <Radius>0</Radius>\n\
                         <R>0.4</R>\n\
                         <G>0.6</G>\n\
@@ -368,7 +368,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>5</TorqueZ>\n\
+                        <TorqueZ>-5</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -378,12 +378,12 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                       </FRegion>\n\
                     <FRegion>\n\
                       <PrimType>0</PrimType>\n\
-                      <X>0.23</X>\n\
-                      <Y>0.45</Y>\n\
+                      <X>0.31</X>\n\
+                      <Y>0.47</Y>\n\
                       <Z>0</Z>\n\
-                      <dX>0.05</dX>\n\
-                      <dY>0.1</dY>\n\
-                      <dZ>0.1</dZ>\n\
+                      <dX>0.03</dX>\n\
+                      <dY>0.06</dY>\n\
+                      <dZ>0.01</dZ>\n\
                       <Radius>0</Radius>\n\
                       <R>0.4</R>\n\
                       <G>0.6</G>\n\
@@ -781,9 +781,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
                             #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
                              #       state = 1  # tiny food
-                            elif (x == 2) and (y == workspace_ylim[1]/2) and (z == 0):
+                            elif (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2) and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == 7) and (y == workspace_ylim[1] / 2) and (z == 0):
+                            elif(x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2) and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
 
                             else:#was else

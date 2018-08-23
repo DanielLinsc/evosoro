@@ -186,6 +186,7 @@ class ObjectiveDict(dict):
                                                            "maximize": maximize,
                                                            "tag": xml_format(tag) if tag is not None else None,
                                                            "worst_value": -10e6 if maximize else 10e6,
+                                                           #"worst_value": 0,
                                                            "node_func": node_func,
                                                            "output_node_name": output_node_name,
                                                            "logging_only": logging_only})
