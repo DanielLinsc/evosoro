@@ -275,8 +275,8 @@ public:
 		//5-21
 //		if (squareLength < SLTHRESH_DISCARD_ANGLE) return Vec3D<T>(0,0,0); //solution
 		if (squareLength <= 0) return Vec3D<T>(0,0,0); //solution
-		else if (squareLength < SLTHRESH_ACOS2SQRT) return Vec3D<T>(x, y, z)*sqrt((2-2*(w>1?1:w))/squareLength); //acos(w) = sqrt(2*(1-x)) for w close to 1. for w=0.001, error is 1.317e-6
-		else return Vec3D<T>(x, y, z)*acos(w>1?1:w)/sqrt(squareLength);
+		else if (squareLength < SLTHRESH_ACOS2SQRT) return Vec3D<T>(x, y, z)*2.0*sqrt((2-2*(w>1?1:w))/squareLength); //deze ook aangepast acos(w) = sqrt(2*(1-x)) for w close to 1. for w=0.001, error is 1.317e-6
+		else return Vec3D<T>(x, y, z)*2.0*acos(w>1?1:w)/sqrt(squareLength);//deze regel terug aangepast, radialen klopt niet
 
 //		if (squareLength <=0) return Vec3D(0,0,0);
 //		else return Vec3D(x, y, z)*2.0*acos(w>1?1:w)/sqrt(squareLength);

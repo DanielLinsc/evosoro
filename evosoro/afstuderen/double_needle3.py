@@ -42,7 +42,7 @@ sys.path.append(os.getcwd() + "/../..")
 from evosoro.base import Sim, Env, ObjectiveDict
 from evosoro.networks import CPPN
 from evosoro.softbot import Genotype, Phenotype, Population
-from evosoro.tools.algorithms import ParetoOptimization
+from evosoro.tools.algorithms import ParetoOptimization #, ParetoTournamentOptimization
 from evosoro.tools.utils import count_occurrences, make_material_tree
 from evosoro.tools.checkpointing import continue_from_checkpoint
 
@@ -55,24 +55,24 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 # sub.call("chmod 755 ./qhull", shell=True)  # Execution right for qhull
 
 
-NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation
-MAX_GENS = 9999  # Number of generations
-POPSIZE = 600  # Population size (number of individuals in the population)
-IND_SIZE = (20,11,1)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
+NUM_RANDOM_INDS = 99  # Number of random individuals to insert each generation
+MAX_GENS = 1000  # Number of generations
+POPSIZE = 10  # Population size (number of individuals in the population)
+IND_SIZE = (20,11,2)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
 SIM_TIME = 1  # (seconds), including INIT_TIME!
 INIT_TIME = 0.001
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
-TIME_TO_TRY_AGAIN = 19  #30 (seconds) wait this long before assuming simulation crashed and resending
-MAX_EVAL_TIME = 20  #60 (seconds) wait this long before giving up on evaluating this individual
+TIME_TO_TRY_AGAIN = 99 #30 (seconds) wait this long before assuming simulation crashed and resending
+MAX_EVAL_TIME = 30  #60 (seconds) wait this long before giving up on evaluating this individual
 SAVE_LINEAGES = True
 MAX_TIME = 9999  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 1  # extra gens to run when continuing from checkpoint
 
-RUN_DIR = "double_needle_momentum_data6"  # Subdirectory where results are going to be generated
-RUN_NAME = "double_needle_momentum6"
+RUN_DIR = "double_needle_momentum_data12"  # Subdirectory where results are going to be generated
+RUN_NAME = "double_needle_momentum12"
 CHECKPOINT_EVERY = 1  # How often to save an snapshot of the execution state to later resume the algorithm
-SAVE_POPULATION_EVERY = 20  # How often (every x generations) we save a snapshot of the evolving population
+SAVE_POPULATION_EVERY = 1  # How often (every x generations) we save a snapshot of the evolving population
 
 SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
@@ -105,7 +105,7 @@ class MyGenotype(Genotype):
                                                         material_if_true=None, material_if_false="0")
 
         self.to_phenotype_mapping.add_output_dependency(name="muscleOrTissue", dependency_name="shape",
-                                                        requirement=True, material_if_true=None, material_if_false="2")  # BUGFIX: was material_if_false=1
+                                                        requirement=True, material_if_true="1", material_if_false="2")  # BUGFIX: was material_if_false=1
 
         #self.to_phenotype_mapping.add_output_dependency(name="tissueType", dependency_name="muscleOrTissue",
         #                                                requirement=False, material_if_true="1", material_if_false="2")#1,2
@@ -144,10 +144,10 @@ my_objective_dict = ObjectiveDict()
 
 # Adding an objective named "fitness", which we want to maximize. This information is returned by Voxelyze
 # in a fitness .xml file, with a tag named "NormFinalDist"
-my_objective_dict.add_objective(name="PushDist", maximize=False, tag="<PushDist>")
-my_objective_dict.add_objective(name="PushRot", maximize=True, tag="<PushRot>")
+#my_objective_dict.add_objective(name="PushDist", maximize=False, tag="<PushDist>")
+#my_objective_dict.add_objective(name="PushRot", maximize=True, tag="<PushRot>")
 my_objective_dict.add_objective(name="fitness", maximize=True, tag="<PushRotUnwr>")
-my_objective_dict.add_objective(name="RotVel", maximize=True, tag="<RotVel>", logging_only=True)
+#my_objective_dict.add_objective(name="RotVel", maximize=True, tag="<RotVel>", logging_only=True)
 #my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
 # Add an objective to minimize the age of solutions: promotes diversity
 my_objective_dict.add_objective(name="age", maximize=False, tag=None)
@@ -174,6 +174,9 @@ my_pop = Population(my_objective_dict, MyGenotype, MyPhenotype, pop_size=POPSIZE
 
 # Setting up our optimization
 my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
+#my_optimization = ParetoTournamentOptimization(my_sim, my_env, my_pop)
+
+#my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
 
 # And, finally, our main
 if __name__ == "__main__":

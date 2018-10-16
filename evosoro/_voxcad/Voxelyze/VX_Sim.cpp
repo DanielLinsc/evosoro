@@ -1102,13 +1102,13 @@ bool CVX_Sim::TimeStep(std::string* pRetMessage)
             RotationNegPos = true;
         }
         else if (RotationPosNeg ==true){
-            if (CurrentNeedleRotation <=-3){
-                RotationCount += 2*M_PI;
+            if (CurrentNeedleRotation <=-6){
+                RotationCount += 4*M_PI;
                 RotationPosNeg = false;}
         }
         else if (RotationNegPos ==true){
-            if (CurrentNeedleRotation >=3){
-                RotationCount -= 2*M_PI;
+            if (CurrentNeedleRotation >=6){
+                RotationCount -= 4*M_PI;
                 RotationNegPos = false;
             }
         }

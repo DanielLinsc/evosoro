@@ -43,7 +43,7 @@ def create_new_children_through_mutation(pop, print_log, new_children=None, muta
             if mutate_network_probs is None:
                 required = 0
             else:
-                required = mutate_network_probs.count(1)
+                required = 0.5 #mutate_network_probs.count(1)
 
             selection = []
             while np.sum(selection) <= required:
