@@ -42,7 +42,7 @@ sys.path.append(os.getcwd() + "/../..")
 from evosoro.base import Sim, Env, ObjectiveDict
 from evosoro.networks import CPPN
 from evosoro.softbot import Genotype, Phenotype, Population
-from evosoro.tools.algorithms import ParetoOptimization #, ParetoTournamentOptimization
+from evosoro.tools.algorithms import ParetoOptimizationDiversifyAncestry #ParetoOptimization #, ParetoTournamentOptimization
 from evosoro.tools.utils import count_occurrences, make_material_tree
 from evosoro.tools.checkpointing import continue_from_checkpoint
 
@@ -55,15 +55,15 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 # sub.call("chmod 755 ./qhull", shell=True)  # Execution right for qhull
 
 
-NUM_RANDOM_INDS = 99  # Number of random individuals to insert each generation
+NUM_RANDOM_INDS = 10  # Number of random individuals to insert each generation
 MAX_GENS = 1000  # Number of generations
-POPSIZE = 10  # Population size (number of individuals in the population)
+POPSIZE = 20  # Population size (number of individuals in the population)
 IND_SIZE = (20,11,2)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
-SIM_TIME = 1  # (seconds), including INIT_TIME!
+SIM_TIME = .01  # (seconds), including INIT_TIME!
 INIT_TIME = 0.001
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
-TIME_TO_TRY_AGAIN = 99 #30 (seconds) wait this long before assuming simulation crashed and resending
+TIME_TO_TRY_AGAIN = 2 #30 (seconds) wait this long before assuming simulation crashed and resending
 MAX_EVAL_TIME = 30  #60 (seconds) wait this long before giving up on evaluating this individual
 SAVE_LINEAGES = True
 MAX_TIME = 9999  # (hours) how long to wait before autosuspending
@@ -173,7 +173,7 @@ my_objective_dict.add_objective(name="num_voxels", maximize=False, tag=None,
 my_pop = Population(my_objective_dict, MyGenotype, MyPhenotype, pop_size=POPSIZE)
 
 # Setting up our optimization
-my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
+my_optimization = ParetoOptimizationDiversifyAncestry(my_sim, my_env, my_pop)
 #my_optimization = ParetoTournamentOptimization(my_sim, my_env, my_pop)
 
 #my_optimization = ParetoOptimization(my_sim, my_env, my_pop)
