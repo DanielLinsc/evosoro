@@ -154,6 +154,7 @@ def pareto_selection_diversify_ancestry(population):
     # pareto level 1: individuals dominated one other individual, etc.
     done = False
     pareto_level = 0
+    rejected = 0
     while not done:
         this_level = []
         size_left = population.pop_size - len(new_population)
@@ -165,6 +166,7 @@ def pareto_selection_diversify_ancestry(population):
         # add the best pareto levels first until it is not possible to fit them in the new_population
         if len(this_level) > 0:
             if size_left >= len(this_level):  # if whole pareto level can fit, add it
+                new_population += [this_level[0]]
                 for i in range(0, len(this_level)):
                     if this_level[i] not in new_population:
                         for j in range(0, len(new_population)):
@@ -178,12 +180,13 @@ def pareto_selection_diversify_ancestry(population):
                                     ratio.append(ratiobuffer)
                             else:
                                 ratio = [0,0]
-                        if not any(ratio) >= 0.01:
+                        if (sum(f>0.5 for f in ratio))/float(len(ratio))<0.25 or (sum(f>0.5 for f in ratio)) < 4: #if 0.5 of ancestors are the same for more then 0.1 of the individuals, don't select this individual
                             new_population += [this_level[i]]
+                        else: rejected +=0.000000000001
                         continue
             else:  # otherwise, select by sorted ranking within the level
                 new_population += [this_level[0]]
-                while len(new_population) < population.pop_size:
+                while len(new_population) < population.pop_size and rejected<(len(this_level)-len(new_population)): #because individuals can be deselected, a pareto level can still be smaller then the size left after evaluation
                     #random_num = random.random()
                     #log_level_length = math.log(len(this_level))
                     for i in range(1, len(this_level)):
@@ -197,11 +200,13 @@ def pareto_selection_diversify_ancestry(population):
                                     else:
                                         ratio.append(ratiobuffer)
                                 else: ratio=[0,0]
-                            if not any(ratio) >= 0.01 and len(new_population) < population.pop_size:
+                            if (((sum(f>0.5 for f in ratio))/float(len(ratio)))<0.25 or (sum(f>0.5 for f in ratio)) < 4) and len(new_population) < population.pop_size:
                                 new_population += [this_level[i]]
+                            else: rejected +=1.0000000000
                             continue
 
         pareto_level += 1
+        rejected =0
         if len(new_population) == population.pop_size:
             done = True
 
