@@ -6,7 +6,7 @@ import subprocess as sub
 from functools import partial
 
 from evaluation import evaluate_all
-from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry
+from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry, annealing_selection
 from mutation import create_new_children_through_mutation, genome_wide_mutation
 from logging import PrintLog, initialize_folders, make_gen_directories, write_gen_stats
 
@@ -161,6 +161,11 @@ class ParetoOptimization(PopulationBasedOptimizer):
 class ParetoOptimizationDiversifyAncestry(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
         PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_diversify_ancestry, create_new_children_through_mutation)
+
+class AnnealingOptimization(PopulationBasedOptimizer):
+    def __init__(self, sim, env, pop):
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, annealing_selection, create_new_children_through_mutation)
+
 
 class ParetoTournamentOptimization(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):

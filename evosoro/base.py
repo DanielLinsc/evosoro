@@ -52,7 +52,7 @@ class Env(VoxCadParams):
     """Container for VoxCad environment parameters."""
 
     def __init__(self, frequency=4.0, gravity_enabled=1, grav_acc=-9.81, density=1e+006, temp_enabled=1,
-                 floor_enabled=1, floor_slope=0.0, lattice_dimension=0.01, fat_stiffness=5e+006, bone_stiffness=5e+008,
+                 floor_enabled=0, floor_slope=0.0, lattice_dimension=0.01, fat_stiffness=5e+006, bone_stiffness=5e+008,
                  muscle_stiffness=5e+006, sticky_floor=0, time_between_traces=0, actuation_variance=0, temp_amp=39,
                  squeeze_rate=0, constant_squeeze=True, squeeze_start=0, squeeze_end=0, num_hurdles=0,
                  space_between_hurdles=0, hurdle_height=0, hurdle_stop=0, circular_hurdles=False, tunnel_width=0,

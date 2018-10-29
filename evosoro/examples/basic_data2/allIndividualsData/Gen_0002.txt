@@ -1,0 +1,12 @@
+gen		id		dom		parent_id		variation_type		fitness		parent_fitness		age		parent_age		num_voxels		parent_num_voxels		material_different_from_parent		mean_material		mean_parent_material		mean_parent_diff_material
+2		1		0		-1		survived		0.00859632		-10000000.0		2		10000000.0		22		10000000.0		
+2		11		0		10		mutate_function(neg_sqrt_abs-to-square)		0.00420718		0.00410861		1		1		10000000.0		10000000.0		
+2		12		0		1		add_node		-5.87055e-05		0.00859632		2		2		6		22		
+2		14		1		8		mutate_weight(0.420606876454)		0.00527916		-0.00151623		2		2		23		22		
+2		10		1		-1		survived		0.00410861		-10000000.0		1		10000000.0		10000000.0		10000000.0		
+2		13		2		0		add_node		0.00445452		0.0042468		2		2		27		27		
+2		8		2		1		survived		-0.00151623		0.00859632		2		1		22		22		
+2		0		3		-1		survived		0.0042468		-10000000.0		2		10000000.0		27		10000000.0		
+2		15		4		7		mutate_function(square-to-sin)		0.00421874		0.00420718		2		2		27		27		
+2		7		5		2		survived		0.00420718		0.00410861		2		1		27		27		
+2		16		10		-1		newly_generated		-10000000.0		-10000000.0		0		10000000.0		10000000.0		10000000.0		

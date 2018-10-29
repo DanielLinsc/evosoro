@@ -1,6 +1,7 @@
 import random
 import math
 import difflib
+import numpy as np
 
 
 def pareto_selection(population):
@@ -218,3 +219,58 @@ def pareto_selection_diversify_ancestry(population):
 
     return new_population
 
+
+def annealing_selection(population):
+    """Return a list of selected individuals from the population.
+
+    All individuals in the population are ranked by their level, i.e. the number of solutions they are dominated by.
+    Individuals are added to a list based on their ranking, best to worst, until the list size reaches the target
+    population size (population.pop_size).
+
+    Parameters
+    ----------
+    population : Population
+        This provides the individuals for selection.
+
+    Returns
+    -------
+    new_population : list
+        A list of selected individuals.
+
+    """
+    max_gens = 1000 #hardcoded right now
+    new_population = []
+    # SAM: moved this into calc_dominance()
+    # population.sort(key="id", reverse=False) # <- if tied on all objectives, give preference to newer individual
+
+    # (re)compute dominance for each individual
+    population.calc_dominance()
+
+    # sort the population multiple times by objective importance
+    population.sort_by_objectives()
+
+    done = False
+    annealing_temperature = population.gen/max_gens +1 -1/max_gens
+    #from first individual temp =1 to last individual temp=2
+    population_buffer = []
+    for ind in population:
+        population_buffer += [ind] #to delete individuals that have been selected
+    while not done:
+
+        #using a beta distribution, for temp =1 it is a uniform distribution to
+        # temp =2 a
+        population_buffer_size = len(population_buffer)
+        random_num = int(np.random.beta(1,annealing_temperature*2)*population_buffer_size)
+        if population_buffer[random_num] not in new_population:
+            new_population += [population_buffer[random_num]]
+            del population_buffer[random_num]
+        if len(new_population) == population.pop_size:
+            done = True
+
+    for ind in population:
+        if ind in new_population:
+            ind.selected = 1
+        else:
+            ind.selected = 0
+
+    return new_population

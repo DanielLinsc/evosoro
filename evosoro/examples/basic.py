@@ -55,10 +55,10 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 
 
 NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation
-MAX_GENS = 1000  # Number of generations
-POPSIZE = 20  # Population size (number of individuals in the population)
-IND_SIZE = (6,6,6)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
-SIM_TIME = 120  # (seconds), including INIT_TIME!
+MAX_GENS = 5  # Number of generations
+POPSIZE = 5  # Population size (number of individuals in the population)
+IND_SIZE = (3,3,3)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels
+SIM_TIME = 10  # (seconds), including INIT_TIME!
 INIT_TIME = 1
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
@@ -68,10 +68,10 @@ SAVE_LINEAGES = True
 MAX_TIME = 100  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 0  # extra gens to run when continuing from checkpoint
 
-RUN_DIR = "basic_data"  # Subdirectory where results are going to be generated
-RUN_NAME = "Basic"
-CHECKPOINT_EVERY = 10  # How often to save an snapshot of the execution state to later resume the algorithm
-SAVE_POPULATION_EVERY = 20  # How often (every x generations) we save a snapshot of the evolving population
+RUN_DIR = "basic_data2"  # Subdirectory where results are going to be generated
+RUN_NAME = "Basic2"
+CHECKPOINT_EVERY = 1  # How often to save an snapshot of the execution state to later resume the algorithm
+SAVE_POPULATION_EVERY = 1  # How often (every x generations) we save a snapshot of the evolving population
 
 SEED = 1
 random.seed(SEED)  # Initializing the random number generator for reproducibility
