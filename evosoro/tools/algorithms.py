@@ -6,7 +6,7 @@ import subprocess as sub
 from functools import partial
 
 from evaluation import evaluate_all
-from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry, annealing_selection
+from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry, annealing_selection, pareto_selection_reset
 from mutation import create_new_children_through_mutation, genome_wide_mutation
 from logging import PrintLog, initialize_folders, make_gen_directories, write_gen_stats
 
@@ -44,6 +44,8 @@ class Optimizer(object):
 
 
 class PopulationBasedOptimizer(Optimizer):
+    global fitness_list
+    fitness_list = []
     def __init__(self, sim, env, pop, selection_func, mutation_func):
         Optimizer.__init__(self, sim, env)
         self.pop = pop
@@ -65,7 +67,7 @@ class PopulationBasedOptimizer(Optimizer):
 
     def run(self, max_hours_runtime=29, max_gens=3000, num_random_individuals=1, num_env_cycles=0,
             directory="tests_data", name="TestRun",
-            max_eval_time=60, time_to_try_again=10, checkpoint_every=100, save_vxa_every=100, save_pareto=False,
+            max_eval_time=60, time_to_try_again=10, checkpoint_every=100, save_vxa_every=100, save_pareto=True,
             save_nets=False, save_lineages=False, continued_from_checkpoint=False):
 
         if self.autosuspended:
@@ -85,6 +87,8 @@ class PopulationBasedOptimizer(Optimizer):
             self.name = name
             self.num_random_inds = num_random_individuals
             self.num_env_cycles = num_env_cycles
+            global fitness_list
+            fitness_list += [self.pop.best_fit_so_far]
 
             initialize_folders(self.pop, self.directory, self.name, save_nets, save_lineages=save_lineages)
             make_gen_directories(self.pop, self.directory, save_vxa_every, save_nets)
@@ -143,7 +147,6 @@ class PopulationBasedOptimizer(Optimizer):
             print_log.message("Saving statistics")
             write_gen_stats(self.pop, self.directory, self.name, save_vxa_every, save_pareto, save_nets,
                             save_lineages=save_lineages)
-
             # replace population with selection
             self.pop.individuals = new_population
             print_log.message("Population size reduced to %d" % len(self.pop))
@@ -165,6 +168,11 @@ class ParetoOptimizationDiversifyAncestry(PopulationBasedOptimizer):
 class AnnealingOptimization(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
         PopulationBasedOptimizer.__init__(self, sim, env, pop, annealing_selection, create_new_children_through_mutation)
+
+class ParetoOptimizationReset(PopulationBasedOptimizer):
+    def __init__(self, sim, env, pop):
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_reset, create_new_children_through_mutation)
+
 
 
 class ParetoTournamentOptimization(PopulationBasedOptimizer):

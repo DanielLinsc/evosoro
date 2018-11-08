@@ -492,7 +492,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>5e+07</Elastic_Mod>\n\
+            <Elastic_Mod>" + str(env.bone_stiffness) + "</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\

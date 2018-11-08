@@ -227,8 +227,8 @@ def make_gen_directories(population, run_directory, save_vxa_every, save_network
 
 def write_gen_stats(population, run_directory, run_name, save_vxa_every, save_pareto, save_networks,
                     save_all_individual_data=True, num_inds_to_save=None, save_lineages=False):
-
     write_champ_file(population, run_directory)
+
 
     if save_all_individual_data:
         write_gen_individuals_data(population, run_directory, num_inds_to_save)
