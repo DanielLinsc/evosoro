@@ -1,0 +1,2 @@
+gen		id		dom		parent_id		variation_type		fitness		parent_fitness		age		parent_age		num_voxels		parent_num_voxels		material_different_from_parent		mean_material		mean_parent_material		mean_parent_diff_material
+0		2		0		-1		newly_generated		0.000119353		-10000000.0		0		10000000.0		120		10000000.0		
