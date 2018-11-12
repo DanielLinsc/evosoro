@@ -2,6 +2,7 @@ import random
 import math
 import difflib
 import numpy as np
+import subprocess as sub
 
 global fitness_list
 global fitness_list_relative
@@ -328,6 +329,7 @@ def pareto_selection_reset(population):
     global fitness_list
     deleted_individuals = []
     if reset_counter >=3: #301 counter after how many gens the first evaluation of local optima has to be done, when first reset is possible
+        print "Sum of relative change in fitness over the last 300 generations is {0}".format(sum(fitness_list_relative[(len(fitness_list_relative) - 1):]))
         if sum(fitness_list_relative[(len(fitness_list_relative) - 1):])<0.0001: # sum of relative change in fitness over the last x generations
             j = population_buffer[0].parent_id #the parent of the best individual, to check the lineages as they are not updated yet
             if not j==-1: #tough chance, but the best individual is newly generated
@@ -351,8 +353,29 @@ def pareto_selection_reset(population):
                     else:
                         i += 1
                 print "Deleted best individual {0} and close family {1}".format(population_buffer[0].id, deleted_individuals)
+                deleted_individuals.append(population_buffer[0].id)
+                run_directory = 'transmission_reset_data'
+                run_name = 'transmission_reset'
+                sub.call("mkdir " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i" % population.gen, shell=True)
+                for individual in population:
+                    if individual.id in deleted_individuals:
+                        sub.call(
+                            "mv " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
+                            " " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i/" % population.gen + "/" +
+                            run_name + "Gen_%04i--Fit_%.08f--id_%05i--dom_%d.vxa" %
+                            (population.gen, individual.fitness, individual.id, len(individual.dominated_by)), shell=True)
+
                 del population_buffer[0] #after every one is checked, the best individual is deleted
+                individual = population_buffer[0] #add the new best result in the folder as well
+                sub.call(
+                    "mv " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
+                    " " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i/" % population.gen + "/" +
+                    run_name + "Gen_%04i--Fit_%.08f--id_%05i--dom_%d_new_best_id.vxa" %
+                    (population.gen, individual.fitness, individual.id, len(individual.dominated_by)), shell=True)
                 reset_counter=0 #and the counter is reset to let it run to find a new local optimum
+                fitness_list = []
+                fitness_list_relative = []
+                population.best_fit_so_far = 0
     else:
         reset_counter+=1
 
@@ -396,6 +419,6 @@ def pareto_selection_reset(population):
             ind.selected = 0
     fitness_list += [0]
     fitness_list_relative += [0]
-    fitness_list[population.gen] = population.best_fit_so_far
+    fitness_list[population.gen] = population.best_fit_so_far #list of best individuals per generation
     fitness_list_relative[population.gen] = (population.best_fit_so_far-fitness_list[population.gen-1])/fitness_list[population.gen-1]
     return new_population
