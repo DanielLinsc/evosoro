@@ -356,7 +356,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <Z>0</Z>\n\
                         <dX>0.03</dX>\n\
                         <dY>0.06</dY>\n\
-                        <dZ>0.01</dZ>\n\
+                        <dZ>1</dZ>\n\
                         <Radius>0</Radius>\n\
                         <R>0.4</R>\n\
                         <G>0.6</G>\n\
@@ -368,7 +368,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>0.5</TorqueZ>\n\
+                        <TorqueZ>-0.5</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -379,11 +379,11 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                     <FRegion>\n\
                       <PrimType>0</PrimType>\n\
                       <X>0.31</X>\n\
-                      <Y>0.47</Y>\n\
+                      <Y>0.50</Y>\n\
                       <Z>0</Z>\n\
-                      <dX>0.03</dX>\n\
-                      <dY>0.06</dY>\n\
-                      <dZ>0.01</dZ>\n\
+                      <dX>0.01</dX>\n\
+                      <dY>0.01</dY>\n\
+                      <dZ>1</dZ>\n\
                       <Radius>0</Radius>\n\
                       <R>0.4</R>\n\
                       <G>0.6</G>\n\
@@ -468,13 +468,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.fat_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>5000000.0</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>" + str(env.density) + "</Density>\n\
+            <Density>1e+03</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -492,7 +492,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>" + str(env.bone_stiffness) + "</Elastic_Mod>\n\
+            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
@@ -612,13 +612,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>5e+07</Elastic_Mod>\n\
+            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+05</Density>\n\
+            <Density>1e+03</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -636,13 +636,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>5e+07</Elastic_Mod>\n\
+            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+05</Density>\n\
+            <Density>1e+03</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\

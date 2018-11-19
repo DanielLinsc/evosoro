@@ -16,7 +16,7 @@ from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
 # sub.call("cp ../_voxcad/qhull .", shell=True)
 
 #zelf ingevoegd hieronder
-node = ['node15','node16','node17','node18']
+node = ['node12','node13','node14','node16']
 number_nodes = len(node)
 def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_name, max_eval_time,
                   time_to_try_again, save_lineages=False):
@@ -79,8 +79,8 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             ids_to_analyze += [ind.id]
             #invoegen try nodexxx om te kijken of het werkt, of implementeren dat het in het main script al gevraagd wordt of je met nodes werkt
             #if sshcon == True:
-            #sub.Popen("ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
-               # shell=True)
+            sub.Popen("ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
+                shell=True)
             #else:
             #if sshcon == True:
              #   sub.Popen("exit && ssh " + node[ind.id%number_nodes] + " \"cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa\"" % ind.id,
@@ -88,8 +88,8 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             #else:
            #sub.Popen("ssh " + node + "cd evosoro/evosoro/afstuderen && ./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
                     #  shell=True)	
-            sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
-                   shell=True)
+            #sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % ind.id,
+            #       shell=True)
 
     print_log.message("Launched {0} voxelyze calls, out of {1} individuals".format(num_evaluated_this_gen, len(pop)))
 
@@ -119,6 +119,11 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             for idx in non_analyzed_ids:
                 sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % idx,
                           shell=True)
+        if time_waiting_for_fitness > 120:
+			non_analyzed_ids = [idx for idx in ids_to_analyze if idx not in already_analyzed_ids]
+			if len(non_analyzed_ids) <2:
+				all_done = False
+				break
 
         # check to see if all are finished
         all_done = True

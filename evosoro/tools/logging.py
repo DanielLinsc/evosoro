@@ -192,6 +192,7 @@ def initialize_folders(population, run_directory, run_name, save_networks, save_
     sub.call("mkdir " + run_directory + "/bestSoFar 2> /dev/null", shell=True)
     sub.call("mkdir " + run_directory + "/bestSoFar/paretoFronts 2> /dev/null", shell=True)
     sub.call("mkdir " + run_directory + "/bestSoFar/fitOnly 2>/dev/null", shell=True)
+    sub.call("mkdir " + run_directory + "/bestSoFar/LocalOptima 2>/dev/null", shell=True)
 
     sub.call("mkdir " + run_directory + "/pickledPops 2> /dev/null", shell=True)
 
