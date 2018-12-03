@@ -330,7 +330,7 @@ def pareto_selection_reset(population):
     deleted_individuals = []
     if reset_counter >=300: #301 counter after how many gens the first evaluation of local optima has to be done, when first reset is possible
         print "Sum of relative change in fitness over the last 300 generations is {0}".format(sum(fitness_list_relative[(len(fitness_list_relative) - 299):]))
-        if sum(fitness_list_relative[(len(fitness_list_relative) - 1):])<0.001: # sum of relative change in fitness over the last x generations
+        if sum(fitness_list_relative[(len(fitness_list_relative) - 299):])<0.005: # sum of relative change in fitness over the last x generations
             j = population_buffer[0].parent_id #the parent of the best individual, to check the lineages as they are not updated yet
             if not j==-1: #tough chance, but the best individual is newly generated
                 if population_buffer[0].id in population.lineage_dict:
@@ -347,15 +347,16 @@ def pareto_selection_reset(population):
                         elif not len(population.lineage_dict[k])==0: #check if the individuals parent has ancestors
                             difference = difflib.SequenceMatcher(None, population.lineage_dict[k], population.lineage_dict[j])
                             ratio = difference.ratio()  #else: ratio =0 # if lineage of parent =0
-                    if ratio >= 0.8: # if there's a higher similarity then this number, the individual is close family of the best individual
+                    if ratio >= 0.3: # if there's a higher similarity then this number, the individual is close family of the best individual
                         deleted_individuals.append(l)
+                        print "Individuals k={0}, l={1}, j={2} and ratio = {3}".format(k, l, j, ratio)
                         del population_buffer[i] # and is deleted  the population buffer shifted one place because of the deletion, so the same number has to be checked again., i stays the same, otherwise
                     else:
                         i += 1
                 print "Deleted best individual {0} and close family {1}".format(population_buffer[0].id, deleted_individuals)
                 deleted_individuals.append(population_buffer[0].id)
-                run_directory = 'transmission_reset3_data'
-                run_name = 'transmission_reset3'
+                run_directory = 'transmission_reset5_data'
+                run_name = 'transmission_reset5'
                 sub.call("mkdir " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i" % population.gen, shell=True)
                 for individual in population:
                     if individual.id in deleted_individuals:

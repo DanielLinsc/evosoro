@@ -60,7 +60,7 @@ MAX_GENS = 9999  # Number of generations
 POPSIZE = 100  # Population size (number of individuals in the population)
 IND_SIZE = (20,12,2)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels 20 12 2
 SIM_TIME = 2  # (seconds), including INIT_TIME!
-INIT_TIME = 0.1
+INIT_TIME = 0.01
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
 TIME_TO_TRY_AGAIN = 20 #30 (seconds) wait this long before assuming simulation crashed and resending
@@ -69,8 +69,8 @@ SAVE_LINEAGES = True
 MAX_TIME = 9999  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 1  # extra gens to run when continuing from checkpoint
 
-RUN_DIR = "transmission_reset3_data"  # Subdirectory where results are going to be generated
-RUN_NAME = "transmission_reset3"
+RUN_DIR = "transmission_reset5_data"  # Subdirectory where results are going to be generated
+RUN_NAME = "transmission_reset5"
 CHECKPOINT_EVERY = 40  # How often to save an snapshot of the execution state to later resume the algorithm
 SAVE_POPULATION_EVERY = 20  # How often (every x generations) we save a snapshot of the evolving population
 
