@@ -51,7 +51,7 @@ void CVX_SimGA::WriteResultFile(CXML_Rip* pXML)
 	{
 	    PushDist = pow(pow(SS.CurNeedlePos.x-InitialNeedlePosition.x,2)+pow(SS.CurNeedlePos.y-InitialNeedlePosition.y,2),0.5)/LocalVXC.GetLatticeDim();
         PushRot = SS.CurNeedleRot-InitialNeedleRotation;// + SS.CurNeedleRot.y + SS.CurNeedleRot.z;
-        PushRotUnwr = RotationCount+CurrentNeedleRotation;
+        PushRotUnwr = RotationCount+CurrentNeedleRotation-InitialNeedleRotation;
 	    RotVel = SS.CurNeedleRotVel.z + SS.CurNeedleRotVel.y + SS.CurNeedleRotVel.x;
 	    if(SS.CurNeedlePos.x != InitialNeedlePosition.x or SS.CurNeedlePos.y != InitialNeedlePosition.y)
 	    {
