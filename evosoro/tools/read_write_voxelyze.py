@@ -73,6 +73,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     padding = 0;
     x_pad = [padding, padding]
     y_pad = [padding, padding]
+    z_pad = [2,2]
 
     #padding = env.num_hurdles * (env.space_between_hurdles + 1)
     #x_pad = [padding, padding]
@@ -95,7 +96,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
     workspace_xlim = (-x_pad[0], body_xlim[1] + x_pad[1])
     workspace_ylim = (-y_pad[0], body_ylim[1] + y_pad[1])
-    workspace_zlim = (0, body_zlim[1])
+    workspace_zlim = (-z_pad[0], body_zlim[1] + z_pad[1])
     #workspace_zlim = (0, max(env.wall_height, body_zlim[1])) #was 0 before, veranderd zodat de needle niet weg is
 
     length_workspace_xyz = (float(workspace_xlim[1]-workspace_xlim[0]),
@@ -348,7 +349,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     elif env.needle_position > 0:
         voxelyze_file.write(
             "    <Boundary_Conditions>\n\
-                      <NumBCs>2</NumBCs>\n\
+                      <NumBCs>3</NumBCs>\n\
                       <FRegion>\n\
                         <PrimType>0</PrimType>\n\
                         <X>0.66</X>\n\
@@ -368,7 +369,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>0.5</TorqueZ>\n\
+                        <TorqueZ>-0.5</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -376,33 +377,60 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <AngDisplaceY>0</AngDisplaceY>\n\
                         <AngDisplaceZ>0</AngDisplaceZ>\n\
                       </FRegion>\n\
-                    <FRegion>\n\
-                      <PrimType>0</PrimType>\n\
-                      <X>0.31</X>\n\
-                      <Y>0.50</Y>\n\
-                      <Z>0</Z>\n\
-                      <dX>0.01</dX>\n\
-                      <dY>0.01</dY>\n\
-                      <dZ>1</dZ>\n\
-                      <Radius>0</Radius>\n\
-                      <R>0.4</R>\n\
-                      <G>0.6</G>\n\
-                      <B>0.4</B>\n\
-                      <alpha>1</alpha>\n\
-                      <DofFixed>31</DofFixed>\n\
-                      <ForceX>0</ForceX>\n\
-                      <ForceY>0</ForceY>\n\
-                      <ForceZ>0</ForceZ>\n\
-                      <TorqueX>0</TorqueX>\n\
-                      <TorqueY>0</TorqueY>\n\
-                      <TorqueZ>0</TorqueZ>\n\
-                      <DisplaceX>0</DisplaceX>\n\
-                      <DisplaceY>0</DisplaceY>\n\
-                      <DisplaceZ>0</DisplaceZ>\n\
-                      <AngDisplaceX>0</AngDisplaceX>\n\
-                      <AngDisplaceY>0</AngDisplaceY>\n\
-                      <AngDisplaceZ>0</AngDisplaceZ>\n\
-                    </FRegion>\n\
+                        <FRegion>\n\
+                          <PrimType>0</PrimType>\n\
+                          <X>0.31</X>\n\
+                          <Y>0.50</Y>\n\
+                          <Z>0</Z>\n\
+                          <dX>0.01</dX>\n\
+                          <dY>0.01</dY>\n\
+                          <dZ>1</dZ>\n\
+                          <Radius>0</Radius>\n\
+                          <R>0.4</R>\n\
+                          <G>0.6</G>\n\
+                          <B>0.4</B>\n\
+                          <alpha>1</alpha>\n\
+                          <DofFixed>31</DofFixed>\n\
+                          <ForceX>0</ForceX>\n\
+                          <ForceY>0</ForceY>\n\
+                          <ForceZ>0</ForceZ>\n\
+                          <TorqueX>0</TorqueX>\n\
+                          <TorqueY>0</TorqueY>\n\
+                          <TorqueZ>0</TorqueZ>\n\
+                          <DisplaceX>0</DisplaceX>\n\
+                          <DisplaceY>0</DisplaceY>\n\
+                          <DisplaceZ>0</DisplaceZ>\n\
+                          <AngDisplaceX>0</AngDisplaceX>\n\
+                          <AngDisplaceY>0</AngDisplaceY>\n\
+                          <AngDisplaceZ>0</AngDisplaceZ>\n\
+                        </FRegion>\n\
+                        <FRegion>\n\
+                              <PrimType>0</PrimType>\n\
+                              <X>0</X>\n\
+                              <Y>0</Y>\n\
+                              <Z>0</Z>\n\
+                              <dX>1</dX>\n\
+                              <dY>1</dY>\n\
+                              <dZ>1</dZ>\n\
+                              <Radius>0</Radius>\n\
+                              <R>0.4</R>\n\
+                              <G>0.6</G>\n\
+                              <B>0.4</B>\n\
+                              <alpha>1</alpha>\n\
+                              <DofFixed>0</DofFixed>\n\
+                              <ForceX>0</ForceX>\n\
+                              <ForceY>9.81</ForceY>\n\
+                              <ForceZ>0</ForceZ>\n\
+                              <TorqueX>0</TorqueX>\n\
+                              <TorqueY>0</TorqueY>\n\
+                              <TorqueZ>0</TorqueZ>\n\
+                              <DisplaceX>0</DisplaceX>\n\
+                              <DisplaceY>0</DisplaceY>\n\
+                              <DisplaceZ>0</DisplaceZ>\n\
+                              <AngDisplaceX>0</AngDisplaceX>\n\
+                              <AngDisplaceY>0</AngDisplaceY>\n\
+                              <AngDisplaceZ>0</AngDisplaceZ>\n\
+                        </FRegion>\n\
             </Boundary_Conditions>\n")
 
     else:
@@ -781,9 +809,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
                             #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
                              #       state = 1  # tiny food
-                            elif (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2) and (z == 0):
+                            elif (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2):# and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2) and (z == 0):
+                            elif(x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2):# and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
 
                             else:#was else
@@ -802,10 +830,10 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                             else:
                                 state = env.debris_size  # tiny debris
                         # dit ingevoegd
-                        elif env.needle_position > 0:
-                            if (x == 2) and (y == workspace_ylim[1]/2) and (z == 0):
+                        elif env.needle_position > 0:#NOT THIS ONE
+                            if (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2):# (x == 2) and (y == workspace_ylim[1]/2):# and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == 7) and (y == workspace_ylim[1] / 2) and (z == 0):
+                            elif (x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2):#(x == 7) and (y == workspace_ylim[1] / 2):# and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
                             else:
                                 state = 0
