@@ -17,6 +17,8 @@ See <http://www.opensource.org/licenses/lgpl-3.0.html> for license details.
 #include <fstream>
 #include <math.h>
 
+
+
 #ifdef USE_OPEN_GL
 #include "Utils/GL_Utils.h"
 #endif
@@ -1085,11 +1087,13 @@ bool CVX_Sim::TimeStep(std::string* pRetMessage)
 		// std::cout  << "t = " << CurTime << " - EndOfLifeTime PostY =  " << SS.EndOfLifetimePosteriorY << std::endl;
 	}
 
-	if(pEnv->GetUsingNeedleInHaystack() and (not NeedleInitialized) and CurTime > InitCmTime)
+	if(pEnv->GetUsingNeedleInHaystack() and (not NeedleInitialized))
 	{
 		InitialNeedlePosition = GetNeedlePosition();
-		InitialNeedleRotation = GetNeedleRotation();
+		InitialNeedleRotation = GetNeedleRotation();//RotationCount+CurrentNeedleRotation; //GetNeedleRotation() RotationCount+CurrentNeedleRotation
+		if(CurTime > InitCmTime){
 		NeedleInitialized = true;
+		}
 	}
 
     if(pEnv->GetUsingNeedleInHaystack())
@@ -1799,7 +1803,8 @@ bool CVX_Sim::Integrate()
 //	BondInput->UpdateBond();
 
 	bool Diverged = false;
-//#pragma omp parallel for
+//    #pragma omp parallel
+//    #pragma omp for
 	for (int i=0; i<iT; i++){
 		BondArrayInternal[i].UpdateBond();
 		if (BondArrayInternal[i].GetEngStrain() > 100) Diverged = true; //catch divergent condition! (if any thread sets true we will fail, so don't need mutex...
@@ -1812,7 +1817,7 @@ bool CVX_Sim::Integrate()
 //	Vec3D<> M1b = BondArrayInternal[2].GetMoment1();
 
 	iT = NumColBond();
-//#pragma omp parallel for
+//    #pragma omp parallel for
 	for (int i=0; i<iT; i++){
 		BondArrayCollision[i].UpdateBond();
 	}
@@ -1939,14 +1944,14 @@ bool CVX_Sim::Integrate()
 
 //#pragma omp parallel for
 
+
 	// Iterate all voxels, and apply integration step to each one
 	for (int i=0; i<iT; i++) { VoxArray[i].EulerStep();}
 
 
 	// let's update also the position of the sources, if in motion
 	if(CurTime >= InitCmTime && pEnv->getSourcesPresent())
-		pEnv->updateSourcesPosition(CurTime-InitCmTime);
-
+		 pEnv->updateSourcesPosition(CurTime-InitCmTime);
 	//End Euler integration
 
 	
