@@ -1431,7 +1431,7 @@ bool CVX_Sim::StopConditionMet(void) //have we met the stop condition yet?
 {
 	int numJump; //how many timesteps to look back in order to have 10 data points within the history length
 	vfloat fNumVoxInv;
-	if(CurTime <= InitCmTime) // Evaluate stop condition only after the transient time is expired
+	if(CurTime <= 0.01)//InitCmTime) // Evaluate stop condition only after the transient time is expired
 		return false;
 
 	if (StopConditionType==SC_CONST_MAXENERGY || StopConditionType==SC_MIN_KE || StopConditionType==SC_MIN_MAXMOVE || SC_MIN_MAXMOVE_MAX_SIM_TIME){
