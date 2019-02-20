@@ -10,7 +10,7 @@ from evosoro.tools.utils import sigmoid, xml_format, dominates
 class Genotype(object):
     """A container for multiple networks, 'genetic code' copied with modification to produce offspring."""
 
-    def __init__(self, orig_size_xyz=(20,11,2)):#aangepast , was 6,6,6,
+    def __init__(self, orig_size_xyz=(14,7,1)):#aangepast , was 6,6,6,
 
         """
         Parameters

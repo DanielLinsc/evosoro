@@ -73,7 +73,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     padding = 0;
     x_pad = [padding, padding]
     y_pad = [padding, padding]
-    z_pad = [2,2]
+    z_pad = [1,1]
 
     #padding = env.num_hurdles * (env.space_between_hurdles + 1)
     #x_pad = [padding, padding]
@@ -369,7 +369,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                         <ForceZ>0</ForceZ>\n\
                         <TorqueX>0</TorqueX>\n\
                         <TorqueY>0</TorqueY>\n\
-                        <TorqueZ>-0.5</TorqueZ>\n\
+                        <TorqueZ>0.5</TorqueZ>\n\
                         <DisplaceX>0</DisplaceX>\n\
                         <DisplaceY>0</DisplaceY>\n\
                         <DisplaceZ>0</DisplaceZ>\n\
@@ -419,7 +419,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                               <alpha>1</alpha>\n\
                               <DofFixed>0</DofFixed>\n\
                               <ForceX>0</ForceX>\n\
-                              <ForceY>9.81</ForceY>\n\
+                              <ForceY>0</ForceY>\n\
                               <ForceZ>0</ForceZ>\n\
                               <TorqueX>0</TorqueX>\n\
                               <TorqueY>0</TorqueY>\n\

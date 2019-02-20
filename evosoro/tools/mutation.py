@@ -4,7 +4,7 @@ import copy
 import inspect
 
 
-def create_new_children_through_mutation(pop, print_log, new_children=None, mutate_network_probs=None, #was eerder none
+def create_new_children_through_mutation(pop, print_log, new_children=None, mutate_network_probs=[0.5], #was eerder none
                                          max_mutation_attempts=1500):
     """Create copies, with modification, of existing individuals in the population.
 

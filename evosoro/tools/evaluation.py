@@ -16,7 +16,7 @@ from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
 # sub.call("cp ../_voxcad/qhull .", shell=True)
 
 #zelf ingevoegd hieronder
-node = ['node12','node13','node14','node16']
+node = ['node15','node12','node13','node14','node16','node18']
 number_nodes = len(node)
 def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_name, max_eval_time,
                   time_to_try_again, save_lineages=False):
@@ -119,7 +119,7 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
             for idx in non_analyzed_ids:
                 sub.Popen("./voxelyze  -f " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % idx,
                           shell=True)
-        if time_waiting_for_fitness > 120:
+        if time_waiting_for_fitness > 10:
 			non_analyzed_ids = [idx for idx in ids_to_analyze if idx not in already_analyzed_ids]
 			if len(non_analyzed_ids) <2:
 				all_done = False
@@ -201,13 +201,13 @@ def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_na
                                          ind.id + " " + run_directory + "/ancestors/", shell=True)
 
                             if pop.gen % save_vxa_every == 0 and save_vxa_every > 0:
-                                sub.call("mv " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" %
+                                sub.call("cp " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" %
                                          ind.id + " " + run_directory + "/Gen_%04i/" % pop.gen +
                                          run_name + "--Gen_%04i--fit_%.08f--id_%05i.vxa" %
                                          (pop.gen, ind.fitness, ind.id), shell=True)
-                            else:
-                                sub.call("rm " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" %
-                                         ind.id, shell=True)
+                            #else:
+                             #   sub.call("rm " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" %
+                              #           ind.id, shell=True)
 
                             break
 

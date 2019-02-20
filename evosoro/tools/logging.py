@@ -188,6 +188,7 @@ def initialize_folders(population, run_directory, run_name, save_networks, save_
     sub.call("mkdir " + run_directory + "/voxelyzeFiles 2> /dev/null", shell=True)
     sub.call("mkdir " + run_directory + "/tempFiles 2> /dev/null", shell=True)
     sub.call("mkdir " + run_directory + "/fitnessFiles 2> /dev/null", shell=True)
+    sub.call("mkdir " + run_directory + "/network_gml 2> /dev/null", shell=True) 
 
     sub.call("mkdir " + run_directory + "/bestSoFar 2> /dev/null", shell=True)
     sub.call("mkdir " + run_directory + "/bestSoFar/paretoFronts 2> /dev/null", shell=True)
@@ -268,10 +269,10 @@ def remove_old_lineages(population, run_directory):
             if parent not in ancestors_ids:
                 ancestors_ids += [parent]
 
-    for vxa in glob(run_directory + "/ancestors/*"):
-        this_id = int(find_between(vxa, "--id_", ".vxa"))
-        if this_id not in ancestors_ids:
-            sub.call("rm " + vxa, shell=True)
+    #for vxa in glob(run_directory + "/ancestors/*"): daniel: deletes files before usage in selection
+    #    this_id = int(find_between(vxa, "--id_", ".vxa"))
+    #    if this_id not in ancestors_ids:
+     #       sub.call("rm " + vxa, shell=True)
 
 
 def write_pareto_front(population, run_directory, run_name):
@@ -280,7 +281,7 @@ def write_pareto_front(population, run_directory, run_name):
     ind = population[0]  # first individual
     for individual in population:
         if len(individual.dominated_by) == 0:
-            sub.call("mv " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % individual.id +
+            sub.call("cp " + run_directory + "/voxelyzeFiles/" + run_name + "--id_%05i.vxa" % individual.id +
                      " " + run_directory + "/bestSoFar/paretoFronts/Gen_%04i/" % population.gen + "/" +
                      run_name + "Gen_%04i--Fit_%.08f--id_%05i--dom_%d.vxa" %
                      (population.gen, individual.fitness, individual.id, len(individual.dominated_by)), shell=True)

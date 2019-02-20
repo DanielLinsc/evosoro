@@ -55,28 +55,32 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 # sub.call("chmod 755 ./qhull", shell=True)  # Execution right for qhull
 
 
-NUM_RANDOM_INDS = 20  # Number of random individuals to insert each generation
-MAX_GENS = 9999  # Number of generations
-POPSIZE = 100  # Population size (number of individuals in the population)
-IND_SIZE = (20,12,2)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels 20 12 2
-SIM_TIME = 2  # (seconds), including INIT_TIME!
-INIT_TIME = 0.01
+NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation
+MAX_GENS = 99999  # Number of generations
+POPSIZE = 30  # Population size (number of individuals in the population)
+IND_SIZE = (14,7,1)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels 20 12 2
+SIM_TIME = 3  # (seconds), including INIT_TIME!
+INIT_TIME = 0.1
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
 
-TIME_TO_TRY_AGAIN = 20 #30 (seconds) wait this long before assuming simulation crashed and resending
-MAX_EVAL_TIME = 21  #60 (seconds) wait this long before giving up on evaluating this individual
+TIME_TO_TRY_AGAIN = 40 #30 (seconds) wait this long before assuming simulation crashed and resending
+MAX_EVAL_TIME = 41  #60 (seconds) wait this long before giving up on evaluating this individual
 SAVE_LINEAGES = True
 MAX_TIME = 9999  # (hours) how long to wait before autosuspending
 EXTRA_GENS = 1  # extra gens to run when continuing from checkpoint
 
-RUN_DIR = "transmission_reset5_data"  # Subdirectory where results are going to be generated
-RUN_NAME = "transmission_reset5"
-CHECKPOINT_EVERY = 40  # How often to save an snapshot of the execution state to later resume the algorithm
-SAVE_POPULATION_EVERY = 20  # How often (every x generations) we save a snapshot of the evolving population
-
-SEED = 1
+SEED = int(sys.argv[1])
 random.seed(SEED)  # Initializing the random number generator for reproducibility
 np.random.seed(SEED)
+
+
+RUN_DIR = "transmission_chain1_{}_data".format(SEED)  # Subdirectory where results are going to be generated
+RUN_NAME = "transmission_chain1_{}".format(SEED)
+CHECKPOINT_EVERY = 50  # How often to save an snapshot of the execution state to later resume the algorithm
+SAVE_POPULATION_EVERY = 25  # How often (every x generations) we save a snapshot of the evolving population
+
+
+
 
 #if socket.gethostname() == "tsu5":
  #   SSHCON = True
@@ -150,7 +154,7 @@ my_objective_dict.add_objective(name="fitness", maximize=True, tag="<PushRotUnwr
 #my_objective_dict.add_objective(name="RotVel", maximize=True, tag="<RotVel>", logging_only=True)
 #my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
 # Add an objective to minimize the age of solutions: promotes diversity
-my_objective_dict.add_objective(name="age", maximize=False, tag=None)
+#my_objective_dict.add_objective(name="age", maximize=False, tag=None)
 
 # Adding another objective called "num_voxels", which we want to minimize in order to minimize
 # the amount of material employed to build the robot, promoting at the same time non-trivial
