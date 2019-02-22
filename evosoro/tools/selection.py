@@ -283,7 +283,7 @@ def annealing_selection(population):
     return new_population
 
 
-def pareto_selection_reset(population):
+def pareto_selection_reset(population,run_directory,run_name):
     """Return a list of selected individuals from the population.
 
     All individuals in the population are ranked by their level, i.e. the number of solutions they are dominated by.
@@ -355,13 +355,13 @@ def pareto_selection_reset(population):
                         i += 1
                 print "Deleted best individual {0} and close family {1}".format(population_buffer[0].id, deleted_individuals)
                 deleted_individuals.append(population_buffer[0].id)
-                run_directory = 'transmission_reset5_data'
-                run_name = 'transmission_reset5'
+                #run_directory = 'transmission_gear10_data'
+                #run_name = 'transmission_gear10'
                 sub.call("mkdir " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i" % population.gen, shell=True)
                 for individual in population:
                     if individual.id in deleted_individuals:
                         sub.call(
-                            "mv " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
+                            "cp " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
                             " " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i/" % population.gen + "/" +
                             run_name + "Gen_%04i--Fit_%.08f--id_%05i--dom_%d.vxa" %
                             (population.gen, individual.fitness, individual.id, len(individual.dominated_by)), shell=True)
@@ -369,7 +369,7 @@ def pareto_selection_reset(population):
                 del population_buffer[0] #after every one is checked, the best individual is deleted
                 individual = population_buffer[0] #add the new best result in the folder as well
                 sub.call(
-                    "mv " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
+                    "cp " + run_directory + "/ancestors/" + run_name + "--id_%05i.vxa" % individual.id +
                     " " + run_directory + "/bestSoFar/LocalOptima/Gen_%04i/" % population.gen + "/" +
                     run_name + "Gen_%04i--Fit_%.08f--id_%05i--dom_%d_new_best_id.vxa" %
                     (population.gen, individual.fitness, individual.id, len(individual.dominated_by)), shell=True)
@@ -426,6 +426,9 @@ def pareto_selection_reset(population):
     fitness_list += [0]
     fitness_list_relative += [0]
     fitness_list[population.gen] = population.best_fit_so_far #list of best individuals per generation
-    fitness_list_relative[population.gen] = (population.best_fit_so_far-fitness_list[population.gen-1])/fitness_list[population.gen-1]
     
+    if fitness_list[population.gen-1]==0:
+		fitness_list_relative[population.gen] = 0
+    else:
+	    fitness_list_relative[population.gen] = (population.best_fit_so_far-fitness_list[population.gen-1])/fitness_list[population.gen-1]
     return new_population

@@ -10,6 +10,8 @@ from selection import pareto_selection, pareto_tournament_selection, pareto_sele
 from mutation import create_new_children_through_mutation, genome_wide_mutation
 from logging import PrintLog, initialize_folders, make_gen_directories, write_gen_stats
 
+global RUN_DIR
+global RUN_NAME
 
 class Optimizer(object):
     def __init__(self, sim, env, evaluation_func=evaluate_all):
@@ -44,8 +46,9 @@ class Optimizer(object):
 
 
 class PopulationBasedOptimizer(Optimizer):
-    global fitness_list
-    fitness_list = []
+    #global fitness_list
+
+    #fitness_list = []
     def __init__(self, sim, env, pop, selection_func, mutation_func):
         Optimizer.__init__(self, sim, env)
         self.pop = pop
@@ -58,7 +61,10 @@ class PopulationBasedOptimizer(Optimizer):
         self.directory = None
         self.name = None
         self.num_random_inds = 0
-
+        global RUN_DIR
+        global RUN_NAME
+        RUN_DIR = self.directory
+        RUN_NAME = self.name
     def update_env(self):
         if self.num_env_cycles > 0:
             switch_every = self.max_gens / float(self.num_env_cycles)
@@ -87,15 +93,19 @@ class PopulationBasedOptimizer(Optimizer):
             self.name = name
             self.num_random_inds = num_random_individuals
             self.num_env_cycles = num_env_cycles
-            global fitness_list
-            fitness_list += [self.pop.best_fit_so_far]
+            #global fitness_list
+            #fitness_list += [self.pop.best_fit_so_far]
+            global RUN_NAME
+            global RUN_DIR
+            RUN_NAME = name
+            RUN_DIR = directory
 
             initialize_folders(self.pop, self.directory, self.name, save_nets, save_lineages=save_lineages)
             make_gen_directories(self.pop, self.directory, save_vxa_every, save_nets)
             sub.call("touch {}/RUNNING".format(self.directory), shell=True)
             self.evaluate(self.sim, self.env[self.curr_env_idx], self.pop, print_log, save_vxa_every, self.directory,
                           self.name, max_eval_time, time_to_try_again, save_lineages)
-            self.select(self.pop)  # only produces dominated_by stats, no selection happening (population not replaced)
+            self.select(self.pop,directory,name)  # only produces dominated_by stats, no selection happening (population not replaced)
             write_gen_stats(self.pop, self.directory, self.name, save_vxa_every, save_pareto, save_nets,
                             save_lineages=save_lineages)
 
@@ -141,7 +151,7 @@ class PopulationBasedOptimizer(Optimizer):
             print_log.message("Fitness evaluation finished", timer_name="evaluation")  # record total eval time in log
 
             # perform selection by pareto fronts
-            new_population = self.select(self.pop)
+            new_population = self.select(self.pop,directory,name)
 
             # print population to stdout and save all individual data
             print_log.message("Saving statistics")

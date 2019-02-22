@@ -17,8 +17,14 @@
         <Lifetime>3</Lifetime>
         <FoundNeedleInHaystack>0</FoundNeedleInHaystack>
         <PushDist>0</PushDist>
+<<<<<<< HEAD
         <PushRot>0.855609</PushRot>
         <RotVel>0.000424336</RotVel>
         <PushRotUnwr>0.855609</PushRotUnwr>
+=======
+        <PushRot>0.855557</PushRot>
+        <RotVel>0.000424336</RotVel>
+        <PushRotUnwr>0.855557</PushRotUnwr>
+>>>>>>> 380a1c480b78b90279eb155eaa7ab2a0368582ee
     </Fitness>
 </Voxelyze_Sim_Result>
