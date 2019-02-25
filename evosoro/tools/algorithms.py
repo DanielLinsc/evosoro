@@ -128,6 +128,13 @@ class PopulationBasedOptimizer(Optimizer):
 
             # update ages
             self.pop.update_ages()
+            
+            #adding individuals if the pop is too small
+            if len(self.pop) < self.pop.pop_size:
+				for _ in range(self.pop.pop_size-len(self.pop)):
+					print_log.message("Random individual added to population because too many were deleted")
+					self.pop.add_random_individual()
+				print_log.message("New population size is %d" % len(self.pop))
 
             # mutation
             print_log.message("Mutation starts")
@@ -160,6 +167,7 @@ class PopulationBasedOptimizer(Optimizer):
             # replace population with selection
             self.pop.individuals = new_population
             print_log.message("Population size reduced to %d" % len(self.pop))
+            
 
         if not self.autosuspended:  # print end of run stats
             print_log.message("Finished {0} generations".format(self.pop.gen + 1))
