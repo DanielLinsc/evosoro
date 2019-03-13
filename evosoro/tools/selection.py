@@ -410,7 +410,11 @@ def pareto_selection_reset(population,run_directory,run_name):
         elif pareto_level > population_buffer_size:
             done = True
             print "Deleted to many individuals in reset to have full population."
-
+            for _ in range(population.pop_size - len(new_population)):
+				population.add_random_individual()
+				new_population += [population.individuals[len(population.individuals)-1]]
+				print "Random individual added to population because too many were deleted"
+            print "New population size is {}".format(len(new_population))
     for ind in population:
         if ind in new_population:
             ind.selected = 1

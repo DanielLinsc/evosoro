@@ -6,12 +6,14 @@ import subprocess as sub
 from functools import partial
 
 from evaluation import evaluate_all
-from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry, annealing_selection, pareto_selection_reset
+from selection import pareto_selection, pareto_tournament_selection, pareto_selection_diversify_ancestry, \
+    annealing_selection, pareto_selection_reset
 from mutation import create_new_children_through_mutation, genome_wide_mutation
 from logging import PrintLog, initialize_folders, make_gen_directories, write_gen_stats
 
 global RUN_DIR
 global RUN_NAME
+
 
 class Optimizer(object):
     def __init__(self, sim, env, evaluation_func=evaluate_all):
@@ -46,15 +48,15 @@ class Optimizer(object):
 
 
 class PopulationBasedOptimizer(Optimizer):
-    #global fitness_list
+    # global fitness_list
 
-    #fitness_list = []
+    # fitness_list = []
     def __init__(self, sim, env, pop, selection_func, mutation_func):
         Optimizer.__init__(self, sim, env)
         self.pop = pop
         self.select = selection_func
         self.mutate = mutation_func
-        #self.sshcon = sshcon
+        # self.sshcon = sshcon
         self.num_env_cycles = 0
         self.autosuspended = False
         self.max_gens = None
@@ -65,11 +67,12 @@ class PopulationBasedOptimizer(Optimizer):
         global RUN_NAME
         RUN_DIR = self.directory
         RUN_NAME = self.name
+
     def update_env(self):
         if self.num_env_cycles > 0:
             switch_every = self.max_gens / float(self.num_env_cycles)
             self.curr_env_idx = int(self.pop.gen / switch_every % len(self.env))
-            print " Using environment {0} of {1}".format(self.curr_env_idx+1, len(self.env))
+            print " Using environment {0} of {1}".format(self.curr_env_idx + 1, len(self.env))
 
     def run(self, max_hours_runtime=29, max_gens=3000, num_random_individuals=1, num_env_cycles=0,
             directory="tests_data", name="TestRun",
@@ -93,8 +96,8 @@ class PopulationBasedOptimizer(Optimizer):
             self.name = name
             self.num_random_inds = num_random_individuals
             self.num_env_cycles = num_env_cycles
-            #global fitness_list
-            #fitness_list += [self.pop.best_fit_so_far]
+            # global fitness_list
+            # fitness_list += [self.pop.best_fit_so_far]
             global RUN_NAME
             global RUN_DIR
             RUN_NAME = name
@@ -105,19 +108,20 @@ class PopulationBasedOptimizer(Optimizer):
             sub.call("touch {}/RUNNING".format(self.directory), shell=True)
             self.evaluate(self.sim, self.env[self.curr_env_idx], self.pop, print_log, save_vxa_every, self.directory,
                           self.name, max_eval_time, time_to_try_again, save_lineages)
-            self.select(self.pop,directory,name)  # only produces dominated_by stats, no selection happening (population not replaced)
+            self.select(self.pop, directory,
+                        name)  # only produces dominated_by stats, no selection happening (population not replaced)
             write_gen_stats(self.pop, self.directory, self.name, save_vxa_every, save_pareto, save_nets,
                             save_lineages=save_lineages)
 
         while self.pop.gen < max_gens:
 
             if self.pop.gen % checkpoint_every == 0:
-                print_log.message("Saving checkpoint at generation {0}".format(self.pop.gen+1), timer_name="start")
+                print_log.message("Saving checkpoint at generation {0}".format(self.pop.gen + 1), timer_name="start")
                 self.save_checkpoint(self.directory, self.pop.gen)
 
             if self.elapsed_time(units="h") > max_hours_runtime:
                 self.autosuspended = True
-                print_log.message("Autosuspending at generation {0}".format(self.pop.gen+1), timer_name="start")
+                print_log.message("Autosuspending at generation {0}".format(self.pop.gen + 1), timer_name="start")
                 self.save_checkpoint(self.directory, self.pop.gen)
                 sub.call("touch {0}/AUTOSUSPENDED && rm {0}/RUNNING".format(self.directory), shell=True)
                 break
@@ -128,13 +132,7 @@ class PopulationBasedOptimizer(Optimizer):
 
             # update ages
             self.pop.update_ages()
-            
-            #adding individuals if the pop is too small
-            if len(self.pop) < self.pop.pop_size:
-				for _ in range(self.pop.pop_size-len(self.pop)):
-					print_log.message("Random individual added to population because too many were deleted")
-					self.pop.add_random_individual()
-				print_log.message("New population size is %d" % len(self.pop))
+
 
             # mutation
             print_log.message("Mutation starts")
@@ -158,7 +156,15 @@ class PopulationBasedOptimizer(Optimizer):
             print_log.message("Fitness evaluation finished", timer_name="evaluation")  # record total eval time in log
 
             # perform selection by pareto fronts
-            new_population = self.select(self.pop,directory,name)
+            new_population = self.select(self.pop, directory, name)
+            
+            # adding individuals if the pop is too small
+            if len(self.pop) < self.pop.pop_size:
+                for _ in range(self.pop.pop_size - len(self.pop)):
+                    print_log.message("Random individual added to population because too many were deleted")
+                    self.pop.add_random_individual()
+                print_log.message("New population size is %d" % len(self.pop))
+
 
             # print population to stdout and save all individual data
             print_log.message("Saving statistics")
@@ -167,7 +173,6 @@ class PopulationBasedOptimizer(Optimizer):
             # replace population with selection
             self.pop.individuals = new_population
             print_log.message("Population size reduced to %d" % len(self.pop))
-            
 
         if not self.autosuspended:  # print end of run stats
             print_log.message("Finished {0} generations".format(self.pop.gen + 1))
@@ -179,18 +184,23 @@ class ParetoOptimization(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
         PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection, create_new_children_through_mutation)
 
+
 class ParetoOptimizationDiversifyAncestry(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
-        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_diversify_ancestry, create_new_children_through_mutation)
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_diversify_ancestry,
+                                          create_new_children_through_mutation)
+
 
 class AnnealingOptimization(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
-        PopulationBasedOptimizer.__init__(self, sim, env, pop, annealing_selection, create_new_children_through_mutation)
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, annealing_selection,
+                                          create_new_children_through_mutation)
+
 
 class ParetoOptimizationReset(PopulationBasedOptimizer):
     def __init__(self, sim, env, pop):
-        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_reset, create_new_children_through_mutation)
-
+        PopulationBasedOptimizer.__init__(self, sim, env, pop, pareto_selection_reset,
+                                          create_new_children_through_mutation)
 
 
 class ParetoTournamentOptimization(PopulationBasedOptimizer):
