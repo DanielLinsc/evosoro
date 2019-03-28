@@ -4,6 +4,7 @@ import sys
 import networkx as nx
 import subprocess as sub
 import numpy as np
+import matplotlib.pyplot as plt #only for plotting the network
 from glob import glob
 
 from evosoro.tools.utils import find_between
@@ -167,7 +168,7 @@ def record_individuals_data(pop, path, num_inds_to_save=None, print_to_terminal=
     recording_file.close()
 
 
-def initialize_folders(population, run_directory, run_name, save_networks, save_all_individual_data=True,
+def initialize_folders(population, run_directory, run_name, save_networks=True, save_all_individual_data=True,
                        save_lineages=True):
 
     # sub.call("mkdir " + run_directory + "/" + run_name + "/" + " 2>/dev/null", shell=True)
@@ -297,7 +298,46 @@ def write_networks(population, run_directory):
             for name in network.graph.nodes():
                 network.graph.node[name]["state"] = ""  # remove state information to reduce file size
                 network.graph.node[name]["evaluated"] = 0
+                if network.graph.node[name]['function'] == None:network.graph.node[name]['function'] = ""
+                network.graph.node[name]['function'] = str(network.graph.node[name]['function'])
             nx.write_gml(network.graph, run_directory +
                          "/network_gml/Gen_%04i/network--%02i--fit_%.08f--id_%05i" %
                          (population.gen, net_idx, clone.fitness, clone.id) + ".txt")
+
+            pos = nx.random_layout(network.graph,center=(0,0))
+            pos['x'][0:2] [0]=-1
+            pos['x'][0:2] [1] =1
+
+            pos['y'][0:2][0] = -1
+            pos['y'][0:2][1] = 0.5
+
+            pos['z'][0:2][0] = -1
+            pos['z'][0:2][1] = 0
+
+            pos['d'][0:2][0] = -1
+            pos['d'][0:2][1] = -0.5
+
+            pos['b'][0:2][0] = -1
+            pos['b'][0:2][1] = -1
+
+            pos['shape'][0:2][0] = 1
+            pos['shape'][0:2][1] = -.75
+
+            pos['muscleOrTissue'][0:2][0] = 1
+            pos['muscleOrTissue'][0:2][1] = 0.75
+
+            #fixed_pos = {'x':(-1,1),'y':(-1,0.5),'z':(-1,0),'d':(-1,-0.5),'b':(-1,-1),'shape':(1,-0.75),'muscleOrTissue':(1,0.75)}
+            #fixed_nodes = fixed_pos.keys()
+            #pos = nx.fruchterman_reingold_layout(network.graph,pos=fixed_pos, fixed=fixed_nodes,center=(0,0))
+            pos_function = {}
+            y_off = 0.1
+            for k, v in pos.items():
+                pos_function[k] = (v[0], v[1] + y_off)
+            nx.draw_networkx_labels(network.graph, pos_function, labels=nx.get_node_attributes(network.graph, 'function'),font_size=5)
+            #nx.draw_networkx_edge_labels(network.graph, pos, labels=nx.get_edge_attributes(network.graph, 'state'), font_size=5)
+            nx.draw(network.graph, pos, with_labels=True, draw_networkx_edge_labels=True, width=nx.get_edge_attributes(network.graph, 'weight').values()*2)
+            plt.savefig(run_directory +
+                         "/network_gml/Gen_%04i/network--%02i--fit_%.08f--id_%05i" %
+                         (population.gen, net_idx, clone.fitness, clone.id) + ".png", format="PNG")
+            plt.clf()
             net_idx += 1
