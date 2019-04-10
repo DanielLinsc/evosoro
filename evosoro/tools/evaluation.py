@@ -16,7 +16,7 @@ from read_write_voxelyze import read_voxlyze_results, write_voxelyze_file
 # sub.call("cp ../_voxcad/qhull .", shell=True)
 
 #zelf ingevoegd hieronder
-node = ['node15','node12','node13','node14','node16','node18']
+node = ['node12','node13','node14']
 number_nodes = len(node)
 def evaluate_all(sim, env, pop, print_log, save_vxa_every, run_directory, run_name, max_eval_time,
                   time_to_try_again, save_lineages=False):

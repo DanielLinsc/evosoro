@@ -68,7 +68,7 @@ def create_new_children_through_mutation(pop, print_log, new_children=None, muta
             clone.parent_id = clone.id
 
             for name, details in clone.genotype.to_phenotype_mapping.items():
-                details["old_state"] = copy.deepcopy(details["state"])
+                details["oldstate"] = copy.deepcopy(details["state"])
 
             # old_individual = copy.deepcopy(clone)
 
@@ -115,7 +115,7 @@ def create_new_children_through_mutation(pop, print_log, new_children=None, muta
                     else:
                         for name, details in candidate.genotype.to_phenotype_mapping.items():
                             new = details["state"]
-                            old = details["old_state"]
+                            old = details["oldstate"]
                             changes = np.array(new != old, dtype=np.bool)
                             if np.any(changes) and candidate.phenotype.is_valid():
                                 done = True
@@ -138,7 +138,7 @@ def create_new_children_through_mutation(pop, print_log, new_children=None, muta
 
                 if not clone.genotype[selected_net_idx].direct_encoding:
                     for output_node in clone.genotype[selected_net_idx].output_node_names:
-                        clone.genotype[selected_net_idx].graph.node[output_node]["old_state"] = ""
+                        clone.genotype[selected_net_idx].graph.node[output_node]["oldstate"] = ""
 
             # reset all objectives we calculate in VoxCad to unevaluated values
             for rank, goal in pop.objective_dict.items():

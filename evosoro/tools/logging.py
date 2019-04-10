@@ -224,8 +224,8 @@ def make_gen_directories(population, run_directory, save_vxa_every, save_network
     if population.gen % save_vxa_every == 0 and save_vxa_every > 0:
         sub.call("mkdir " + run_directory + "/Gen_%04i" % population.gen, shell=True)
 
-    if save_networks:
-        sub.call("mkdir " + run_directory + "/network_gml/Gen_%04i" % population.gen, shell=True)
+ #   if save_networks:
+#       sub.call("mkdir " + run_directory + "/network_gml/Gen_%04i" % population.gen, shell=True)
 
 
 def write_gen_stats(population, run_directory, run_name, save_vxa_every, save_pareto, save_networks,
@@ -240,7 +240,7 @@ def write_gen_stats(population, run_directory, run_name, save_vxa_every, save_pa
         # each vxa is saved during evaluation in the ancestors folder
         remove_old_lineages(population, run_directory)
 
-    if population.gen % save_vxa_every == 0 and save_vxa_every > 0 and save_networks:
+    if save_networks: #population.gen % save_vxa_every == 0 and save_vxa_every > 0 and 
         write_networks(population, run_directory)
 
     if population.gen % save_vxa_every == 0 and save_vxa_every > 0 and save_pareto:
@@ -270,10 +270,10 @@ def remove_old_lineages(population, run_directory):
             if parent not in ancestors_ids:
                 ancestors_ids += [parent]
 
-    #for vxa in glob(run_directory + "/ancestors/*"): daniel: deletes files before usage in selection
-    #    this_id = int(find_between(vxa, "--id_", ".vxa"))
-    #    if this_id not in ancestors_ids:
-     #       sub.call("rm " + vxa, shell=True)
+    for vxa in glob(run_directory + "/ancestors/*"):# daniel: deletes files before usage in selection
+        this_id = int(find_between(vxa, "--id_", ".vxa"))
+        if this_id not in ancestors_ids:
+            sub.call("rm " + vxa, shell=True)
 
 
 def write_pareto_front(population, run_directory, run_name):
@@ -292,52 +292,53 @@ def write_pareto_front(population, run_directory, run_name):
 
 def write_networks(population, run_directory):
     for individual in population:
-        clone = copy.deepcopy(individual)
-        net_idx = 0
-        for network in clone.genotype:
-            for name in network.graph.nodes():
-                network.graph.node[name]["state"] = ""  # remove state information to reduce file size
-                network.graph.node[name]["evaluated"] = 0
-                if network.graph.node[name]['function'] == None:network.graph.node[name]['function'] = ""
-                network.graph.node[name]['function'] = str(network.graph.node[name]['function'])
-            nx.write_gml(network.graph, run_directory +
-                         "/network_gml/Gen_%04i/network--%02i--fit_%.08f--id_%05i" %
-                         (population.gen, net_idx, clone.fitness, clone.id) + ".txt")
+		if individual.fitness>=population.best_fit_so_far:
+			clone = copy.deepcopy(individual)
+			net_idx = 0
+			for network in clone.genotype:
+				for name in network.graph.nodes():
+					network.graph.node[name]["state"] = ""  # remove state information to reduce file size
+					network.graph.node[name]["evaluated"] = 0
+					if network.graph.node[name]['function'] == None:network.graph.node[name]['function'] = ""
+					network.graph.node[name]['function'] = str(network.graph.node[name]['function'])
+				nx.write_gml(network.graph, run_directory +
+							 "/network_gml/Gen_%04i_network--%02i--fit_%.08f--id_%05i" %
+							 (population.gen, net_idx, clone.fitness, clone.id) + ".txt")
 
-            pos = nx.random_layout(network.graph,center=(0,0))
-            pos['x'][0:2] [0]=-1
-            pos['x'][0:2] [1] =1
+				pos = nx.random_layout(network.graph,center=(0,0))
+				pos['x'][0:2] [0]=-1
+				pos['x'][0:2] [1] =1
 
-            pos['y'][0:2][0] = -1
-            pos['y'][0:2][1] = 0.5
+				pos['y'][0:2][0] = -1
+				pos['y'][0:2][1] = 0.5
 
-            pos['z'][0:2][0] = -1
-            pos['z'][0:2][1] = 0
+				pos['z'][0:2][0] = -1
+				pos['z'][0:2][1] = 0
 
-            pos['d'][0:2][0] = -1
-            pos['d'][0:2][1] = -0.5
+				pos['d'][0:2][0] = -1
+				pos['d'][0:2][1] = -0.5
 
-            pos['b'][0:2][0] = -1
-            pos['b'][0:2][1] = -1
+				pos['b'][0:2][0] = -1
+				pos['b'][0:2][1] = -1
 
-            pos['shape'][0:2][0] = 1
-            pos['shape'][0:2][1] = -.75
+				pos['shape'][0:2][0] = 1
+				pos['shape'][0:2][1] = -.75
 
-            pos['muscleOrTissue'][0:2][0] = 1
-            pos['muscleOrTissue'][0:2][1] = 0.75
+				pos['muscleOrTissue'][0:2][0] = 1
+				pos['muscleOrTissue'][0:2][1] = 0.75
 
-            #fixed_pos = {'x':(-1,1),'y':(-1,0.5),'z':(-1,0),'d':(-1,-0.5),'b':(-1,-1),'shape':(1,-0.75),'muscleOrTissue':(1,0.75)}
-            #fixed_nodes = fixed_pos.keys()
-            #pos = nx.fruchterman_reingold_layout(network.graph,pos=fixed_pos, fixed=fixed_nodes,center=(0,0))
-            pos_function = {}
-            y_off = 0.1
-            for k, v in pos.items():
-                pos_function[k] = (v[0], v[1] + y_off)
-            nx.draw_networkx_labels(network.graph, pos_function, labels=nx.get_node_attributes(network.graph, 'function'),font_size=5)
-            #nx.draw_networkx_edge_labels(network.graph, pos, labels=nx.get_edge_attributes(network.graph, 'state'), font_size=5)
-            nx.draw(network.graph, pos, with_labels=True, draw_networkx_edge_labels=True, width=nx.get_edge_attributes(network.graph, 'weight').values()*2)
-            plt.savefig(run_directory +
-                         "/network_gml/Gen_%04i/network--%02i--fit_%.08f--id_%05i" %
-                         (population.gen, net_idx, clone.fitness, clone.id) + ".png", format="PNG")
-            plt.clf()
-            net_idx += 1
+				#fixed_pos = {'x':(-1,1),'y':(-1,0.5),'z':(-1,0),'d':(-1,-0.5),'b':(-1,-1),'shape':(1,-0.75),'muscleOrTissue':(1,0.75)}
+				#fixed_nodes = fixed_pos.keys()
+				#pos = nx.fruchterman_reingold_layout(network.graph,pos=fixed_pos, fixed=fixed_nodes,center=(0,0))
+				pos_function = {}
+				y_off = 0.1
+				for k, v in pos.items():
+					pos_function[k] = (v[0], v[1] + y_off)
+				nx.draw_networkx_labels(network.graph, pos_function, labels=nx.get_node_attributes(network.graph, 'function'),font_size=5)
+				#nx.draw_networkx_edge_labels(network.graph, pos, labels=nx.get_edge_attributes(network.graph, 'state'), font_size=5)
+				nx.draw(network.graph, pos, with_labels=True, draw_networkx_edge_labels=True, width=nx.get_edge_attributes(network.graph, 'weight').values()*2)
+				plt.savefig(run_directory +
+							 "/network_gml/Gen_%04i_network--%02i--fit_%.08f--id_%05i" %
+							 (population.gen, net_idx, clone.fitness, clone.id) + ".png", format="PNG")
+				plt.clf()
+				net_idx += 1

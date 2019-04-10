@@ -55,10 +55,10 @@ sub.call("cp ../" + VOXELYZE_VERSION + "/voxelyzeMain/voxelyze .", shell=True)  
 # sub.call("chmod 755 ./qhull", shell=True)  # Execution right for qhull
 
 
-NUM_RANDOM_INDS = 50  # Number of random individuals to insert each generation
+NUM_RANDOM_INDS = 1  # Number of random individuals to insert each generation
 MAX_GENS = 99999  # Number of generations
-POPSIZE = 200  # Population size (number of individuals in the population)
-IND_SIZE = (14,7,3)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels 20 12 2
+POPSIZE = 50  # Population size (number of individuals in the population)
+IND_SIZE = (20,10,1)  # Bounding box dimensions (x,y,z). e.g. IND_SIZE = (6, 6, 6) -> workspace is a cube of 6x6x6 voxels 20 12 2
 SIM_TIME = 3  # (seconds), including INIT_TIME!
 INIT_TIME = 0.1
 DT_FRAC = 0.9  # Fraction of the optimal integration step. The lower, the more stable (and slower) the simulation.
@@ -74,10 +74,10 @@ random.seed(SEED)  # Initializing the random number generator for reproducibilit
 np.random.seed(SEED)
 
 
-RUN_DIR = "transmission_gear4_{}_data".format(SEED)  # Subdirectory where results are going to be generated
-RUN_NAME = "transmission_gear4_{}".format(SEED)
+RUN_DIR = "transmission_gear6_{}_data".format(SEED)  # Subdirectory where results are going to be generated
+RUN_NAME = "transmission_gear6_{}".format(SEED)
 CHECKPOINT_EVERY = 1000  # How often to save an snapshot of the execution state to later resume the algorithm
-SAVE_POPULATION_EVERY = 100  # How often (every x generations) we save a snapshot of the evolving population
+SAVE_POPULATION_EVERY = 1000  # How often (every x generations) we save a snapshot of the evolving population
 
 
 
@@ -120,7 +120,7 @@ class MyGenotype(Genotype):
 
 # Define a custom phenotype, inheriting from the Phenotype class
 class MyPhenotype(Phenotype):
-    def is_valid(self, min_percent_full=0.01, min_percent_muscle=0.0):
+    def is_valid(self, min_percent_full=0.01, min_percent_muscle=0.0, max_percent_full=0.99):
         # override super class function to redefine what constitutes a valid individuals
         for name, details in self.genotype.to_phenotype_mapping.items():
             if np.isnan(details["state"]).any():
@@ -133,6 +133,9 @@ class MyPhenotype(Phenotype):
                 # Discarding the robot if it doesn't have at least a given percentage of muscles (materials 3 and 4)
                 if count_occurrences(state, [3, 4]) < np.product(self.genotype.orig_size_xyz) * min_percent_muscle:
                     return False
+                # daniel: Discarding the robot if it is completely filled (trivial solution?)
+                if np.sum(state>0) > np.product(self.genotype.orig_size_xyz) * max_percent_full:
+                    return False                    
         return True
 
 
@@ -154,7 +157,7 @@ my_objective_dict.add_objective(name="fitness", maximize=True, tag="<PushRotUnwr
 #my_objective_dict.add_objective(name="RotVel", maximize=True, tag="<RotVel>", logging_only=True)
 #my_objective_dict.add_objective(name="fitness", maximize=True, tag="<NormFinalDist>")
 # Add an objective to minimize the age of solutions: promotes diversity
-#my_objective_dict.add_objective(name="age", maximize=False, tag=None)
+my_objective_dict.add_objective(name="age", maximize=False, tag=None)
 
 # Adding another objective called "num_voxels", which we want to minimize in order to minimize
 # the amount of material employed to build the robot, promoting at the same time non-trivial

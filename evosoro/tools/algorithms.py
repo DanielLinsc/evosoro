@@ -77,7 +77,7 @@ class PopulationBasedOptimizer(Optimizer):
     def run(self, max_hours_runtime=29, max_gens=3000, num_random_individuals=1, num_env_cycles=0,
             directory="tests_data", name="TestRun",
             max_eval_time=60, time_to_try_again=10, checkpoint_every=100, save_vxa_every=100, save_pareto=True,
-            save_nets=False, save_lineages=False, continued_from_checkpoint=False):
+            save_nets=True, save_lineages=True, continued_from_checkpoint=False):
 
         if self.autosuspended:
             sub.call("rm %s/AUTOSUSPENDED" % directory, shell=True)

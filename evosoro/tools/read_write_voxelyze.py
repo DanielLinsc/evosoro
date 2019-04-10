@@ -353,10 +353,10 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                       <FRegion>\n\
                         <PrimType>0</PrimType>\n\
                         <X>0.66</X>\n\
-                        <Y>0.47</Y>\n\
+                        <Y>0.5</Y>\n\
                         <Z>0</Z>\n\
-                        <dX>0.03</dX>\n\
-                        <dY>0.06</dY>\n\
+                        <dX>0.01</dX>\n\
+                        <dY>0.01</dY>\n\
                         <dZ>1</dZ>\n\
                         <Radius>0</Radius>\n\
                         <R>0.4</R>\n\
@@ -379,7 +379,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                       </FRegion>\n\
                         <FRegion>\n\
                           <PrimType>0</PrimType>\n\
-                          <X>0.31</X>\n\
+                          <X>0.33</X>\n\
                           <Y>0.50</Y>\n\
                           <Z>0</Z>\n\
                           <dX>0.01</dX>\n\

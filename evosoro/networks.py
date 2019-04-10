@@ -100,7 +100,7 @@ class CPPN(Network):
                 self.graph.node[name]["state"] = input_b
                 self.graph.node[name]["evaluated"] = True
 
-    def mutate(self, num_random_node_adds=5, num_random_node_removals=0, num_random_link_adds=10,
+    def mutate(self, num_random_node_adds=10, num_random_node_removals=0, num_random_link_adds=10,
                num_random_link_removals=5, num_random_activation_functions=100, num_random_weight_changes=100):
 
         # TODO: set default arg val via brute force search
