@@ -73,7 +73,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
     padding = 0;
     x_pad = [padding, padding]
     y_pad = [padding, padding]
-    z_pad = [1,1]
+    z_pad = [0,0]
 
     #padding = env.num_hurdles * (env.space_between_hurdles + 1)
     #x_pad = [padding, padding]
@@ -346,7 +346,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Boundary_Conditions>\n"
         )
 
-    elif env.needle_position > 0:
+    elif env.needle_position == 2:
         voxelyze_file.write(
             "    <Boundary_Conditions>\n\
                       <NumBCs>3</NumBCs>\n\
@@ -432,6 +432,38 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                               <AngDisplaceZ>0</AngDisplaceZ>\n\
                         </FRegion>\n\
             </Boundary_Conditions>\n")
+    elif env.needle_position == 3:
+        voxelyze_file.write(
+            "    <Boundary_Conditions>\n\
+                      <NumBCs>1</NumBCs>\n\
+                      <FRegion>\n\
+                        <PrimType>0</PrimType>\n\
+                        <X>0.66</X>\n\
+                        <Y>0.5</Y>\n\
+                        <Z>0</Z>\n\
+                        <dX>0.01</dX>\n\
+                        <dY>0.01</dY>\n\
+                        <dZ>1</dZ>\n\
+                        <Radius>0</Radius>\n\
+                        <R>0.4</R>\n\
+                        <G>0.6</G>\n\
+                        <B>0.4</B>\n\
+                        <alpha>1</alpha>\n\
+                        <DofFixed>31</DofFixed>\n\
+                        <ForceX>0</ForceX>\n\
+                        <ForceY>0</ForceY>\n\
+                        <ForceZ>0</ForceZ>\n\
+                        <TorqueX>0</TorqueX>\n\
+                        <TorqueY>0</TorqueY>\n\
+                        <TorqueZ>-0.5</TorqueZ>\n\
+                        <DisplaceX>0</DisplaceX>\n\
+                        <DisplaceY>0</DisplaceY>\n\
+                        <DisplaceZ>0</DisplaceZ>\n\
+                        <AngDisplaceX>0</AngDisplaceX>\n\
+                        <AngDisplaceY>0</AngDisplaceY>\n\
+                        <AngDisplaceZ>0</AngDisplaceZ>\n\
+                      </FRegion>\n\
+            </Boundary_Conditions>\n")
 
     else:
         voxelyze_file.write(
@@ -496,13 +528,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>5000000.0</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+03</Density>\n\
+            <Density>1000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -520,13 +552,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+03</Density>\n\
+            <Density>1000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -640,13 +672,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+03</Density>\n\
+            <Density>100000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -664,13 +696,13 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             </Display>\n\
             <Mechanical>\n\
             <MatModel>0</MatModel>\n\
-            <Elastic_Mod>50000000.0</Elastic_Mod>\n\
+            <Elastic_Mod>5e+07</Elastic_Mod>\n\
             <Plastic_Mod>0</Plastic_Mod>\n\
             <Yield_Stress>0</Yield_Stress>\n\
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>1e+03</Density>\n\
+            <Density>100000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
