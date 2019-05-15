@@ -44,7 +44,7 @@ class Network(object):
 class CPPN(Network):
     """A Compositional Pattern Producing Network"""
 
-    input_node_names = ['x', 'y', 'z', 'd', 'b']
+    input_node_names = ['x', 'y', 'z', 'b', 'd_l', 'd_r']
     activation_functions = [np.sin, np.abs, neg_abs, np.square, neg_square, sqrt_abs, neg_sqrt_abs]
 
     def __init__(self, output_node_names):
@@ -80,7 +80,11 @@ class CPPN(Network):
         input_x = normalize(input_x)
         input_y = normalize(input_y)
         input_z = normalize(input_z)
-        input_d = normalize(np.power(np.power(input_x, 2) + np.power(input_y, 2) + np.power(input_z, 2), 0.5))
+        #input_d = normalize(np.power(np.power(input_x, 2) + np.power(input_y, 2) + np.power(input_z, 2), 0.5))
+
+        input_d_l = normalize(np.power(np.power(input_x-0.5, 2) + np.power(input_y, 2) + np.power(input_z, 2), 0.5))
+        input_d_r = normalize(np.power(np.power(input_x+0.5, 2) + np.power(input_y, 2) + np.power(input_z, 2), 0.5))
+
         input_b = np.ones(orig_size_xyz)  # TODO: check input_d (above): changed pow -> np.power without testing
 
         for name in self.graph.nodes():
@@ -93,8 +97,11 @@ class CPPN(Network):
             if name == "z":
                 self.graph.node[name]["state"] = input_z
                 self.graph.node[name]["evaluated"] = True
-            if name == "d":
-                self.graph.node[name]["state"] = input_d
+            if name == "d_l":
+                self.graph.node[name]["state"] = input_d_l
+                self.graph.node[name]["evaluated"] = True
+            if name == "d_r":
+                self.graph.node[name]["state"] = input_d_r
                 self.graph.node[name]["evaluated"] = True
             if name == "b":
                 self.graph.node[name]["state"] = input_b

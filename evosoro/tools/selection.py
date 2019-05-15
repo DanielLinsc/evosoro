@@ -190,7 +190,9 @@ def pareto_selection_diversify_ancestry(population):
                                 ratio = [0,0]
                         if (sum(f>0.5 for f in ratio))/float(len(ratio))<0.25 or (sum(f>0.5 for f in ratio)) < 4: #if 0.5 of ancestors are the same for more then 0.1 of the individuals, don't select this individual
                             new_population += [this_level[i]]
-                        else: rejected +=0.000000000001
+                        else: 
+							rejected +=0.000000000001
+							print "Individual rejected: ", this_level[i].id
                         continue
             else:  # otherwise, select by sorted ranking within the level
                 new_population += [this_level[0]]
@@ -245,7 +247,7 @@ def annealing_selection(population):
         A list of selected individuals.
 
     """
-    max_gens = 1000 #hardcoded right now
+    maxa_gens = 1000 #hardcoded right now
     new_population = []
     # SAM: moved this into calc_dominance()
     # population.sort(key="id", reverse=False) # <- if tied on all objectives, give preference to newer individual

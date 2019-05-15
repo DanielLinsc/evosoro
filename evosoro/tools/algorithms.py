@@ -108,8 +108,7 @@ class PopulationBasedOptimizer(Optimizer):
             sub.call("touch {}/RUNNING".format(self.directory), shell=True)
             self.evaluate(self.sim, self.env[self.curr_env_idx], self.pop, print_log, save_vxa_every, self.directory,
                           self.name, max_eval_time, time_to_try_again, save_lineages)
-            self.select(self.pop, directory,
-                        name)  # only produces dominated_by stats, no selection happening (population not replaced)
+            self.select(self.pop)#, directory,name)  # only produces dominated_by stats, no selection happening (population not replaced)
             write_gen_stats(self.pop, self.directory, self.name, save_vxa_every, save_pareto, save_nets,
                             save_lineages=save_lineages)
 
@@ -118,7 +117,6 @@ class PopulationBasedOptimizer(Optimizer):
             if self.pop.gen % checkpoint_every == 0:
                 print_log.message("Saving checkpoint at generation {0}".format(self.pop.gen + 1), timer_name="start")
                 self.save_checkpoint(self.directory, self.pop.gen)
-
             if self.elapsed_time(units="h") > max_hours_runtime:
                 self.autosuspended = True
                 print_log.message("Autosuspending at generation {0}".format(self.pop.gen + 1), timer_name="start")
@@ -156,7 +154,7 @@ class PopulationBasedOptimizer(Optimizer):
             print_log.message("Fitness evaluation finished", timer_name="evaluation")  # record total eval time in log
 
             # perform selection by pareto fronts
-            new_population = self.select(self.pop, directory, name)
+            new_population = self.select(self.pop)#, directory, name)
             
             # adding individuals if the pop is too small
             if len(self.pop) < self.pop.pop_size:

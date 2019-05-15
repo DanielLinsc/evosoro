@@ -292,7 +292,7 @@ def write_pareto_front(population, run_directory, run_name):
 
 def write_networks(population, run_directory):
     for individual in population:
-		if individual.fitness>=population.best_fit_so_far:
+		if individual.fitness>=population.best_fit_so_far and individual.fitness>0:
 			clone = copy.deepcopy(individual)
 			net_idx = 0
 			for network in clone.genotype:
@@ -315,8 +315,8 @@ def write_networks(population, run_directory):
 				pos['z'][0:2][0] = -1
 				pos['z'][0:2][1] = 0
 
-				pos['d'][0:2][0] = -1
-				pos['d'][0:2][1] = -0.5
+				pos['d_l'][0:2][0] = -1
+				pos['d_l'][0:2][1] = -0.5
 
 				pos['b'][0:2][0] = -1
 				pos['b'][0:2][1] = -1
