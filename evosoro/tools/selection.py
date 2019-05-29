@@ -247,7 +247,7 @@ def annealing_selection(population):
         A list of selected individuals.
 
     """
-    maxa_gens = 1000 #hardcoded right now
+    max_gens = 1000 #hardcoded right now
     new_population = []
     # SAM: moved this into calc_dominance()
     # population.sort(key="id", reverse=False) # <- if tied on all objectives, give preference to newer individual
@@ -259,7 +259,7 @@ def annealing_selection(population):
     population.sort_by_objectives()
 
     done = False
-    annealing_temperature = (population.gen/max_gens +1.0)*6.0 -5.0
+    annealing_temperature = (float(population.gen)/max_gens +1.0)*6.0 -5.0
     #from first individual temp =1 to last individual temp=2
     population_buffer = []
     for ind in population:

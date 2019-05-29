@@ -678,7 +678,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>100000</Density>\n\
+            <Density>1000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -702,7 +702,7 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
             <FailModel>0</FailModel>\n\
             <Fail_Stress>0</Fail_Stress>\n\
             <Fail_Strain>0</Fail_Strain>\n\
-            <Density>100000</Density>\n\
+            <Density>1000</Density>\n\
             <Poissons_Ratio>0.35</Poissons_Ratio>\n\
             <CTE>0</CTE>\n\
             <uStatic>1</uStatic>\n\
@@ -841,9 +841,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
 
                             #elif (env.needle_position > 0) and (x == workspace_xlim[1] - 1) and (y == workspace_ylim[1] - 1) and (z == 0):
                              #       state = 1  # tiny food
-                            elif (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2):# and (z == 0):
+                            elif (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2) and name is 'material':# and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif(x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2):# and (z == 0):
+                            elif(x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2) and name is 'material':# and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
 
                             else:#was else
@@ -863,9 +863,9 @@ def write_voxelyze_file(sim, env, individual, run_directory, run_name):
                                 state = env.debris_size  # tiny debris
                         # dit ingevoegd
                         elif env.needle_position > 0:#NOT THIS ONE
-                            if (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2):# (x == 2) and (y == workspace_ylim[1]/2):# and (z == 0):
+                            if (x == workspace_xlim[1]/3) and (y == workspace_ylim[1]/2) and name is 'material':# (x == 2) and (y == workspace_ylim[1]/2):# and (z == 0):
                                 state = 7  # voxelyze_file.write("7")  # food
-                            elif (x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2):#(x == 7) and (y == workspace_ylim[1] / 2):# and (z == 0):
+                            elif (x == workspace_xlim[1]/3*2+1) and (y == workspace_ylim[1] / 2) and name is 'material':#(x == 7) and (y == workspace_ylim[1] / 2):# and (z == 0):
                                 state = 8  # voxelyze_file.write("8")  # food2
                             else:
                                 state = 0

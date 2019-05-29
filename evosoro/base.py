@@ -24,7 +24,7 @@ class Sim(VoxCadParams):
 
     def __init__(self, self_collisions_enabled=True, simulation_time=10.5, dt_frac=0.9, stop_condition=7,
                  fitness_eval_init_time=0.5, equilibrium_mode=0, min_temp_fact=0.1, max_temp_fact_change=0.00001,
-                 max_stiffness_change=10000, min_elastic_mod=5e006, max_elastic_mod=5e008, afterlife_time=0,
+                 max_stiffness_change=1e7, min_elastic_mod=5e6, max_elastic_mod=5e7, afterlife_time=0,
                  mid_life_freeze_time=0):
 
         VoxCadParams.__init__(self)

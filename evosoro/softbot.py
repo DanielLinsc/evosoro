@@ -241,7 +241,7 @@ class GenotypeToPhenotypeMap(object):
                               "func": func,
                               "dependency_order": dependency_order,
                               "state": None,
-                              "old_state": None,
+                              "oldstate": None, #daniel: was old_state before
                               "output_type": output_type,
                               "params": params,
                               "param_tags": param_tags,

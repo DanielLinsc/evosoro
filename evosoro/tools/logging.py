@@ -315,8 +315,8 @@ def write_networks(population, run_directory):
 				pos['z'][0:2][0] = -1
 				pos['z'][0:2][1] = 0
 
-				pos['d_l'][0:2][0] = -1
-				pos['d_l'][0:2][1] = -0.5
+				pos['d'][0:2][0] = -1
+				pos['d'][0:2][1] = -0.5
 
 				pos['b'][0:2][0] = -1
 				pos['b'][0:2][1] = -1
