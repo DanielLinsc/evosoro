@@ -35,7 +35,7 @@ Evosoro was designed and developed by the [Morphology, Evolution & Cognition Lab
 The library is built on top of the open source [VoxCAD](https://github.com/jonhiller/VoxCAD
 ) and the underlying voxel physics engine ([Voxelyze](https://github.com/jonhiller/Voxelyze)) which were both developed by the [Creative Machines Lab](http://www.creativemachineslab.com/), Columbia University.
 
-
+This specific version of Evosoro was adapted by D. Linschoten as a proof of concept for a computer aided innovation tool for generating solutions for mechanical engineering functions.
 
 (1) Citing
 ------
